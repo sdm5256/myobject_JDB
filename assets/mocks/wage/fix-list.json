@@ -1,0 +1,21 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "fix_be": {
+            "should_amount": "1000.00",
+            "actual_amount": "800.00",
+            "fix_amount": "0.00",
+            "type": 0
+        },
+        "fix_af": {
+            "should_amount": "1000.00",
+            "actual_amount": "900.00",
+            "fix_amount": "100.00",
+            "type": 1
+        }
+    }
+}

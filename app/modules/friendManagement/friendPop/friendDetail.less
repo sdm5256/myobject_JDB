@@ -1,0 +1,481 @@
+#friendDetail {
+    max-height: 600px;
+    overflow-y: auto;
+    border-radius: 3px;
+    .modal-header {
+        border-bottom: none;
+        .closeDetail {
+            width: 100%;
+            height: 35px;
+            background: #f8f8f9;
+            i {
+                float: right;
+                width: 17px;
+                height: 17px;
+                cursor: pointer;
+                margin: 8px 15px 0px 0px;
+                background: url("../../images/modal-close-icon.png") center center no-repeat;
+            }
+        }
+    }
+
+    .modal-body {
+        padding: 0px!important;
+        .companyTitle {
+            width: 100%;
+            min-height: 125px;
+            background: #f8f8f9;
+            padding: 0px 28px 28px 28px;
+            position: relative;
+            .companyLogo {
+                float: left;
+                width: 100px;
+                height: 100px;
+                border: 1px solid #c4c4c4;
+            }
+            .titleDetail {
+                float: right;
+                width: 70%;
+                p {
+                    text-align: left;
+                    font-size: 16px;
+                    color: #617497;
+                }
+            }
+            .fm-item-top{
+                >a{
+                   position: absolute;
+                   top: 0;
+                   left: 30px; 
+                   img{
+                        width: 100px;
+                        height: 100px;
+                        border: solid 1px #d9d9d9;
+                        box-shadow: 0 2px 10px #d9d9d9;
+                    }
+                }
+                p{
+                    text-align: left;
+                    a{
+                        width: 250px;
+                        color: #617497;                                                
+                        margin-left: 115px;
+                        display: inline-block;
+                    }
+                }
+            }
+            .individual{
+                float: left;
+                margin-left: 115px;
+                .fm-item-top{
+                    img{
+
+                    }
+                }
+                h3{
+                    margin-top:0;
+                    margin-right: 10px;
+                    display: inline-block;
+                    a{
+                        font-size: 20px;
+                        color: #617497;
+                    }
+                    span{
+                        width: 15px;
+                        height: 18px;
+                    }
+                    .icon-sex {
+                        display: inline-block;
+                        width: 15px;
+                        height: 18px;
+                        margin: 0 0 0 10px;
+                        background: url(images/friend-item-sprite.png) no-repeat;
+                    }
+                    .man {
+                        background-position: -15px 0;
+                    }
+                }
+                >div{
+                    display: inline-block;
+                    height: 20px;
+                    margin: -10px 0px 0px 0px;
+                    vertical-align: middle;
+                    span{
+                        width: auto;
+                        height: auto;
+                    }
+                    .person-label {
+                        display: inline-block;
+                        font-size: 12px;
+                        color: #6bacf2;
+                        line-height: 16px;
+                        border: solid 1px #6bacf2;
+                        border-radius: 2px;
+                        padding: 0 10px 0 3px;
+                        position: relative;
+                    }
+                    
+                    .person-label::after {
+                        content: '';
+                        display: block;
+                        width: 6px;
+                        height: 4px;
+                        border-left: solid 1px #6bacf2;
+                        border-bottom: solid 1px #6bacf2;
+                        transform: rotate(-45deg);
+                        position: absolute;
+                        right: 2px;
+                        top: 5px;
+                    }
+                    .disabled {
+                        color: #b2b2b2;
+                        border: solid 1px #b2b2b2;
+                        padding: 0 3px;
+                        &::after{
+                            display: none;
+                        }
+                    }
+                }
+                >p{
+                    margin-left: 5px;
+                    color: #808080;
+                }
+            }
+            .fm-item-down{
+                display: none;
+                .operator-wrap{
+                    margin-top: 10px;
+                }
+                .btn-text{
+                    min-width: 63px;
+                    height: 28px;
+                }
+            }
+        }
+        .companyDetail {
+            background: #fff;
+            padding: 28px;
+            .table-area {
+                .table {
+                    border: 1px solid #cccccc;
+                    tr {
+                        background: #fff!important;
+                        td {
+                            color: #4c4c4c;
+                            font-size: 14px;
+                            vertical-align: middle;
+                            padding: 10px!important;
+                            border: 1px solid #cccccc!important;
+                            ul {
+                                li {
+                                    span {
+                                        width: 42px;
+                                        height: 25px;
+                                        margin-left: 5px;
+                                        color: #ff9429;
+                                    }
+                                    a {
+                                        color: #4c4c4c;
+                                        cursor: default;
+                                        margin-right: 8px;
+                                    }
+                                    p {
+                                        color: #808080;
+                                        font-size: 12px;
+                                        text-align: left;
+                                        margin-top: 5px;
+                                    }
+                                }
+                                .unverify{
+                                    color: #808080;
+                                    span {
+                                        color: #808080;
+                                    }
+                                    a {
+                                        color: #808080;
+                                    }
+                                    p {
+                                        color: #808080;
+                                    }
+                                }
+                            }
+                        }
+                        td:nth-child(1) {
+                            width: 120px;
+                            height: 50px;
+                            color: #999;
+                            text-align: right;
+                        }
+                        .noOverdue {
+                            position: relative;
+                            display: inline-block;
+                            width: 14px;
+                            height: 14px;
+                            margin-left: 2px;
+                        }
+                        .authenticated {
+                            position: relative;
+                            margin-right: 20px;
+                        }
+                        .noOverdue:after {
+                            position: absolute;
+                            top: 1px;
+                            left: 0px;
+                            content: '';
+                            width: 15px;
+                            height: 15px;
+                            cursor: pointer;
+                            background: url("../../images/warning-icon.png") center center no-repeat;
+                        }
+                        .noOverdue:focus{
+                            outline: none;
+                        }
+                        .authenticated:before {
+                            position: absolute;
+                            top: -1px;
+                            left: 0;
+                            content: '';
+                            width: 16px;
+                            height: 19px;
+                            background: url("../../images/info-title-status1.png") no-repeat;
+                        }
+                    }
+                }
+                .authenDetail {
+                    .detailTitle {
+                    	height: 20px;
+                    	width: 100%;
+                        text-align: center;
+                        margin: 30px 0px 15px 0px;
+                        position: relative;
+                        span{
+                        	position: absolute;
+                        	top: 0;
+                        	left: 37%;
+                        	z-index: 10;
+                        	width: 100px;
+                        	height: 18px;
+                        	color: #b2b2b2;
+                        	background: #fff;
+                        }
+                        span:before{
+                        	position: absolute;
+                        	top: 7px;
+    						left: 7px;
+                        	content: '';
+                        	width: 8px;
+                        	height: 8px;
+                        	background: #cccccc;
+                        	transform: rotate(45deg);
+                        }
+                        span:after{
+                        	position: absolute;
+                        	top: 7px;
+    						right: 7px;
+                        	content: '';
+                        	width: 8px;
+                        	height: 8px;
+                        	background: #cccccc;
+                        	transform: rotate(45deg);
+                        }
+                        i{
+                        	position: absolute;
+                        	top: 50%;
+                        	left: 0;
+                        	z-index: 5;
+                        	width: 100%;
+                        	height: 1px;
+                        	background: #b2b2b2;
+                        }
+                    }
+                    p{
+                    	color: #999999;
+                    	font-size: 14px;
+                    	text-align: left;
+                    	margin-left: 10px;
+                    	position: relative;
+                    }
+                    p:before{
+                    	position: absolute;
+                    	top: 2px;
+                    	left: -10px;
+                    	content: '';
+                    	width: 3px;
+                    	height: 16px;
+                        border-radius: 3px;
+                    	background: #0c7bf8;                   	
+                    }
+                    ul{
+                        font-size: 0;
+                        margin-left: 5px;
+                    	li{
+                    		width: 20%;
+                    		height: 55px;
+                    		color: #999;
+                    		font-size: 12px;
+                    		text-align: center;
+                    		vertical-align: bottom;
+                    		display: inline-block;
+                    		margin-bottom: 10px;
+         
+                    		div{
+                    			width: 100%;
+                    			height: 34px;
+                    			position: relative;
+                    			i{
+                    				position: absolute;
+                    				top: 0;
+                    				left: 24px;
+                    				width: 22px;
+                    				height: 29px;
+                    				overflow-y: hidden;                    				
+                    			}
+                    			.realName{
+                    				background: url("../../images/friend-sprite.png") -44px -0px no-repeat;
+                    			}
+                    			.noRealName{
+                    				background: url("../../images/friend-sprite.png") -110px -0px no-repeat;
+                    			}
+                    			.portrait{//xiaoxiang
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -540px -0px no-repeat;
+                    			}
+                    			.noPortrait{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -566px -0px no-repeat;
+                    			}
+                    			.blankCard{//yinhangka
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -488px -0px no-repeat;
+                    			}
+                    			.noBlankCard{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -26px -29px no-repeat;
+                    			}
+                    			.plane{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -364px -0px no-repeat;
+                    			}
+                    			.noNlane{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -338px -0px no-repeat;
+                    			}
+                    			.operators{//运营商
+                    				top: -2px;
+                    				background: url("../../images/friend-sprite.png") -0px -0px no-repeat;
+                    			}
+                    			.noOperators{
+                    				top: -2px;
+                    				background: url("../../images/friend-sprite.png") -22px -0px no-repeat;
+                    			}
+                    			//央行Contacts
+                    			.centralBank{
+                    				left: 21px;
+                    				width: 29px;
+                    				background: url("../../images/friend-sprite.png") -161px -0px no-repeat;
+                    			}
+                    			.noCentralBank{
+                    				width: 29px;
+                    				left: 21px;
+                    				background: url("../../images/friend-sprite.png") -132px -0px no-repeat;
+                    			}
+                    			//脉
+                    			.contacts{
+                    				top: 3px;
+                    				width: 24px;
+                    				background: url("../../images/friend-sprite.png") -390px -0px no-repeat;
+                    			}
+                    			.noContacts{
+                    				top: 3px;
+                    				width: 24px;
+                    				background: url("../../images/friend-sprite.png") -414px -0px no-repeat;
+                    			}
+                    			//公积金
+                    			.accumulationFund{
+                    				left: 22px;
+                    				width: 30px;
+                    				background: url("../../images/friend-sprite.png") -278px -0px no-repeat;
+                    			}
+                    			.noAccumulationFund{
+                    				left: 22px;
+                    				width: 30px;
+                    				background: url("../../images/friend-sprite.png") -308px -0px no-repeat;
+                    			}
+                    			.blog{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -78px -29px no-repeat;
+                    			}
+                    			.noBlog{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -52px -29px no-repeat;
+                    			}
+
+                    			.mailList{
+                    				top: 3px;
+                    				width: 25px;
+                    				background: url("../../images/friend-sprite.png") -463px -0px no-repeat;
+                    			}
+                    			.noMailList{
+                    				top: 3px;
+                    				width: 25px;
+                    				background: url("../../images/friend-sprite.png") -438px -0px no-repeat;
+                    			}
+
+                    			.location{
+                    				background: url("../../images/friend-sprite.png") -66px -0px no-repeat;
+                    			}
+                    			.noLocation{
+                    				background: url("../../images/friend-sprite.png") -88px -0px no-repeat;
+                    			}
+                    			.phoneReserve{
+                    				width: 19px;
+                    				background: url("../../images/friend-sprite.png") -209px -0px no-repeat;
+                    			}
+                    			.noPhoneReserve{
+                    				width: 19px;
+                    				background: url("../../images/friend-sprite.png") -190px -0px no-repeat;
+                    			}
+                    			.closeContact{
+                    				    width: 25px;
+                    				background: url("../../images/friend-sprite.png") -253px -0px no-repeat;
+                    			}
+                    			.noCloseContact{
+                    				    width: 25px;
+                    				background: url("../../images/friend-sprite.png") -228px -0px no-repeat;
+                    			}
+                    			.idcard{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -0px -29px no-repeat;
+                    			}
+                    			.noIdcard{
+                    				width: 26px;
+                    				background: url("../../images/friend-sprite.png") -514px -0px no-repeat;
+                    			}
+                    		}
+                    	}
+                    }
+                }
+            }
+        }
+    }
+}
+#limitAttention{
+    .modal-body{
+        .input-group-btn{
+            margin-top: 25px;
+        }
+    }
+}
+#cancelAttent{
+    .closeIcon{            
+                position: absolute;
+                top: 8px;
+                right: -1px;
+                width: 17px;
+                height: 17px;
+                cursor: pointer;
+                margin: 8px 15px 0px 0px;
+                background: url("../../images/modal-close-icon.png") center center no-repeat;
+        }
+}
+

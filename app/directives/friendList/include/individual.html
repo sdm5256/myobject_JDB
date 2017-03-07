@@ -1,0 +1,28 @@
+<div class="fm-item-top clearfix">
+    <a href="javascript:;" ng-click="viewDetails(item,false)"><img class="avater individualAvater" ng-src="{{item.avatarUrl}}" alt=""></a>
+    <div class="individual">
+        <h3 class="name"><a href="javascript:;" ng-click="viewDetails(item,false)" title="{{item.userName}}">{{item.userName}}</a><span class="icon-sex" ng-class="{man: item.sex == '1', woman: item.sex == '2'}"></span></h3>
+        <div>
+            <span class="person-label" ng-show="item.realName">实名</span><span class="person-label disabled" ng-show="!item.realName">实名</span>
+            <span class="person-label" ng-show="item.face">肖像</span><span class="person-label disabled" ng-show="!item.face">肖像</span>
+            <span class="person-label" ng-show="item.bankCard">银行卡</span><span class="person-label disabled" ng-show="!item.bankCard">银行卡</span>
+        </div>
+        <p ng-show="item.phone">账号:{{item.phone}}</p>
+    </div>
+</div>
+<div class="fm-item-down clearfix">
+    <!--个人不能被关注，只有移除宝粉操作-->
+    <div class="operator-wrap be-attituded">
+        <div class="btn-add-primary">
+            <span class="btn-text">被关注</span>
+        </div>
+        <div class="menu-wrap">
+            <div class="entry">···</div>
+            <div class="down">
+                <ul class="menu-list">
+                    <li ng-click="cancelAttion(item,false, $index)">移除宝粉</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "list":[
+      {
+        "name":"测试一",
+        "mobilephone": 18990929112,
+        "del_status":0
+      },
+      {
+        "name":"测试二",
+        "mobilephone": 18990929112,
+        "del_status":1
+      }
+    ],
+    "total":"1000",
+    "failNum":0,
+    "sucessNum":0,
+    "filterNum":0
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "data": {
+    	"loginToken":"aaaa"
+    },
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "二维码失效 ",
+        "returnUserMessage": "获取成功！"
+    }
+}

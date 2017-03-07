@@ -1,0 +1,10 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "上传成功",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "uploadNo": 201612111103341212345
+  }
+}

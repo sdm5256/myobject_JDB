@@ -1,0 +1,52 @@
+<div id="optimizeFst">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; 优化并发放工资</li>
+    </ol>
+    <div class="fstContent optimizeStep">
+        <div class="steps">
+            <ul class="commonStep">
+                <li><div><i>1</i></div><span>选择薪资构成</span></li>
+                <li><div><i>2</i></div><span>上传工资表</span></li>
+                <li><div><i>3</i> </div><span>薪资优化计算</span></li>
+                <li><div><i>4</i></div><span>发放</span></li>
+            </ul>
+        </div>
+        <div class="stepContent">
+            <div class="firstSelct">
+                <div class="clearfix labor" ng-class="{'selectedBg': isSelect1}" ng-click="selectType(0)">
+                    <div class="fstLeft">
+                        <i></i>
+                        <input type="radio" name="salary" value="0" ng-model="struct_type" />
+                    </div>
+                    <div class="fstRight">
+                        <h4>工资+劳务报酬</h4>
+                        <p>适用于日常工资发放，如有第三方为员工发放劳务报酬，且工资和劳务报酬比例合理分配，可将<br>员工实际所得金额提高</p>
+                    </div>
+                </div>
+                <div class="clearfix labor" ng-class="{'selectedBg': isSelect2}" ng-click="selectType(1)">
+                    <div class="fstLeft">
+                        <i></i>
+                        <input type="radio" name="salary" value="1" ng-model="struct_type" />
+                    </div>
+                    <div class="fstRight">
+                        <h4>工资+全年一次性奖金</h4>
+                        <p>适用于当月工资和年终奖的发放，合理分配工资及年终奖金额，可将员工实际所得金额提高</p>
+                    </div>
+                </div>
+            </div>
+            <div class="optimizeBtn">
+                <!-- <button type="button" ng-disabled="btnable" class="btn btn-primary selfa" ng-click="nextStep()">下一步</button> -->
+                <button type="button" ng-disabled="btnable" class="btn btn-primary" ng-click="nextStep()">
+                        <i ng-show="!uploadStatus">下一步</i>
+                        <i class="fa fa-spinner fa-spin"  ng-show="uploadStatus" ></i>
+                    </button>
+                <!-- <a  class="simulation" href="">体验模拟发放流程</a> -->
+            </div>
+        </div>
+    </div>
+</div>

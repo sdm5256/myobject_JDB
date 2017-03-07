@@ -1,0 +1,108 @@
+<div id="deal-search">
+    <ol class="breadcrumb">
+<!--         <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span>
+                返回
+            </a>
+        </li> -->
+        <li class="active">您所在的位置：交易查询</li>
+    </ol>
+    <h2 class="short-title">交易记录</h2>
+    <a class="excel-export" href="" ng-click="excelExport();">导出到Excel</a>
+    <div class="search-field">
+        <div class="search-group">
+            <label class="search-label">
+                起止日期
+            </label>
+            <div class="form-group">
+                <div class="control-wrap">
+                    <input type="text" ng-click="openBeginCalender();" class="form-control" uib-datepicker-popup ng-model="beginCalender.date"  is-open="beginCalender.opened" max-date="endCalender.date" show-button-bar=false date-disabled="" readonly ng-change="getTable();" ng-disabled="wagePageDisabled"/>
+                    <span class="control-icon glyphicon glyphicon-calendar" ng-click="openBeginCalender();"></span>
+                </div>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="form-group">
+                <div class="control-wrap">
+                    <input type="text" ng-click="openEndCalender();" class="form-control" uib-datepicker-popup ng-model="endCalender.date" is-open="endCalender.opened" min-date="beginCalender.date" max-date="today" show-button-bar=false date-disabled="" readonly ng-change="getTable();" ng-disabled="wagePageDisabled"/>
+                    <span class="control-icon glyphicon glyphicon-calendar" ng-click="openEndCalender();"></span>
+                </div>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label class="btn" ng-class="{'btn-primary': smartDate == 1}" ng-click="getSmartDate(1, 7);">最近7天</label>
+            <label class="btn" ng-class="{'btn-primary': smartDate == 2}" ng-click="getSmartDate(2, -1, true);">1个月</label>
+            <label class="btn" ng-class="{'btn-primary': smartDate == 3}" ng-click="getSmartDate(3, -2, true);">2个月</label>
+            <label class="btn" ng-class="{'btn-primary': smartDate == 4}" ng-click="getSmartDate(4, -3, true);">3个月</label>
+        </div>
+        <div class="search-group">
+            <label class="search-label">交易类型</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 0}" ng-click="getStatus(0);">全部</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 1}" ng-click="getStatus(1);">充值</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 6}" ng-click="getStatus(6);">转入</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 2}" ng-click="getStatus(2);">借入</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 7}" ng-click="getStatus(7);">还款</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 3}" ng-click="getStatus(3);">代发工资</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 4}" ng-click="getStatus(4);">提现</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 5}" ng-click="getStatus(5);">交易服务费</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 8}" ng-click="getStatus(8);">员工报销</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 9}" ng-click="getStatus(9);">代发报酬</label>
+            <label class="btn" ng-class="{'btn-primary': query.status == 10}" ng-click="getStatus(10);">代发年终奖</label>
+        </div>
+    </div>
+    <div class="empty-result" ng-hide="wageList && wageList.length">
+        暂无交易记录
+    </div>
+    <div class="table-area" ng-show="wageList && wageList.length">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>时间</th>
+                <th>流水号</th>
+                <th>交易类型</th>
+                <th>对方</th>
+                <th>金额</th>
+                <th>状态</th>
+                <th ng-show="showDetail">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in wageList track by $index">
+                    <td>{{item.time}}</td>
+                    <td>{{item.order}}</td>
+                    <td>{{item.type}}</td>
+                    <td>{{item.to}}</td>
+                    <td>{{item.amount  | amountFormater }}</td>
+                    <td>{{item.status}}</td>
+                    <td class="view-details" ng-show="showDetail ">
+                        <a href="#/details/{{item.order}}&{{item.type}}" ng-show="openDetail(item)" ng-click="saveCookie()">查看详情</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-show="wageList.length" class="clearfix table-bottom">
+            <uib-pagination class="table-pagination" ng-click="getTable(wagePageNo);"
+                            ng-disabled="wagePageDisabled"
+                            total-items="wageListTotal"
+                            items-per-page="pageSize"
+                            ng-model="wagePageNo" max-size="4" rotate="false"
+                            class="pagination-sm" boundary-links="true"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            first-text="首页"
+                            last-text="尾页"
+                    ></uib-pagination>
+
+            <div class="table-tip tip-with">
+                <span class="fs14" ng-show="query.status == 0">充值:{{stats.charge | amountFormater }}元 &nbsp;&nbsp;&nbsp;&nbsp;借入:{{stats.borrow | amountFormater }}元 &nbsp;&nbsp;&nbsp;&nbsp;还款：{{stats.repay | amountFormater }}元 &nbsp;&nbsp;&nbsp;&nbsp;代发工资:{{stats.wage | amountFormater }}元 &nbsp;&nbsp;&nbsp;&nbsp;提现:{{stats.draw | amountFormater }}元 </span>
+                <span ng-show="query.status == 1">充值：{{stats.charge | amountFormater }}元</span>
+                <span ng-show="query.status == 6">转入：{{stats.transfer | amountFormater }}元</span>
+                <span ng-show="query.status == 2">借入：{{stats.borrow | amountFormater }}元</span>
+                <!--提现：{{stats.total}} ¥&nbsp;&nbsp;&nbsp;&nbsp;-->
+                <span ng-show="query.status == 3">代发工资：{{stats.wage | amountFormater }}元</span>
+                <span ng-show="query.status == 7">还款：{{stats.repay | amountFormater }}元</span>
+                <span ng-show="query.status == 4">提现：{{stats.draw | amountFormater }}元</span>
+                <span ng-show="query.status == 5">交易服务费：{{stats.allexcess | amountFormater }}元</span>
+            </div>
+        </div>
+    </div>
+</div>

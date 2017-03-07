@@ -1,0 +1,56 @@
+<div class="bindcompany" id="bind-company">
+    <div class="bc-top">
+    	<div>
+    		<img src="images/bc-ct.png">
+    		<p ng-show="companyStatus">添加您管理的企业，认证通过后即可使用员工管理，工资发放，融资等功能</p>
+    		<p ng-show="!companyStatus" class="tips-style">添加企业前，您还需要在手机借贷宝上完成身份认证。</p>
+    		<div ng-show="!companyStatus" class="bc-tips">
+    			<strong>步骤：</strong>
+    			<p><span>1</span>打开手机借贷宝，<a href="javascript:;">钱包>个人资料>认证中心，</a>完成肖像认证或银行卡认证。</p>
+    			<p><span>2</span>个人身份认证通过后，点击"添加我的企业"</p>
+    		</div>
+            <button class="add-btn" ng-click="checkAuthStatus();" ng-disabled ="loadStatus">
+                <i ng-show="!loadStatus">添加我的企业</i>
+                <i class="fa fa-spinner fa-spin"  ng-show="loadStatus" ></i>
+            </button>
+    	</div>
+    </div>
+    <div class="bc-bom">
+    	<div class="bc-foot">
+    		<div class="left">
+    			<strong class="bc-icon-one">助力企业</strong>
+    			<ul>
+    				<li>1.无抵押、零手续、信用越好融资越便捷</li>
+    				<li>2.一键快速发起融资，金额/期限/利息自定</li>
+    				<li>3.融资范围可选：高层/中层/全体员工</li>
+    				<li>4.去中间化，让企业融资成本更合理</li>
+    				<li>5.借账到账可随时</li>
+    			</ul>
+    		</div>
+    		<div class="right">
+    			<strong class="bc-icon-two">助力员工</strong>
+    			<ul>
+    				<li>1.更低风险-更高收益-更省脑力投资</li>
+    				<li>2.员工是企业天然"熟人"，风险和诚信轻松判断</li>
+    				<li>3.员工自定义投资金额，只需30秒，一键投资企业</li>
+    				<li>4.企业的利息直达员工，赚更多</li>
+    				<li>5.理财，缴费尽享便捷生活</li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="limitExport.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <p>您尚未完成身份认证,请完成后在添加企业。</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="go();">知道了</button>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,59 @@
+.icon-i-tips {
+  display: inline-block;
+  margin-left: 8px;
+  position: relative;
+}
+.icon-i-tips-icon {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: -3px;
+  width: 16px;
+  height: 16px;
+  background: url("images/icon-warn.png") no-repeat;
+}
+.i-tips-container {
+  position: absolute;
+  width: 250px;
+  bottom: 100%;
+  left: -40px;
+  text-align: justify;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 1px #eee;
+  border: solid 1px #d4d4d4;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background: #fff;
+  color: #808080;
+  font-size: 12px;
+  line-height: 18px;
+  &.short {
+	width: auto;
+	white-space: nowrap;
+  }
+  &::after {
+	content: '';
+	box-shadow: 1px 1px 1px #eee;
+	display: block;
+	width: 8px;
+	height: 8px;
+	background: #fff;
+	border-bottom: solid 1px #d4d4d4;
+	border-right: solid 1px #d4d4d4;
+	transform: rotate(45deg) translate(0, -55%);
+	-webkit-transform: rotate(45deg) translate(0, -55%);
+	position: absolute;
+	top: 100%;
+	left: 40px;
+  }
+}
+.i-tips-container-overview{
+  span{
+    .i-tips-container{
+      left: -220px !important;
+      &::after{
+        left: 220px !important;
+      }
+    }
+  }
+  
+}

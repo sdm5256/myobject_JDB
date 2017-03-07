@@ -1,0 +1,29 @@
+{
+  "error":{
+    "returnCode":0,
+    "returnMessage":"OK",
+    "returnUserMessage":"OK"
+  },
+  "traceId":"133d96bafc392106bfa5e3212353351f",
+  "data":[
+    {
+      "id":0,
+      "text":"全部"
+    },{
+      "id":1,
+      "text":"已领取"
+    },{
+      "id":2,
+      "text":"待领取"
+    },{
+      "id":3,
+      "text":"未发放"
+    },{
+      "id":4,
+      "text":"已失效"
+    },{
+      "id":5,
+      "text":"进行中"
+    }
+  ]
+}

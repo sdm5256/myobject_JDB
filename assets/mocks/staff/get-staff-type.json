@@ -1,0 +1,22 @@
+{
+  "error":{
+    "returnCode":0,
+    "returnMessage":"操作成功",
+    "returnUserMessage":"操作成功"
+  },
+  "traceId":"dab6478832aec60c141486529ede6af3",
+  "data":[
+    {
+      "tagId":1,
+      "tagName":"普通员工"
+    },
+    {
+      "tagId":2,
+      "tagName":"中层"
+    },
+    {
+      "tagId":3,
+      "tagName":"高管"
+    }
+  ]
+}

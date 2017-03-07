@@ -1,0 +1,12 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "months":["0000-00","2016-07","2016-06"],
+    "status":["全部","进行中","成功"],
+    "cashBalance":"30000"
+  }
+}

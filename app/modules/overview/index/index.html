@@ -1,0 +1,151 @@
+<div id="overview">
+    <ol class="breadcrumb">
+        <li class="active">您所在的位置：概况</li>
+    </ol>
+    <h2 class="short-title">账户资产</h2>
+    <table class="table-display">
+        <tr id="property">
+            <td class="account-ui">
+                <div class="header" >
+                    <img ng-src="{{companyinfo.avatar_url}}">
+                    <a href="javascript:;" ng-click="modifyLogo();">设置</a>
+                </div>
+                <div class="right">
+                    <p class="name">{{companyinfo.company_name}}</p>
+                    <p class="status">  
+                        <span ng-class="{'ident-success':identSuccess === true, 'ident-failure':identSuccess === false}">{{verifyStatus}}</span>
+                    </p>
+                </div>
+            </td>
+            <td id="balance">
+                <div class="display-title left">
+                    <i class="icon-rmb"></i>账户余额:
+                </div>
+                <div class="display-data left">
+                    <span class="number-bold">{{data.countBalance | amountFormater}}</span> 元
+                    <span class="bttn">
+                        <a ng-click="goToRecharge();" class="btn btn-primary">充值</a>
+                        <a class="btn btn-default" href="javascript:;" ng-click="checkIdentStatus()">提现</a>
+                    </span>                  
+                </div>
+                <div class="data-separate-parts left clearfix">
+                    <div class="data-part no-padding">&nbsp;=&nbsp;现金余额：({{data.cashBalance | amountFormater}}元)<i-tips tip="企业充值或转入金额"></i-tips></div>
+                    <div class="data-part no-padding">&nbsp;+&nbsp;融资余额：({{data.trustBalance | amountFormater}}元)<i-tips tip="企业融资所得金额；该金额不可用于发工资"></i-tips></div>
+                    <div class="data-part no-padding i-tips-container-overview" ng-if="isGraterThan0">&nbsp;+&nbsp;冻结金额：({{data.frozen | amountFormater}}元)<i-tips tip="因发工资时员工未注册或未认证而冻结的金额（30个自然日后如还未到员工账户，则解除冻结）；或提现进行中金额"></i-tips></div><!--冻结金额 大于0 显示-->
+                </div>
+
+            </td>
+        </tr>
+    </table>
+    <h2 class="short-title">累计交易</h2>
+    <table class="table-display">
+        <tr id="deal">
+            <td>
+                <div class="display-title">
+                    充值
+                </div>
+                <div class="display-data">
+                    <span class="number">{{data.total.recharge | amountFormater}}</span> 元
+                </div>
+            </td>
+            <td>
+                <div class="display-title">
+                    借入
+                </div>
+                <div class="display-data">
+                    <span class="number">{{data.total.trust | amountFormater}}</span> 元
+                </div>
+            </td>
+            <td>
+                <div class="display-title">
+                    提现
+                </div>
+                <div class="display-data">
+                    <span class="number">{{data.total.withdraw | amountFormater}}</span> 元
+                </div>
+            </td>
+            <td>
+                <div class="display-title">
+                    代发工资
+                </div>
+                <div class="display-data">
+                    <span class="number">{{data.total.behalf | amountFormater}}</span> 元
+                </div>
+            </td>
+        </tr>
+    </table>
+    <h2 class="short-title">常用操作</h2>
+    <div class="actions">
+        <a class="btn btn-default" ng-href="#/pay-management">发工资</a>
+        <a class="btn btn-default" ng-click="goToBorrow();">发起融资</a>
+        <a class="btn btn-default" ng-click="payToEmployee();">向员工付款</a><!--认证企业显示-->
+    </div>
+    <h2 class="short-title">融资秘籍</h2>
+    <ul class="list-style-normal">    
+        <li><a href="help-page.html#发工资的好处">发工资有什么好处？</a></li>
+        <li><a href="help-page.html#借力员工融资">向员工融资太尴尬？</a></li>
+    </ul>
+</div>
+
+<script type="text/ng-template" id="isJiuxuanhu.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">
+            <p class="text-left">由于{{companyName}}近6个月内没有进行过交易，为保证企业的账户资金安全,请管理员登录借贷宝，打开小秘书通知完成激活。</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="close();">确定</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 绑定logo的 -->
+<script type="text/ng-template" id="modifyLogoModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">修改企业LOGO</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" ng-submit="ok();" novalidate>
+            <div class="step-content">
+                1、图片格式必须为：jpeg、png；<br>
+                2、图片不大于2M。<br><br>
+                <div class="btn btn-default" ngf-select="upload($file)" ng-model="file" name="file"
+                     ngf-accept="'image/jpeg, image/png'">选择图片</div>
+                <div class="preview-area clearfix">
+                    <div class="preview-left">
+                        <div class="head head-big">
+                            <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                        </div>
+                        <div class="error-messages">
+                            {{uploadError}}
+                        </div>
+                    </div>
+
+                    <div class="preview-right">
+                        <div class="preview-title">
+                            头像预览
+                        </div>
+                        <div class="clearfix">
+                            <div class="head head-block">
+                                <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                            </div>
+                            <div class="head head-circle">
+                                <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': hasUploaded}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,310 @@
+
+body.info .page-wrapper .page-container{
+    background-color: #fff!important;
+}
+
+#info{
+	/*
+	*     在info下边的样式    无嵌套关系的
+	*	  都是需要覆盖   或者    公共样式 
+	*     icon 开头的   为icon三种样式  
+	*     btn开头的     为按钮的通用样式  
+	*/
+
+	
+	/* 控制认证进度图片 */
+	.box-style{
+		display: inline-block;
+		width: 177px;
+		height: 177px;
+	}
+	.level-one-style{
+		background: url(images/info-data-status.png) no-repeat;
+	}
+	.level-two-style{
+		background: url(images/info-data-status1.png) no-repeat;
+	}
+	.level-three-style{
+		background: url(images/info-data-status2.png) no-repeat;
+	}
+	.level-four-style{
+		background: url(images/info-data-status3.png) no-repeat;
+	}
+	/* 字体颜色 */
+	.info-color-red{
+		color: red;
+	}
+	.info-color-blue{
+		color: #0c7bf8;
+	}
+	/* 处理特殊居中 */
+	.pull-right-center{
+		margin: 38px 0;
+		text-align: right;
+	}
+	.info-center-parent{
+		display: table;
+		height: 100%;
+	}
+	.info-center-child{
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.company-logo{
+		max-width: 40px;
+    	max-height: 40px;
+	}
+	.icon-default{
+		background: url(images/info-title-status.png) no-repeat;
+		width: 16px;
+		height: 19px;
+		position: absolute;
+		top: 2px;
+		left:20px;
+	}
+	.icon-success{
+		background: url(images/info-title-status1.png) no-repeat;
+	}
+	.icon-failure{
+		background: url(images/info-title-status2.png) no-repeat;
+	}
+	.breadcrumb{
+		background: #fff;
+	}
+	.btn-default-info{
+		display: inline-block;
+		width: 90px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		color: #fff;
+		background: #0c7bf8;
+		border-radius: 2px;
+		border: none;
+	}
+	.btn-disabled-info{
+		background: #e6bcbc;
+		color: #fff;
+		cursor:not-allowed;
+	}
+	.btn-failure-info{
+		background: #e61717;
+		color: #fff;
+	}
+	.info-company-attestation{
+		.info-attestation-intro{
+			p{
+				margin: 0;
+				font-size: 12px;
+				color: #999999;
+			}
+		}
+	}
+	.info-data-integrity{
+		margin-bottom: 44px;
+		text-align: center;
+		ul{
+			overflow: hidden;
+			text-align: center;
+			margin-bottom: 20px;
+			li{
+				width: 170px;
+				height: 40px;
+				border:1px solid #b3b3b3;
+				border-radius: 20px;
+				display: inline-block;
+				line-height: 40px;
+				&.info-border-none{
+					border:none;
+					width: 70px;
+				}
+				&.active{
+					border:1px solid #7bb9ff;
+					color: #0c7bf8;
+				}
+			}
+		}
+		.info-data-integrity-wa{
+			width: 760px;
+			margin: 0 auto;
+			span{
+				display: block;
+			}
+		}
+	}
+	.info-papers-audit{
+		.info-verify-error{
+			padding: 2px 0;
+			span{
+				font-size: 12px;
+				color: #999999;
+			}
+		}
+	}
+	.row{
+		margin: 0;
+	}
+	.info-name{
+		font-size: 14px;
+		color: #333;
+	}
+	.info-border{
+		border:1px solid #dedede;
+		margin-bottom: 20px;
+	}
+	.info-border-top{
+		border-top:1px solid #dedede;
+
+	}
+	.info-border-right{
+		border-right:1px solid #dedede;
+	}
+	.info-else-padding{
+		padding-left: 15px !important;
+	}
+	.info-text-align-right{
+		text-align: right;
+	}
+	.info-text-align-left{
+		text-align: left;
+	}
+	.info-text-align-center{
+		text-align: center;
+	}
+	// 需要特殊处理的银行样式
+	.custom-bank-style{
+		height: 100% !important;
+		line-height: 20px !important;
+		padding: 16px 0;
+		position: relative;
+		.custom-bank-style-left{
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 26px 0 27px  15px;
+		}
+		.custom-bank-style-left-one{
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 24px 0 24px  15px;
+		}
+		.custom-bank-style-right{
+			float: right;
+			.tips{
+				padding-top: 8px;
+			}
+			.no-padding{
+				padding-top: 0 !important;
+			}
+			.plan-to{
+				float: left;
+				&.colors{
+					font-size: 14px;
+					color: #b2b2b2;
+				}
+			}
+			.btn-box{
+				height: 100%;
+				display: inline-block;
+				padding-top: 5px;
+			}
+		}
+	}
+	.info-container{
+		height: 54px;
+		line-height: 54px;
+		.right{
+			text-align: right;
+			.span-left{
+				float: left;
+				margin: 0;
+			}
+		}
+
+	}
+	
+	.info-title{
+		padding: 30px 0;
+		background: #f5f5f5;
+		&.info-title-custom-padding{
+			padding: 0;
+			height: 108px;
+
+			.info-title-right{
+				margin: 23px 0;
+				width: 10%;
+				padding: 21px 0 21px 40px;
+				&.info-delete-border{
+					border:none;
+				}
+				&.info-add-border{
+					border-right:1px solid #dedede;
+				}
+				i{
+					top:22px;
+				}
+			}
+			.info-title-left{
+				padding: 21px 0 21px 15px;
+				margin: 20px 0;
+			}
+		}
+		.info-title-right{
+			padding: 2px 0 2px 40px;
+			position: relative;
+			&.certificate-delete-border{
+				border: none;
+			}
+			&.certificate-add-border{
+				width: 90px;
+				border-right: 1px solid #dedede;
+				margin-right: 10px;
+			}
+		}
+	}
+	.info-title-name{
+		font-size:18px;
+		color: #666;
+		font-weight: bold;
+
+	}
+	.info-title-status{
+		font-size:14px;
+		color: #666;
+	}
+}
+/* 账号体系添加操作员ui */
+.account-oper{
+	margin-bottom: 20px;
+	background: #f5f5f5;
+	line-height: 80px;
+	border: 1px solid #dedede; 
+	strong{
+		font-size: 18px;
+    	color: #666;
+    	padding-left: 15px;
+    	font-style: normal;
+	}
+	a{
+		width: 90px;
+		height: 30px;
+		background: #0c7bf8;
+		color: #fff !important;
+		display: inline-block;
+		margin: 25px 0;
+		float: right;
+		line-height: 30px;
+		text-align: center;
+		margin-right: 15px;
+		border-radius: 2px;
+	}
+}
+.extensionCode5002Error {
+  margin: 5px auto 0;
+  color: red;
+}
+.excode-err {
+  top: 1px !important;
+  line-height: 28px;
+}

@@ -1,0 +1,34 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "curMemberID": "571054799013817583",
+        "hasMore": 1,
+        "lastIndex": "11,24",
+        "count": 1,
+        "list": [{
+            "memberID": "566631140618674423",
+            "companyName": "人人行科技股份有限公司",
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "followStatus": 0
+        },{
+            "memberID": "566631140618674423",
+            "companyName": "银行卡号任意输入随机数字比如： 1234432112344321",
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "followStatus": 1
+        },{
+            "memberID": "566631140618674423",
+            "companyName": "密码必须包含大小写及数字三种组合",
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "followStatus": 2
+        },{
+            "memberID": "566631140618674423",
+            "companyName": "xxxxx",
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "followStatus": 3
+        }]
+    }
+}

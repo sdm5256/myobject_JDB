@@ -1,0 +1,47 @@
+<div ng-show="onceBonusAll" class="onceBonusAll">
+    <!-- 扫码鉴权 -->
+    <div class="scan-auth" ng-show="true">
+        <scan-auth order-id="{{orderId}}" sel-type="2"></scan-auth>
+    </div>
+    <div class="onceBonus">
+        <p>本次发放信息</p>
+        <div class="table-area" ng-show="bonusList.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>身份证号</th>
+                        <th>应发工资</th>
+                        <th>社保公积金个人部分</th>
+                        <th>工资个人所得税</th>
+                        <th>实发工资</th>
+                        <th>应发全年一次性奖金</th>
+                        <th>一次性奖金个人所得税</th>
+                        <th>实发一次性奖金</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in bonusList track by $index">
+                        <td>{{item.name}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.idcard}}</td>
+                        <td>{{item.should_amount}}</td>
+                        <td>{{item.fund_amount}}</td>
+                        <td>{{item.tax_amount}}</td>
+                        <td>{{item.actual_amount}}</td>
+                        <td>{{item.bonus_should_amount}}</td>
+                        <td>{{item.bonus_tax_amount}}</td>
+                        <td>{{item.bonus_actual_amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-show="bonusList.length" class="clearfix table-bottom">
+                <uib-pagination class="table-pagination" ng-change="bonusList(pageNo);" ng-disabled="wagePageDisabled" total-items="bonusListTotal" items-per-page="pageSize" rotate="false" ng-model="pageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                <div class="table-tip">
+                    员工人数：{{bonusTotal.number}}人&nbsp;&nbsp;&nbsp;&nbsp; 实发金额：{{bonusTotal.actual_amount}}元
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

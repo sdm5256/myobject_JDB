@@ -1,0 +1,90 @@
+<div id="optimizeScd">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; 优化并发放工资</li>
+    </ol>
+    <div class="scdContent optimizeStep">
+        <div class="steps">
+            <ul class="commonStep">
+                <li>
+                    <div><i>1</i></div><span>选择薪资构成</span></li>
+                <li>
+                    <div><i>2</i></div><span>上传工资表</span></li>
+                <li>
+                    <div><i>3</i> </div><span>薪资优化计算</span></li>
+                <li>
+                    <div><i>4</i></div><span>发放</span></li>
+            </ul>
+        </div>
+        <div class="secondDetail">
+            <div class="uploadSalary">
+                <div class="head-actions">
+                    <button ng-disabled="uploadStatus" id="upload-excel-btn" class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file">
+                        <i ng-show="!uploadStatus">上传工资表</i>
+                        <i class="fa fa-spinner fa-spin" ng-show="uploadStatus"></i>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{{downloadUrl}}" target="_blank">下载模版</a>
+                </div>
+                <div class="balance-tips">现金余额：<span>{{returnMsg.ext.balance | amountFormater}}</span>元
+                    <i-tips tip="企业充值或转入金额"></i-tips>
+                </div>
+            </div>
+            <div >
+                <div ng-if="listShow">
+                    <online-edit  order-id="{{orderId}}" page-type="1" ></online-edit>
+                </div>
+                <div ng-if="!listShow">
+                    <online-edit  order-id="{{orderId}}" page-type="2" ></online-edit>
+                </div>
+                
+            </div>
+            <div class="optimizeBtn">
+                <button type="button btn-disabled" class="btn selfa btncom btn-primary btn-optimize" ng-class="{'btn-primary': btnSwitch}" ng-click="preStep()">上一步</button>
+                <button type="button" class="btn selfa  btn-primary btn-optimize" ng-disabled="btnSwitch" ng-click="nextStep()">下一步</button>
+                <!-- <a  class="simulation" href="">体验模拟发放流程</a> -->
+            </div>
+        </div>
+        <!-- 错误信息模块 -->
+        <div ng-show="excelErrorMessage">
+            <div class="alert alert-danger">
+                Excel错误信息！
+                <br> {{excelErrorMessage}}
+            </div>
+        </div>
+        <p class="important-tips-wrap">
+            <img src="images/ia.png">
+            <span class="import-text">重要提示：</span>
+            <br>1. 请先下载模板,在此基础上录入工资信息，在进行上传。
+            <br>2. 工资将发放到员工手机号对应的借贷宝账户上,员工收到后可以借给企业、购买理财产品、消费和提现。请在发放后通知员工查收。
+            <br>3. 如果员工没有开通借贷宝，工资也会记入其名下，开通借贷宝后即可收到。如果1个月内为开通借贷宝，工资将返回企业账户。
+            <br>4. 发放工资后，员工将成为企业好友，企业即可向该员工借钱。如果当月未发工资，该员工将在下月解除与企业的好友关系，企业无法再向其借钱，直到下次发放工资。
+            <br>5. 每位员工，每次至少发放500元工资。
+        </p>
+    </div>
+</div>
+<script type="text/ng-template" id="notFunds.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body onledit-text-center" ng-show="isshow" style="text-align:center">
+        <p >余额不足，需充值{{funds | amountFormater}}元，请充值后重试</p>
+        <span class="input-group-btn center-online-edit" >
+            <button class="btn btn-disabled left" type="submit" ng-click="cancel();">取消</button>
+        </span>
+        <span class="input-group-btn center-online-edit">
+            <button class="btn btn-primary right" type="submit" ng-click="goRecharge();">去充值</button>
+        </span>
+    </div>
+    <div class="modal-body onledit-text-center" ng-show="!isshow">
+        <p>{{funds}}</p>
+        
+        <div class="col-xs-12 text-center">
+            <button class="btn btn-primary" ng-click="cancel();">确定</button>
+        </div>
+    </div>
+</script>

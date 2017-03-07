@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <i class="modal-close-icon" ng-click="cancel();"></i>
+    <h3 class="modal-title">提示</h3>
+</div>
+<div class="modal-body reimbursement-del-modal">
+    <form data-role="form" name="modifyForm" class="form-horizontal" novalidate>
+        <div class="step-content">
+            <p>确定要删除该记录吗?</p>
+        </div>
+        <div class="step-actions">
+            <div class="form-group">
+                <div class="col-xs-12 text-center">
+                    <div class="col-xs-6"><button class="btn btn-primary" type="button" ng-click="confirm()">确定</button></div>
+                    <div class="col-xs-6"><button class="btn btn-default" type="button" ng-click="cancel()">取消</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

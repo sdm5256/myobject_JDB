@@ -1,0 +1,307 @@
+#addFriend {
+    .addFriendCont {
+        margin-top: 20px;
+        background: #fff;
+        border-radius: 3px;
+        border: 1px solid #d9d9d9;
+        box-shadow: 0px 2px 2px 0px #d9d9d9;
+        .addTitle {
+            text-align: center;
+            padding-top: 40px;
+            span {
+                display: inline-block;
+                color: #333;
+                font-size: 22px;
+                margin-bottom: 35px;
+                position: relative;
+            }
+            span:before {
+                position: absolute;
+                top: 3px;
+                left: -33px;
+                content: '';
+                width: 24px;
+                height: 24px;
+                background: url("../../images/add-icon.png") center center no-repeat;
+            }
+            div {
+                text-align: center;
+                width: 560px;
+               	margin: 0 auto;
+                position: relative;
+                input {
+                    width: 560px;
+                    height: 50px;
+                    margin: 0 auto;
+                    border-radius: 25px!important;
+                    padding-left: 20px!important;
+                    background: rgba(0, 0, 0, 0) url("../../images/seach.png") 96% center no-repeat;
+                    background-size: 20px auto;
+                }
+                input:focus {
+                    background: rgba(0, 0, 0, 0) url("../../images/staff-seach.png") 96% center no-repeat;
+                    background-size: 20px auto;
+                }
+                i{
+                	position: absolute;
+                	top: 0;
+                	right: 0;
+                	width: 50px;
+                	height: 50px;
+                	cursor: pointer;
+                }
+            }
+        }
+        .searchResult{
+        	
+        	.searchPro{
+        		padding:30px 30px 70px 30px;
+        		padding-bottom: 70px;
+        	}       	
+        	.resultNum{
+        		color: #808080;
+        		padding:30px 30px 10px 30px;
+        		padding-bottom: 10px;
+                position: relative;
+        	}
+            .resultNum:before{
+                position: absolute;
+                top: 22px;
+                left: 30px;
+                content: '';
+                width: 93%;
+                height: 1px;
+                background: #d9d9d9;
+            }
+        	.noResult{
+        		color: #999999;
+        		font-size: 18px;
+        		text-align: center;
+        		padding: 80px 0px 100px 0px;
+        	}
+        }
+        .addFriendWay {
+            height: 375px;
+            padding-top: 60px;
+            background: #fafafa;
+            .wayCont {
+                margin: 0 auto;
+                width: 670px;
+                height: 250px;
+                position: relative;
+                .wayTitle {
+                    position: absolute;
+                    top: -45px;
+                    left: 33%;
+                    color: #808080;
+                    font-size: 16px;
+                    span {
+                        position: relative;
+                    }
+                    span:before {
+                        position: absolute;
+                        top: 8px;
+                        left: -115px;
+                        content: '';
+                        width: 100px;
+                        height: 1px;
+                        background: #ccc;
+                    }
+                    span:after{
+                    	position: absolute;
+                        top: 8px;
+                        right: -115px;
+                        content: '';
+                        width: 100px;
+                        height: 1px;
+                        background: #ccc;
+                    }
+                }
+                ul {
+                    float: left;
+                    width: 369px;
+                    height: 100%;
+                    border-right: 1px dashed #999999;
+                    li {
+                        height: 50%;
+                        text-align: center;
+                        padding: 18px 0px 0px 38px;
+                        p {
+                            margin-bottom: 20px;
+                            text-align: left;
+                            position: relative;
+                        }
+                        span {
+                            margin: 0 auto;
+                            display: inline-block;
+                            position: relative;
+                        }
+                        span:before,
+                        span:after {
+                            position: absolute;
+                            left: -10px;
+                            content: '';
+                            width: 5px;
+                            height: 5px;
+                            border-left: 1px solid #4d4d4d;
+                        }
+                        span:before {
+                            top: -5px;
+                            border-top: 1px solid #4d4d4d;
+                        }
+                        span:after {
+                            bottom: -5px;
+                            border-bottom: 1px solid #4d4d4d;
+                        }
+                        i {
+                            position: absolute;
+                            right: 0;
+                            top: 0;
+                            display: block;
+                            height: 100%;
+                        }
+                        i:before,
+                        i:after {
+                            position: absolute;
+                            right: -10px;
+                            content: '';
+                            width: 5px;
+                            height: 5px;
+                            border-right: 1px solid #4d4d4d;
+                        }
+                        i:before {
+                            top: -5px;
+                            border-top: 1px solid #4d4d4d;
+                        }
+                        i:after {
+                            bottom: -5px;
+                            border-bottom: 1px solid #4d4d4d;
+                        }
+                    }
+                    .way-one {
+                        border-bottom: 1px dashed #999999;
+                        p:before {
+                            position: absolute;
+                            content: '';
+                            top: -3px;
+                            left: -24px;
+                            width: 20px;
+                            height: 20px;
+                            background: url("../../images/staff-seach.png") center center no-repeat;
+                            background-size: 18px 18px;
+                        }
+                    }
+                    .way-two {
+                        p:before {
+                            position: absolute;
+                            content: '';
+                            top: -1px;
+                            left: -24px;
+                            width: 20px;
+                            height: 20px;
+                            background: url("../../images/way-two.png") center center no-repeat;
+                            background-size: 18px 18px;
+                        }
+                    }
+                }
+                .way-three {
+                    float: right;
+                    width: 300px;
+                    height: 100%;
+                    padding: 18px 0px 0px 38px;
+                    text-align: center;
+                    p {
+                        position: relative;
+                        text-align: left;
+                    }
+                    p:before {
+                        position: absolute;
+                        content: '';
+                        top: -1px;
+                        left: -24px;
+                        width: 20px;
+                        height: 20px;
+                        background: url("../../images/way-three.png") center center no-repeat;
+                        background-size: 18px 18px;
+                    }
+                    >div {
+                        margin-bottom: 15px;
+                        img {
+                            width: 120px;
+                            height: 120px;
+                            display: block;
+                            margin: 0 auto;
+                            border: 1px solid #ccc;
+                        }
+                    }
+                    span {
+                        margin: 0 auto;
+                        display: inline-block;
+                        position: relative;
+                    }
+                    span:before,
+                    span:after {
+                        position: absolute;
+                        left: -10px;
+                        content: '';
+                        width: 5px;
+                        height: 5px;
+                        border-left: 1px solid #4d4d4d;
+                    }
+                    span:before {
+                        top: -5px;
+                        border-top: 1px solid #4d4d4d;
+                    }
+                    span:after {
+                        bottom: -5px;
+                        border-bottom: 1px solid #4d4d4d;
+                    }
+                    i {
+                        position: absolute;
+                        right: 0;
+                        top: 0;
+                        display: block;
+                        height: 100%;
+                    }
+                    i:before,
+                    i:after {
+                        position: absolute;
+                        right: -10px;
+                        content: '';
+                        width: 5px;
+                        height: 5px;
+                        border-right: 1px solid #4d4d4d;
+                    }
+                    i:before {
+                        top: -5px;
+                        border-top: 1px solid #4d4d4d;
+                    }
+                    i:after {
+                        bottom: -5px;
+                        border-bottom: 1px solid #4d4d4d;
+                    }
+                }
+            }
+            .wayCont:before {
+                position: absolute;
+                top: -35px;
+                left: 0;
+                content: '';
+                width: 670px;
+                height: 320px;
+                border-left: 1px dashed #999999;
+                border-right: 1px dashed #999999;
+            }
+            .wayCont:after {
+                position: absolute;
+                top: 0px;
+                left: -35px;
+                content: '';
+                width: 740px;
+                height: 250px;
+                border-top: 1px dashed #999999;
+                border-bottom: 1px dashed #999999;
+            }
+        }
+    }
+}

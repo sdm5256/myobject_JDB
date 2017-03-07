@@ -1,0 +1,208 @@
+#employee-list, #employee-delete {
+    .breadcrumb{
+        .activeStaff{
+            color: #1283fc !important;
+        }
+    }
+    .tap-title{
+        width: 100%;
+        height: 39px;
+        border-bottom: 1px solid #bbb;
+        margin-bottom: 20px;
+        .title-active{
+            color: #1283fc;
+            border-bottom: 4px solid #1283fc;
+        }
+        li{
+            float: left;
+            padding: 5px 15px;
+            font-size: 18px;
+        }
+        li:hover{
+            cursor: pointer;
+        }
+    }
+    
+    .short-info {
+        margin-bottom: 18px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .head-actions {
+        margin-bottom: 20px;
+    }
+
+    .loading-box {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		font-size: 18px;
+		margin-left: -35px;
+		margin: -27px;
+    }
+
+    .alert-danger {
+        border-style:dashed!important;
+        border-color: #b3b3b3;
+        background-color: #f7f7f7;
+        margin:30px 0;
+        color: #4d4d4d;
+        .alert-title {
+          color: #2f7edb;
+          font-weight: 700;
+          margin: 0 0 15px;
+        }
+
+        .list {
+          list-style-type: decimal;
+          padding-left: 20px;
+        }
+    }
+    .absolute-left {
+        position: absolute;
+        left: 10px;
+        bottom: 12px;
+    }
+    .success-box {
+        padding: 20px 0;
+        background-color: #fff;
+        border:1px solid #ccc;
+        text-align: center;
+        .success-txt{
+            color:#4c4c4c;
+            padding: 14px 0;
+
+            span{
+                color:#0c7bf8;
+            }
+        }
+    }
+    .failed-box {
+        border:1px dashed #ff0000;
+        background-color: #f2e2e2;
+        padding: 20px 20px;
+        color:#4c4c4c;
+        .failed-title {
+            color: #ff3d3d;
+        }
+    }
+    .sample-box{
+        margin-bottom: 30px;
+    }
+    .inputType{
+        width: 32%;
+        display: inline-block;
+        padding: 0 40px 0 12px !important;
+    }
+    .errorBorde{
+        border: 1px solid #ea371a;
+    }
+    .selectType{
+         width: 15%;
+         display: inline-block;
+    }
+    .tabs2{
+        position: relative;
+        .manualAdd{
+            margin-top: 20px;
+            li {
+                margin-bottom: 30px;
+                label{
+                    text-align: right;
+                    width: 100px;
+                }
+                button{
+                    width: 140px;
+                    height: 40px;
+                    text-align: center;
+                    border: none;
+                    outline: none;
+                    border-radius: 5px;
+                    cursor: default;
+                    background: #d9d9d9;
+                }
+                
+                button:nth-child(1){ 
+                    color: #575757;              
+                    margin-left: 105px;
+                }
+                .btnActive{ 
+                    cursor: pointer;              
+                    border: 1px solid #bbb;
+                    background: #fff;
+                }
+                button:nth-child(2){
+                    color:#fff;
+                    margin-left: 35px;              
+                    background: #a4c4eb;
+                }
+                button.manualAddBtn{
+                    cursor: pointer;
+                    background: #1283fc;
+                }
+                span{
+                    margin-left: 10px;
+                    color: #ea371a;
+                }
+                .errorMsg:before{
+                    display: inline-block;
+                    background: url(../../images/cross.png) no-repeat;
+                    width: 15px;
+                    height: 15px;
+                    content: '';
+                    position: relative;
+                    top: 2px;
+                    right: 2px;
+                    margin-right: 2px;
+                }
+            }
+        }
+        .addLoading{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            .loadingBg{
+                position: absolute;
+                top: 15%;
+                left: 30%;
+                width: 250px;
+                min-height: 140px;
+                background: rgba(0,0,0,0.6);
+                border-radius: 7px;
+                .loadColor{
+                    color: #fff;
+                }
+                ul{
+                    width:100%;
+                    margin-top: 35px;
+                    li:nth-child(1){
+                        margin-bottom: 15px;
+                    }
+                    li{
+                        width:100%;
+                        text-align: center;
+                        color: #fff;
+                        line-height: 30px;  
+                        font-size: 18px; 
+                        margin-bottom: 20px;                    
+                        img{
+                            display: block;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal-dialog .modal-content .modal-upload-employeelist {
+    margin-top: 0;
+    p {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+}

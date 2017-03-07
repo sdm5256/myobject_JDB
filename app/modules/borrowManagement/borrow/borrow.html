@@ -1,0 +1,352 @@
+<div id="borrow">
+    <div class="step-1" ng-show="currentStep == 1">
+        <ol class="breadcrumb">
+            <li>
+                <a href="" ng-click="historyBack();">
+                    <span class="glyphicon glyphicon-triangle-left"></span>
+                    返回
+                </a>
+            </li>
+            <li class="active">您所在的位置：<a href="#/borrowing-management">融资管理</a>>&nbsp; 发起融资</li>
+        </ol>
+        <h2 class="short-title">发起融资</h2>
+        <div class="borrow-form container-padding">
+            <form data-role="form" name="borrowForm" class="form-horizontal" ng-submit="submitForm(borrowForm.$valid && !amountError && !dateError && data.friendIdList != -1);" novalidate>
+                <strong>基本信息</strong>
+                <div class="form-content">
+                    <div class="form-group error-tip" ng-class="{'error': submitted && amountError, 'ok': submitted && !amountError}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            融资金额:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap small-input">
+                                <input class="form-control small-input" name="amount" type="text" ng-class="{'financing-error-border':submitted && amountError || amountError}" ipt-formatter ng-model="data.amount" autocomplete="off" placeholder="100的整数倍" ng-blur='amountCheck()' required/>
+                                <div class="financing-error-msg" ng-show= "submitted && amountError && !checkAmount || amountError && !checkAmount">请输入100的正整数倍且不超过可融额度{{amountNum  | amountFormater }}</div>
+                                <div class="new-small-tip">
+                                    <i></i>
+                                    <span>当前可融资额度{{amountNum  | amountFormater }}元</span>
+                                </div>
+                                <span class="position">元</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.rate.$invalid, 'ok': submitted && borrowForm.rate.$valid}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            年利率:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap small-input">
+                                <input class="form-control" name="rate" type="text" ng-model="data.rate" ng-class="{'financing-error-border':checkInterestError}" autocomplete="off" maxlength="4"
+                                       placeholder="0-24" ng-change="checkChange()" ng-blur="checkInterest()" ng-keydown="verifyInterestInput($event)" required/>
+                                <div ng-show="checkInterestError">
+                                    <div  class="financing-error-msg">年利率应在0-24之间</div>
+                                </div>
+                                <span class="position">%</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.term.$invalid, 'ok': submitted && borrowForm.term.$valid}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            还款日期:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap small-input">
+                                <input type="text" name="term" ng-click="openCalender();" ng-change="dateChanged()" class="form-control small-input" uib-datepicker-popup ng-model="termCalender.date" is-open="termCalender.opened" min-date="minDate" max-date="maxDate" show-button-bar=false date-disabled="disabled(date, mode)" placeholder="期限不超过五年" ng-required="true" readonly/>
+                                <span class="control-icon glyphicon glyphicon-calendar" ng-click="openCalender();"></span>
+                                <div class="new-small-tip new-date-tip">
+                                    <i></i>
+                                    <span>周末及节假日银行不处理对公业务，请注意还款日的选择</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.tags.$invalid, 'ok': submitted && borrowForm.tags.$valid}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            融资用途:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap control-text">
+<!--                                 <input class="form-control" name="tags" type="text" ng-model="data.tags" autocomplete="off"
+                                       placeholder="例如：生产经营" required maxlength="50" readonly/> -->
+                                生产经营
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.remark.$invalid, 'ok': submitted && borrowForm.remark.$valid}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            补充说明:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap word-count big-input">
+                                <textarea id="addExplain" class="form-control big-input" name="remark" type="text" ng-model="data.remark" autocomplete="off"
+                                       placeholder="补充说明融资的原因、还款保障措施等（限255字）"  ng-trim="false" ng-change = "wordCount()" >
+                                </textarea>
+                                <span>{{data.remark.length || 0}}/255</span>           
+                            </div>
+<!--                             <div class="upload-btn" ngf-select="upload($file)" ng-model="file" name="file"
+                                 ngf-accept="'image/jpeg, image/png'">+</div> -->
+                            <div class="upload-error">{{uploadError}}</div>
+                            <div class="images-area clearfix">
+                                <div ng-repeat="image in data.imagesDatas track by $index" class="image">
+                                    <img ng-src="{{image.basePath}}{{image.file}}"/>
+                                </div>
+								<div ng-hide="imgsLimit == 3" class="upload-btn" ngf-select="upload($file)" ng-model="file" name="file" ngf-accept="'image/jpeg, image/png'"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <strong>发布信息</strong>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.friendIdList.$invalid || submitted && data.friendIdList == -1, 'ok': submitted && borrowForm.friendIdList.$valid && data.friendIdList != -1}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            融资对象:
+                        </label>
+                        <div class="col-xs-8">
+                            <div class="control-wrap big-input">
+                                <input ng-model="friendNames" ng-click="getFriendsList();" class="form-control big-input" name="friendIdList" type="text" ng-model="data.friendIdList" autocomplete="off"
+                                       placeholder="" readonly/>
+                                <span class="control-icon fui-user" ng-click="getFriendsList();"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && borrowForm.effectiveTime.$invalid || submitted && dateError, 'ok': submitted && borrowForm.effectiveTime.$valid && !dateError}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            发布期:
+                        </label>
+                        <div class="col-xs-10">
+                            <div class="control-wrap small-input">
+                                <input class="form-control small-input" ng-class="{'financing-error-border':checkErrMsg()}" name="effectiveTime" type="text" ng-blur="checkEffectDate();" ng-model="data.effectiveTime"  autocomplete="off" maxlength="2"
+                                       placeholder="不超过20天" required/>
+                                <div ng-show="submitted" ng-messages="borrowForm.effectiveTime.$error">
+                                    <div  ng-message="pattern">请输入正确信息</div>
+                                </div>
+                                <div>
+                                    <div ng-class="{'financing-error-msg':errStyle}">{{errText}}</div>
+                                </div>
+                                <span class="position">天</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group error-tip" ng-class="{'error': submitted && (borrowForm.guarantee.$invalid || !data.guaranteeID), 'ok': submitted && borrowForm.guarantee.$valid && data.guaranteeID}">
+                        <label class="control-label col-xs-2 clear-padding">
+                            担保人:
+                        </label>
+                        <div class="col-xs-10">
+                            <!-- <div class="control-wrap" ng-mouseleave="showPersonsLayer = false;"> -->
+                            <div class="control-wrap big-input">
+                                <label class="form-control big-input" id="guarantee-cnt">
+                                    <input id="guarantee" name="guarantee" type="text" ng-model="data.guarantee" autocomplete="off"
+                                           placeholder="必须为企业员工" ng-required="true" ng-change="getPersonsLayer();" ng-blur="autoStuff();"/>
+                                    <span>{{data.mobile}}</span>
+                                </label>
+                                <ul class="persons-layer" ng-show="showPersonsLayer && personsList.length">
+                                    <li ng-repeat="person in personsList track by $index" ng-click="selectPerson(person);">
+                                        {{person.memberName}} {{person.mobile}}
+                                    </li>
+                                </ul>
+                                <!-- <span class="control-icon fui-user"></span> -->
+                                <!-- <div class="small-tip">
+                                    <a href="javascript:;" ng-click="guaranteeRequirement();" class="font-color">必须为企业员工</a>
+                                </div> -->
+                            </div>
+							<div class="tips-container-wrapper" ng-show="isAutoRenewal">
+								<input type="checkbox" ng-model="data.is_auto_renewal" ng-change="cancelAutoRenewal()"/>&nbsp;
+								<span ng-mouseenter="toggleRenewalTips()" ng-mouseleave="toggleRenewalTips()">自动续标</span>
+								<div class="auto-renewal-tip">
+									<i ng-mouseenter="toggleRenewalTips()" ng-mouseleave="toggleRenewalTips()"></i>
+									<div class="tips-container" ng-show="showAutoRenewalTips">
+										<p>1. 开启自动续借后，若发布期结束时融资未筹满，将以原利率和期限继续借款，直到筹满为止。</p>
+										<p>2. 每次自动续借后，您的融资将重新出现在员工借款列表的顶部，从而更快筹满。</p>
+									</div>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-text col-xs-offset-2 col-xs-10 text-left is-agree">
+                            <label>
+                                <input type="checkbox" ng-model="data.agree" required/> 已阅读并同意
+                            </label>
+							<a href="/company/gettradecontents?rate={{data.rate}}&amount={{data.amount}}&endDate={{deadLine || ''}}&token={{token}}&companyID={{companyID}}" target="_blank">《理财协议》</a>
+							<a ng-show="isAutoRenewal && data.is_auto_renewal" href="/borrow/view-auto-rebid?rate={{data.rate}}&amount={{data.amount}}&endDate={{deadLine/1000 || ''}}&token={{token}}&companyID={{companyID}}" target="_blank">《自动续借授权书》</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="form-group">
+                        <div class="col-xs-12 text-center btn-disabled-borrow">
+                            <button class="btn btn-disabled custom-btn" ng-class="{'btn-primary': !borrowForm.$error.required && data.agree && data.friendIdList != -1}" type="submit" ng-disabled="!data.agree">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="step-2" ng-show="currentStep == 2">
+        <ol class="breadcrumb">
+            <li>
+                <a href="" ng-click="historyBack();">
+                    <span class="glyphicon glyphicon-triangle-left"></span>
+                    返回
+                </a>
+            </li>
+            <li class="active">您所在的位置：<a href="#/borrowing-management">融资管理</a>>&nbsp; 发起融资</li>
+        </ol>
+        <div class="borrow-info-header clearfix">
+            <div class="qr-code">
+                <img ng-src="{{qrImg}}"/>
+            </div>
+            <div class="qr-message">
+                <p ng-show = "statusResult.status != 5">
+                    <span ng-show="statusResult.status == 1">{{statusError.returnMessage}}<br><br></span>
+                    <span class="text-big" ng-show="statusResult.notice" ng-class="{'text-danger': statusResultError, 'text-success': statusResultSuccess}">{{statusResult.notice}}</span><br><br>
+                    <span ng-show="statusResult.tips">{{statusResult.tips}}</span><br>
+                    <span ng-show="statusResult.admin">{{statusResult.admin}}</span><br>
+                    <span ng-show="statusResult.mobile">{{statusResult.mobile}}</span>
+                </p>
+                <p ng-show="statusResult.status == 5" class="cancel-one">
+                    <span class="first">操作员取消融资</span>
+                    <span>您可以<a href="javascript:;" ng-click="cancelRz()">重新发起融资</a></span>
+                </p>
+            </div>
+        </div>
+        <h2 class="short-title">融资信息</h2>
+        <div class="borrow-info clearfix">
+            <div class="info-item">融资金额：<span class="bold">{{data.amount | amountFormater }}</span></div>
+            <div class="info-item">年利率：<span class="bold">{{data.rate}}%</span></div>
+            <div class="info-item">发布期：<span class="bold">{{data.effectiveTime}}天</span></div>
+            <div class="info-item">融资用途：<span class="bold">{{data.tags}}</span></div>
+            <div class="info-item">担保人：<span class="bold">{{data.guarantee}}</span></div>
+            <div class="info-item">到期日：<span class="bold">{{data.term}}</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- <script type="text/ng-template" id="guarantee-requirement.html">
+    <div class="modal-header">
+        <h3 class="modal-title">担保人要求</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            <ul class="list">
+                <li>最近一个月通过借贷宝向其发放过500元以上的工资</li>
+                <li>已注册借贷宝，并通过了身份认证</li>
+            </ul>
+        </div>
+        <div class="actions text-center">
+            <button class="btn btn-primary" type="button" ng-click="ok()">知道了</button>
+        </div>
+    </div>
+</script> -->
+
+<script type="text/ng-template" id="customer.html">
+    <div class="modal-header">
+        <h3 class="modal-title">担保人要求</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            <ul class="list">
+                <li>最近一个月通过借贷宝向其发放过500元以上的工资</li>
+                <li>已注册借贷宝，并通过了身份认证</li>
+            </ul>
+        </div>
+        <div class="actions text-center">
+            <button class="btn btn-primary" type="button" ng-click="ok()">知道了</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="friendsListModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">已选择{{num}}位融资对象</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            <table class="table-list">
+                <tr ng-repeat="friend in friendsList track by $index" ng-click="check($index);">
+                    <td class="checkbox-td">
+                        <input type="checkbox" ng-checked="isChecked(friend);" ng-model="list[$index]" ng-click="change(friend,$index);">
+                    </td>
+                    <td class="head">
+                        <div class="img">
+                            <img ng-src="{{friend.avatarUrl}}"/>
+                        </div>
+                    </td>
+                    <td class="name">
+                        {{friend.memberName}}
+                    </td>
+                    <td>
+                    {{friend.tagName}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="actions clearfix">
+            <span class="check-all checkbox-group">
+                <span>
+                    <input type="checkbox" ng-model="list.all" ng-change="checkAll();"/>
+                全选&nbsp;&nbsp;
+                </span>
+                <span ng-repeat="kind in kinds track by $index" ng-show="kind.tagNum != 0">
+                    <input type="checkbox" ng-model="ifCheck[$index]" ng-click="choseKind(kind.tagId, $index);"/> {{kind.tagName}}&nbsp;&nbsp;
+                </span>
+            </span>
+            <button class="btn btn-primary pull-right" type="button" ng-click="ok()" ng-disabled="!num">确定</button>
+        </div>
+    </div>
+</script>
+<!--<script type="text/ng-template" id="tip.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            本次借款成功后，您的企业累积借入金额可能超过100万元。对实际借入超过100万元的部分，本平台将按照年化0.35%的标准收取交易服务费
+        </div>
+        <div class="actions clearfix">
+            <span class="check-all pull-left">
+                <span>
+                    <input type="checkbox" ng-model="is_check"/>
+                不在提示&nbsp;&nbsp;
+                </span>
+            </span>
+            <button class="btn btn-primary pull-right" type="button" ng-click="ok()">确定</button>
+            <button class="btn btn-primary pull-right" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+</script>-->
+<script type="text/ng-template" id="tip.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="tipForm" class="form-horizontal">
+            <div class="step-content clearfix">
+                <p>本次融资成功后，您的企业累积借入金额可能超过100万元。对实际借入超过100万元的部分，本平台将按照年化0.3%的标准收取交易服务费</p>
+                <div class="pull-right plus">
+                    <input type="checkbox" ng-checked="checkit" ng-model="is_checks"/>
+                    不在提示&nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-primary btnmr20" type="button" ng-click="ok()">继续融资</button>
+                        <button class="btn btn-primary" type="button" ng-click="cancel()">取消融资</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

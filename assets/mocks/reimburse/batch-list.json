@@ -1,0 +1,70 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "list":[
+      {
+        "date":"2016-07-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be96",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":0,
+        "statusText":"编辑中"
+      },
+      {
+        "date":"2016-06-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be78",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":1,
+        "statusText":"等待操作员确认"
+      },
+      {
+        "date":"2016-07-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be96",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":2,
+        "statusText":"等待管理员确认"
+      },
+      {
+        "date":"2016-06-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be78",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":3,
+        "statusText":"已完成"
+      },
+      {
+        "date":"2016-07-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be96",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":4,
+        "statusText":"管理员拒绝"
+      },
+      {
+        "date":"2016-07-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be96",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":5,
+        "statusText":"超时失效"
+      },
+      {
+        "date":"2016-06-29 18:54:00",
+        "order":"4faa0dd17f9eb76790c7fdbfbfd2be78",
+        "totalAmount":"500.00",
+        "totalNumber":"10",
+        "status":7,
+        "statusText":"处理中"
+      }
+    ],
+    "stats":{
+      "number":2
+    }
+  }
+}

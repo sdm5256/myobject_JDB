@@ -1,0 +1,104 @@
+<div id="optimizeFth">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; 优化并发放工资</li>
+    </ol>
+    <div class="fthContent optimizeStep">
+        <div class="steps" ng-show="stepStatus">
+            <ul class="commonStep">
+                <li>
+                    <div><i>1</i></div><span>选择薪资构成</span></li>
+                <li>
+                    <div><i>2</i></div><span>上传工资表</span></li>
+                <li>
+                    <div><i>3</i> </div><span>薪资优化计算</span></li>
+                <li>
+                    <div><i>4</i></div><span>发放</span></li>
+            </ul>
+        </div>
+        <div class="stepfth">
+            <!-- 工资+劳务报酬 有优化空间-->            
+            <div ng-include="'modules/payManagement/optimizeFth/workLaborOptimize.html'" ng-if="workOptimize" ></div>
+            <!-- 工资+劳务报酬(无优化空间)-->
+            <div ng-include="'modules/payManagement/optimizeFth/workLaborOptimizeNo.html'" ng-if="workOptimizeNo" ></div>
+            <!-- 工资+全年一次性奖金 -->
+            <div ng-include="'modules/payManagement/optimizeFth/workBunos.html'" ng-if="onceBonusAll" ></div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="modifyWageItemModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">修改后重发</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" ng-submit="submit(modifyForm.$valid);" novalidate>
+            <div class="step-content">
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.name.$invalid, 'ok': submitted && modifyForm.name.$valid}">
+                    <label class="control-label col-xs-4">
+                        姓名
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证-->
+                                {{submitForm.cusName}}
+                            </div>
+                            <input class="form-control" name="name" type="text" ng-model="submitForm.cusName" autocomplete="off" maxlength="25" required  ng-if="!operType4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.phone.$invalid, 'ok': submitted && modifyForm.phone.$valid}">
+                    <label class="control-label col-xs-4">
+                        手机号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <input class="form-control" name="phone" type="text" ng-model="submitForm.cusPhone"   maxlength="11"  ng-change="phoneMacth()" />
+                            <div  ng-show="phoneError">
+                                <span  class="red"><span class="glyphicon glyphicon-remove-circle red"></span>手机号输入格式错误</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.idCard.$invalid, 'ok': submitted && modifyForm.idCard.$valid}">
+                    <label class="control-label col-xs-4">
+                        身份证号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证-->
+                                {{submitForm.cusIdNo}}
+                            </div>
+                            <input class="form-control" name="idCard" type="text" ng-model="submitForm.cusIdNo" autocomplete="off" maxlength="18" required  ng-if="!operType4"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'error': submitted && modifyForm.idCard.$invalid, 'ok': submitted && modifyForm.idCard.$valid}">
+                    <label class="control-label col-xs-4">
+                        发放金额
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text">
+                                {{item.actual_amount}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': !modifyForm.$error.required}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+            <div class="red text-center" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证, 弹框底部提示：#已验证姓名与身份证信息，仅可修改手机号#-->
+                已验证姓名与身份证信息，仅可修改手机号
+            </div>
+        </form>
+    </div>
+</script>

@@ -1,0 +1,211 @@
+<div id="register">
+    <div class="step-container step-{{currentStep}}" ng-show="checkStatus">
+        <div class="page-title">注册企业账户</div>
+        <div class="step" id="step3">
+            <div class="block-title">企业信息</div>
+            <form name="step3Form" class="form-horizontal" role="form" novalidate>
+                <div class="step-content">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group" ng-class="{'error': step3Submitted && step3Form.companyName.$invalid || companyNametips || company_name_msg,'ok': step3Submitted && step3Form.companyName.$valid}">
+                                <label class="control-label col-xs-3">
+                                    企业名称
+                                </label>
+                                <div class="col-xs-5">
+                                    <div class="control-wrap">
+                                        <input class="form-control" name="companyName" type="text" ng-model="data.company_name" ng-blur="companyCheck()"
+                                               placeholder="须与营业执照中的名称保持一致" ng-focus="cnFocus()" ng-pattern=/^(（?[\u4e00-\u9fa5]+）?){5,}$/ required autocomplete="off" maxlength="50"/>
+                                        <span class="control-icon icon" ng-class="{'icon-lock':!companyNametips,'icon-lock-blue':cnStatus ,'icon-lock-red':companyNametips || company_name_msg}"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-4" ng-show="companyNametips ">
+                                    <p class="help-message" >
+                                        请输入正确的企业名称
+                                    </p>
+                                </div>
+                                <div class="col-xs-4" ng-show="company_name_msg ">
+                                    <p class="help-message" >
+                                        合作社非企业，请输入正确的企业名称
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{'error': step3Submitted && (step3Form.companyShort.$invalid || (data.company_name && data.company_abbr_name && (data.company_abbr_name.length > 1) && contain)) || companyShortTips || contain,
+                                                                'ok': step3Submitted &&  data.company_name && data.company_abbr_name && (data.company_abbr_name.length > 1) && !contain}">
+                                <label class="control-label col-xs-3">
+                                    企业简称
+                                </label>
+                                <div class="col-xs-5">
+                                    <div class="control-wrap">
+                                        <!--<input class="form-control" name="companyShort" type="text" ng-model="data.company_abbr_name"-->
+                                        <!--placeholder="2-4个字，且须包含在企业名称中" ng-change="checkName();" ng-pattern=/^[\u4e00-\u9fa5]{2,4}$/ required maxlength="4" autocomplete="off"/>-->
+                                        <!--<span class="control-icon fui-list"></span> -->
+                                        <input class="form-control" name="companyShort" type="text" ng-model="data.company_abbr_name"
+                                               placeholder="2-4个字，且须包含在企业名称中" ng-focus="comsFocus()" ng-blur="companyShortCheck()"   required maxlength="4" autocomplete="off"/>
+                                        <span class="control-icon icon" ng-class="{'icon-short':!companyShortTips,'icon-short-blue':comsStatus ,'icon-short-red':companyShortTips}"></span>
+                                        <!--<div ng-show="step3Submitted" ng-messages="step3Form.companyShort.$error" class="error-messages">-->
+                                        <!--<div ng-message="pattern">2-4个字，且须包含在企业名称中</div>-->
+                                        <!--</div>-->
+                                        <!--<div ng-show="step3Submitted && data.company_name && data.company_abbr_name && (data.company_abbr_name.length > 1) && contain"-->
+                                        <!--class="error-messages">-->
+                                        <!--所用字符须包含在企业名称中-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                                <div class="col-xs-4" ng-show="companyShortTips ">
+                                    <p class="help-message" >
+                                        2-4个字，且须包含在企业名称中
+                                    </p>
+                                </div>
+                                <div class="col-xs-4" ng-show=" !companyShortTips && contain">
+                                    <p class="help-message" >
+                                        所用字符须包含在企业名称中
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label class="control-label col-xs-3">
+                                    证件类型
+                                </label>
+                                <div class="col-xs-5" ng-init="data.company_id_type = 1;">
+                                    <label class="control-label">
+                                        <input type="radio" ng-checked="true" name="idType" value="1" ng-model="data.company_id_type" ng-click="setEmpty2();"/>
+                                        普通营业执照
+                                    </label>
+                                    <label class="control-label ml20">
+                                        <input type="radio" name="idType" value="2" ng-model="data.company_id_type" ng-click="setEmpty1();"/>
+                                        统一社会信用代码
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="data.company_id_type == 2">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="alert alert-default">
+                                        注：指将营业执照、组织机构代码证等合并为一张营业执照的主体资格证书
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" ng-show="data.company_id_type == 1">
+                            <div class="form-group" ng-class="{'error': step3Submitted && step3Form.normalNo.$invalid || operTips,'ok': step3Submitted && step3Form.normalNo.$valid}">
+                                <label class="control-label col-xs-3">
+                                    营业执照注册号
+                                </label>
+                                <div class="col-xs-5">
+                                    <div class="control-wrap">
+                                        <input class="form-control" name="normalNo" type="text" ng-model="company_id_no_1"
+                                               placeholder="须与营业执照中的注册号保持一致" ng-blur="opercheck()" ng-required="data.company_id_type == 1" maxlength="15" autocomplete="off" >
+                                        <span class="control-icon fui-new"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4" ng-show="operTips">
+                                    <p class="help-message" >
+                                        13位或15位的数字字母组合
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" ng-show="data.company_id_type == 2">
+                            <div class="form-group" ng-class="{'error': step3Submitted && step3Form.specialNo.$invalid || specialTips,'ok': step3Submitted && step3Form.specialNo.$valid}" >
+                                <label class="control-label col-xs-3">
+                                    统一社会信用代码：
+                                </label>
+                                <div class="col-xs-5">
+                                    <div class="control-wrap">
+                                        <input class="form-control" name="specialNo" type="text" ng-model="company_id_no_2" maxlength="18"
+                                               placeholder="须与营业执照中社会信用代码保持一致"  ng-blur="specialCheck()" ng-required="data.company_id_type == 2" autocomplete="off">
+                                        <span class="control-icon fui-new"></span>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-3" ng-show="specialTips">
+                                    <p class="help-message" >
+                                        18位数字和字母组合
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group" ng-class="{'error': step3Submitted && step3Form.companyName.$invalid || staff_numTips,'ok': step3Submitted && step3Form.companyName.$valid}">
+                                <label class="control-label col-xs-3">
+                                    员工人数
+                                </label>
+                                <div class="col-xs-5">
+                                    <div class="control-wrap">
+                                        <input class="form-control posrelation" name="staff_num" staff-formater type="text" ng-model="data.staff_num" ng-blur="staffBlur()"
+                                               placeholder="请输入真实有效的人数" ng-focus="sfFocus()"  required autocomplete="off" maxlength="7"/>
+                                        <span class="control-icon icon" ng-class="{'icon-staff':!staff_numTips,'icon-staff-blue':sfStatus ,'icon-staff-red':staff_numTips}"></span>
+                                        <span class="staff_tips">人</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4" ng-show="staff_numTips ">
+                                    <p class="help-message" >
+                                        请输入正确的员工人数
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="step" id="step4" ng-click="dialogClick()">
+            <div class="step4-wrapper">
+                <div class="block-title">银行账户信息</div>
+                <div bank></div>
+            </div>
+            <div class="form-group yq-code" ng-class="{'error': extensionCodeError,'ok': step1Submitted && !extensionCodeError}">
+                <label class="control-label col-xs-3" class="xxx">
+                    邀请码
+                </label>
+                <div class="col-xs-5">
+                    <div class="control-wrap">
+                        <input class="form-control" name="extensionCode" ng-disabled="extensionCodeStatus" type="text" ng-model="data.extension_code" ng-focus="ecFocus()" ng-blur="ecBlur()" autocomplete="off" maxlength="20"
+                               placeholder="如果您有邀请码，请输入"/>
+                        <span class="control-icon icon icon-info" ng-class="{'icon-info-blue':ecStatus,'icon-info-disabled':extensionCodeStatus}" ></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group clearfix">
+            <div class="control-label col-xs-offset-2 col-xs-10 text-left is-agree">
+                <input type="checkbox" ng-model="data.agree">
+                已阅读并同意<a href="/registrationAgreement.html" target="_blank">《企业用户注册协议》</a>
+                、<a href="/payServiceAgreement.html" target="_blank">《支付服务协议》</a>、<a href="/payAgreement.html" target="_blank">《代发工资协议》</a>
+            </div>
+        </div>
+        <button ng-disabled ="loadStatus" class="register-btn" ng-click="submit(true, step3Form.$valid && (data.company_name && data.company_abbr_name && (data.company_abbr_name.length > 1) && !contain))">
+            <i ng-show="!loadStatus">立即添加</i>
+            <i class="fa fa-spinner fa-spin"  ng-show="loadStatus" ></i>
+        </button>
+    </div>
+    <div class="add-company-success" ng-show="!checkStatus">
+        <img src="images/cr-success.png">
+        <h2>添加成功</h2>
+        <p class="company-name">已添加<a href="#/info">{{companyName}}</a></p>
+        <p class="company-tips">添加完成认证企业后，即可添加员工并向他们发起融资！</p>
+        <div class="company-note">
+            <strong>如何认证</strong>
+            <p>借贷宝会通过鹰皇金佰士向您<span>{{bankName}}</span>的企业账户(尾号<span>{{bankNo}}</span>)发出一笔汇款，输入正确的汇款金额即可。</p>
+        </div>
+        <a href="#/info">开始认证企业</a>
+    </div>
+</div>
+
+<!--提示邀请码弹窗-->
+<script type="text/ng-template" id="tipExtensionCodeModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">温馨提示</h3>
+    </div>
+    <div class="modal-body tip-extensioncode">
+        <!--<p class="text-left"><i class="icon-regTip"></i>啊哦，系统未能成功响应邀请码<br>请注册成功后在“企业资料”页面再次验证您的邀请码</p>-->
+        <p class="text-left"><i class="icon-regTip"></i>{{errorMsg}}</p>
+        <button class="btn btn-primary" type="button" ng-click="ok();">我知道了</button>
+    </div>
+</script>
+

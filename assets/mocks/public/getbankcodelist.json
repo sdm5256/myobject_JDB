@@ -1,0 +1,406 @@
+{"error": {
+    "returnCode": "0",
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+}, "data": [
+    {
+        "ID": 1,
+        "LBNK_CD": "PBOC",
+        "BNK_NM": "中国人民",
+        "CORP_ORG": "001",
+        "FLG": 1,
+        "TM_SMP": "20121018185536586"
+    },
+    {
+        "ID": 2,
+        "LBNK_CD": "ICBC",
+        "BNK_NM": "中国工商",
+        "CORP_ORG": "102",
+        "FLG": 1,
+        "TM_SMP": "20121018185536588"
+    },
+    {
+        "ID": 3,
+        "LBNK_CD": "ABC",
+        "BNK_NM": "中国农业",
+        "CORP_ORG": "103",
+        "FLG": 1,
+        "TM_SMP": "20121018185536588"
+    },
+    {
+        "ID": 4,
+        "LBNK_CD": "BOC",
+        "BNK_NM": "中国银行",
+        "CORP_ORG": "104",
+        "FLG": 1,
+        "TM_SMP": "20121018185536589"
+    },
+    {
+        "ID": 5,
+        "LBNK_CD": "CCB",
+        "BNK_NM": "中国建设",
+        "CORP_ORG": "105",
+        "FLG": 1,
+        "TM_SMP": "20121018185536594"
+    },
+    {
+        "ID": 6,
+        "LBNK_CD": "CDB",
+        "BNK_NM": "国家开发",
+        "CORP_ORG": "201",
+        "FLG": 1,
+        "TM_SMP": "20121018185536594"
+    },
+    {
+        "ID": 7,
+        "LBNK_CD": "EIBC",
+        "BNK_NM": "中国进出",
+        "CORP_ORG": "202",
+        "FLG": 1,
+        "TM_SMP": "20121018185536594"
+    },
+    {
+        "ID": 8,
+        "LBNK_CD": "ADBC",
+        "BNK_NM": "中国农业",
+        "CORP_ORG": "203",
+        "FLG": 1,
+        "TM_SMP": "20121018185536595"
+    },
+    {
+        "ID": 9,
+        "LBNK_CD": "BCOM",
+        "BNK_NM": "交通银行",
+        "CORP_ORG": "301",
+        "FLG": 1,
+        "TM_SMP": "20121018185536595"
+    },
+    {
+        "ID": 10,
+        "LBNK_CD": "CITIC",
+        "BNK_NM": "中信银行",
+        "CORP_ORG": "302",
+        "FLG": 1,
+        "TM_SMP": "20121018185536596"
+    },
+    {
+        "ID": 11,
+        "LBNK_CD": "CEBB",
+        "BNK_NM": "中国光大",
+        "CORP_ORG": "303",
+        "FLG": 1,
+        "TM_SMP": "20121018185536596"
+    },
+    {
+        "ID": 12,
+        "LBNK_CD": "HXB",
+        "BNK_NM": "华夏银行",
+        "CORP_ORG": "304",
+        "FLG": 1,
+        "TM_SMP": "20121018185536596"
+    },
+    {
+        "ID": 13,
+        "LBNK_CD": "CMBC",
+        "BNK_NM": "中国民生",
+        "CORP_ORG": "305",
+        "FLG": 1,
+        "TM_SMP": "20121018185536597"
+    },
+    {
+        "ID": 14,
+        "LBNK_CD": "GDB",
+        "BNK_NM": "广东发展",
+        "CORP_ORG": "306",
+        "FLG": 1,
+        "TM_SMP": "20121018185536597"
+    },
+    {
+        "ID": 15,
+        "LBNK_CD": "SDB",
+        "BNK_NM": "深圳发展",
+        "CORP_ORG": "307",
+        "FLG": 1,
+        "TM_SMP": "20121018185536597"
+    },
+    {
+        "ID": 16,
+        "LBNK_CD": "CMB",
+        "BNK_NM": "招商银行",
+        "CORP_ORG": "308",
+        "FLG": 1,
+        "TM_SMP": "20121018185536598"
+    },
+    {
+        "ID": 17,
+        "LBNK_CD": "CIB",
+        "BNK_NM": "兴业银行",
+        "CORP_ORG": "309",
+        "FLG": 1,
+        "TM_SMP": "20121018185536598"
+    },
+    {
+        "ID": 18,
+        "LBNK_CD": "SPDB",
+        "BNK_NM": "上海浦东",
+        "CORP_ORG": "310",
+        "FLG": 1,
+        "TM_SMP": "20121018185536599"
+    },
+    {
+        "ID": 19,
+        "LBNK_CD": "BOB",
+        "BNK_NM": "北京银行",
+        "CORP_ORG": "313",
+        "FLG": 0,
+        "TM_SMP": "20121018185536599"
+    },
+    {
+        "ID": 21,
+        "LBNK_CD": "EBCL",
+        "BNK_NM": "恒丰银行",
+        "CORP_ORG": "315",
+        "FLG": 1,
+        "TM_SMP": "20121018185536600"
+    },
+    {
+        "ID": 22,
+        "LBNK_CD": "CZB",
+        "BNK_NM": "浙商银行",
+        "CORP_ORG": "316",
+        "FLG": 1,
+        "TM_SMP": "20121018185536600"
+    },
+    {
+        "ID": 24,
+        "LBNK_CD": "CBHB",
+        "BNK_NM": "渤海银行",
+        "CORP_ORG": "318",
+        "FLG": 1,
+        "TM_SMP": "20121018185536601"
+    },
+    {
+        "ID": 25,
+        "LBNK_CD": "HSCB",
+        "BNK_NM": "徽商银行",
+        "CORP_ORG": "319",
+        "FLG": 1,
+        "TM_SMP": "20121018185536602"
+    },
+    {
+        "ID": 31,
+        "LBNK_CD": "PSBC",
+        "BNK_NM": "中国邮政",
+        "CORP_ORG": "403",
+        "FLG": 1,
+        "TM_SMP": "20121018185536604"
+    },
+    {
+        "ID": 32,
+        "LBNK_CD": "BOS",
+        "BNK_NM": "上海银行",
+        "CORP_ORG": "404",
+        "FLG": 1,
+        "TM_SMP": "20121018185536586"
+    },
+    {
+        "ID": 33,
+        "LBNK_CD": "HSBC",
+        "BNK_NM": "汇丰银行",
+        "CORP_ORG": "501",
+        "FLG": 1,
+        "TM_SMP": "20121018185536604"
+    },
+    {
+        "ID": 34,
+        "LBNK_CD": "BEA",
+        "BNK_NM": "东亚银行",
+        "CORP_ORG": "502",
+        "FLG": 1,
+        "TM_SMP": "20121018185536604"
+    },
+    {
+        "ID": 35,
+        "LBNK_CD": "NCB",
+        "BNK_NM": "南洋商业",
+        "CORP_ORG": "503",
+        "FLG": 1,
+        "TM_SMP": "20121018185536605"
+    },
+    {
+        "ID": 36,
+        "LBNK_CD": "HSB",
+        "BNK_NM": "恒生银行",
+        "CORP_ORG": "504",
+        "FLG": 1,
+        "TM_SMP": "20121018185536605"
+    },
+    {
+        "ID": 40,
+        "LBNK_CD": "DBS",
+        "BNK_NM": "星展银行",
+        "CORP_ORG": "509",
+        "FLG": 1,
+        "TM_SMP": "20121018185536606"
+    },
+    {
+        "ID": 41,
+        "LBNK_CD": "WHSZ",
+        "BNK_NM": "永亨银行",
+        "CORP_ORG": "510",
+        "FLG": 1,
+        "TM_SMP": "20121018185536607"
+    },
+    {
+        "ID": 46,
+        "LBNK_CD": "CITI",
+        "BNK_NM": "花旗银行",
+        "CORP_ORG": "531",
+        "FLG": 1,
+        "TM_SMP": "20121018185536608"
+    },
+    {
+        "ID": 47,
+        "LBNK_CD": "BA",
+        "BNK_NM": "美国银行",
+        "CORP_ORG": "532",
+        "FLG": 1,
+        "TM_SMP": "20121018185536609"
+    },
+    {
+        "ID": 52,
+        "LBNK_CD": "TMSH",
+        "BNK_NM": "三菱东京",
+        "CORP_ORG": "561",
+        "FLG": 1,
+        "TM_SMP": "20121018185536610"
+    },
+    {
+        "ID": 53,
+        "LBNK_CD": "SM",
+        "BNK_NM": "三井住友",
+        "CORP_ORG": "563",
+        "FLG": 1,
+        "TM_SMP": "20121018185536610"
+    },
+    {
+        "ID": 54,
+        "LBNK_CD": "MH",
+        "BNK_NM": "瑞穗实业",
+        "CORP_ORG": "564",
+        "FLG": 1,
+        "TM_SMP": "20121018185536610"
+    },
+    {
+        "ID": 58,
+        "LBNK_CD": "KE",
+        "BNK_NM": "韩国外换",
+        "CORP_ORG": "591",
+        "FLG": 1,
+        "TM_SMP": "20121018185536612"
+    },
+    {
+        "ID": 59,
+        "LBNK_CD": "WB",
+        "BNK_NM": "友利银行",
+        "CORP_ORG": "593",
+        "FLG": 1,
+        "TM_SMP": "20121018185536612"
+    },
+    {
+        "ID": 60,
+        "LBNK_CD": "KDB",
+        "BNK_NM": "韩国产业",
+        "CORP_ORG": "594",
+        "FLG": 1,
+        "TM_SMP": "20121018185536612"
+    },
+    {
+        "ID": 67,
+        "LBNK_CD": "UOB",
+        "BNK_NM": "大华银行",
+        "CORP_ORG": "622",
+        "FLG": 1,
+        "TM_SMP": "20121018185536615"
+    },
+    {
+        "ID": 72,
+        "LBNK_CD": "KBC",
+        "BNK_NM": "比利时联",
+        "CORP_ORG": "651",
+        "FLG": 1,
+        "TM_SMP": "20121018185536617"
+    },
+    {
+        "ID": 77,
+        "LBNK_CD": "SC",
+        "BNK_NM": "渣打银行",
+        "CORP_ORG": "671",
+        "FLG": 1,
+        "TM_SMP": "20121018185536619"
+    },
+    {
+        "ID": 83,
+        "LBNK_CD": "CAL",
+        "BNK_NM": "东方汇理",
+        "CORP_ORG": "694",
+        "FLG": 1,
+        "TM_SMP": "20121018185536621"
+    },
+    {
+        "ID": 85,
+        "LBNK_CD": "DR",
+        "BNK_NM": "德国德累",
+        "CORP_ORG": "711",
+        "FLG": 1,
+        "TM_SMP": "20121018185536622"
+    },
+    {
+        "ID": 86,
+        "LBNK_CD": "DB",
+        "BNK_NM": "德意志银",
+        "CORP_ORG": "712",
+        "FLG": 1,
+        "TM_SMP": "20121018185536622"
+    },
+    {
+        "ID": 87,
+        "LBNK_CD": "CB",
+        "BNK_NM": "德国商业",
+        "CORP_ORG": "713",
+        "FLG": 1,
+        "TM_SMP": "20121018185536622"
+    },
+    {
+        "ID": 94,
+        "LBNK_CD": "CS",
+        "BNK_NM": "瑞士信贷",
+        "CORP_ORG": "741",
+        "FLG": 1,
+        "TM_SMP": "20121018185536624"
+    },
+    {
+        "ID": 96,
+        "LBNK_CD": "BNS",
+        "BNK_NM": "加拿大丰",
+        "CORP_ORG": "751",
+        "FLG": 1,
+        "TM_SMP": "20121018185536625"
+    },
+    {
+        "ID": 107,
+        "LBNK_CD": "BNPP",
+        "BNK_NM": "法国巴黎",
+        "CORP_ORG": "782",
+        "FLG": 1,
+        "TM_SMP": "20121018185536628"
+    },
+    {
+        "ID": 109,
+        "LBNK_CD": "FSBK",
+        "BNK_NM": "华一银行",
+        "CORP_ORG": "787",
+        "FLG": 1,
+        "TM_SMP": "20121018185536629"
+    }
+]}

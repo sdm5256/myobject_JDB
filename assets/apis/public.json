@@ -1,0 +1,17 @@
+{
+    "/public/verifysmscode": "mocks/public/verifysmscode.json",
+    "/public/sendsmscode": "mocks/public/sendsmscode.json",
+    "/public/restpwdsms": "mocks/public/restpwdsms.json",
+    "/public/loginsms": "mocks/public/loginsms.json",
+    "/public/getbankcodelist": "mocks/public/getbankcodelist.json",
+    "/public/getprovincelist": "mocks/public/getprovincelist.json",
+    "/public/getcitylist": "mocks/public/getcitylist.json",
+    "/public/getcmmtbkinlist": "mocks/public/getcmmtbkinlist.json",
+    "/public/verifyextensioncode": "mocks/public/verifyextensioncode.json",
+    "/public/sendphonenum": "mocks/public/sendphonenum.json",
+    "/public/addcmmtbkin": "mocks/public/addcmmtbkin.json",
+    "/public/sendopercode": "mocks/public/sendopercode.json",
+    "/public/sendadmincode": "mocks/public/sendadmincode.json",
+    "/public/checkcard": "mocks/public/checkcard.json",
+    "/public/isoverdue": "mocks/public/isoverdue.json"
+}

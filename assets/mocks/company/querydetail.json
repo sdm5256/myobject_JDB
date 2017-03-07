@@ -1,0 +1,23 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "compJdbId": "14508406174261985",
+    "transId": "4348072874C44B58A899402D5816072A",
+    "cashBalance": "234",
+    "frozen": "3423432",
+    "trustBalance": "0",
+    "countBalance": "234",
+    "totalBalance": "1999999900000",
+    "getWageunCost": "1000000",
+    "total": {
+      "recharge": 1060000,
+      "trust": 260000,
+      "withdraw": 120000,
+      "behalf": 1012000
+    }
+  }
+}

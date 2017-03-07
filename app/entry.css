@@ -1,0 +1,11 @@
+
+/* 基础样式 */
+require('../node_modules/html5-boilerplate/dist/css/normalize.css');
+require('../node_modules/html5-boilerplate/dist/css/main.css');
+require('../node_modules/bootstrap/dist/css/bootstrap.css');
+require('libs/flat-ui/dist/css/flat-ui.css');
+require('libs/font-awesome/css/font-awesome.css');
+
+/* 模块样式 */
+require('directives');
+require('modules');

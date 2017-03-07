@@ -1,0 +1,15 @@
+{
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "ok",
+        "returnUserMessage": "ok"
+    },
+    "data": {
+        "mobilephone": "15910987706",
+        "name": "用户的名字",
+        "id_no": "612555632514021502",
+        "staff_type": 1,
+        "status": 2,
+        "dimission": "0"
+    }
+}

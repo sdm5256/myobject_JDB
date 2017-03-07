@@ -1,0 +1,35 @@
+<div id="table">
+    <table class="table tableFix">
+        <thead>
+            <th class="index"></th>
+            <th ng-repeat=" thead in headList">{{thead}}</th>
+        </thead>
+    </table>
+    <div class="table-wrap js-table-wrap">
+        <table class="table">
+            <thead>
+                <th class="index"></th>
+                <th ng-repeat=" thead in headList">{{thead}}</th>
+            </thead>
+            <tbody id="tableTody">
+                <tr ng-repeat="items in itemList track by $index" idData={{items.id}}>
+                    <td class="index">{{$index+1}}</td>
+                    <td ng-repeat="tbody in bodyList.slice(1,bodyList.length)">
+                        <div>
+                            <span ng-class="{'textError': items.warn_ext[tbody].notice}" ng-click="handleSpanClick($event)">{{items[tbody]}}</span>
+                            <i ng-if="items.warn_ext[tbody].notice">
+                                <span class="errorText">{{items.warn_ext[tbody].text}}</span>
+                            </i>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="loading" ng-show="hasMore">
+            <span class="loading-txt">正在加载</span>
+        </div>
+    </div>
+    <div class="table-foot">
+        员工人数：{{total.number}}人&nbsp;&nbsp;&nbsp;&nbsp; 应发金额：{{total.amount}}元
+    </div>
+</div>

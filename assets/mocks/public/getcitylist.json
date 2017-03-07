@@ -1,0 +1,57 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": [
+    {
+      "ID": 300,
+      "CITY_CD": "910",
+      "PROV_CD": "26",
+      "CITY_LNM": "榆林市分公司",
+      "CITY_NM": "榆林",
+      "BOSS_CITY": "912",
+      "VGOP_CITY": "0912",
+      "VGOP_PROV": 0,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706
+    },
+    {
+      "ID": 304,
+      "CITY_CD": "914",
+      "PROV_CD": "26",
+      "CITY_LNM": "榆林市分公司4",
+      "CITY_NM": "榆林4",
+      "BOSS_CITY": "912",
+      "VGOP_CITY": "0912",
+      "VGOP_PROV": 0,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706
+    },
+    {
+      "ID": 302,
+      "CITY_CD": "912",
+      "PROV_CD": "26",
+      "CITY_LNM": "榆林市分公司2",
+      "CITY_NM": "榆林2",
+      "BOSS_CITY": "912",
+      "VGOP_CITY": "0912",
+      "VGOP_PROV": 0,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706
+    },
+    {
+      "ID": 305,
+      "CITY_CD": "915",
+      "PROV_CD": "26",
+      "CITY_LNM": "榆林市分公司5",
+      "CITY_NM": "榆林5",
+      "BOSS_CITY": "912",
+      "VGOP_CITY": "0912",
+      "VGOP_PROV": 0,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706
+    }
+  ]
+}

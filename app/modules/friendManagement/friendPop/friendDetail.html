@@ -1,0 +1,178 @@
+<div id="friendDetail">
+    <div class="modal-header">
+        <div class="closeDetail">
+            <i ng-click="cancel();"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="companyTitle">
+            <div class="fm-item" ng-show="curentType" ng-include="'directives/friendList/include/company.html'"></div>
+            <div class="fm-item" ng-show="!curentType" ng-include="'directives/friendList/include/individual.html'"></div>
+        </div>
+        <div class="companyDetail">
+            <div class="table-area" ng-if="curentType">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>信用记录</td>
+                            <td>{{overdue[item.overdue]}}<!-- <i class="noOverdue" tabindex="0" uib-popover="uuuuu" popover-trigger="mouseenter" ng-show="overdue[item.overdue]"></i> --></td>
+                        </tr>
+                        <tr>
+                            <td>认证信息</td>
+                            <td><i class="authenticated" ng-show="ident[item.ident]"></i>{{ident[item.ident]}}</td>
+                        </tr>
+                        <tr>
+                            <td>营业执照注册号</td>
+                            <td>{{item.company_id_no}}</td>
+                        </tr>
+                        <tr>
+                            <td>企业住所</td>
+                            <td>{{item.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>法定代表人</td>
+                            <td>{{item.legal_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-area" ng-if="!curentType">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>借贷宝等级</td>
+                            <td>{{item.level}}</td>
+                        </tr>
+                        <tr>
+                            <td>信用记录</td>
+                            <td>{{overdue[item.overdue]}}<!-- <i class="noOverdue" tabindex="0" uib-popover="{{}}" popover-trigger="mouseenter" ng-show="overdue[item.overdue]"></i> --></td>
+                        </tr>
+                        <tr>
+                            <td>注册时间</td>
+                            <td>{{item.register}}</td>
+                        </tr>
+                        <tr>
+                            <td>工作经历</td>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="verify in item.workExpire.verified">{{verify.company}} <span>已验证</span></li>
+                                    <li class="unverify" ng-repeat="unverify in item.workExpire.unverified">{{unverify.company}}<span>未验证</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>教育信息</td>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="verify in item.edu.verified">
+                                        <a>{{verify.schoolName}}</a><a>{{verify.degree}}</a><a>{{verify.major}}</a>
+                                        <p>{{verify.startTime}}~{{verify.endTime}}</p>
+                                    </li>
+                                    <li class="unverify" ng-repeat="unverify in item.edu.unverified" >
+                                        <a>{{unverify.schoolName}}</a><a>{{unverify.degree}}</a><a>{{unverify.major}}</a>
+                                        <p>{{unverify.startTime}}~{{unverify.endTime}}</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="authenDetail">
+                    <div class="detailTitle">
+                        <i></i><span>认证信息</span>
+                    </div>
+                    <p>机构认证</p>
+                    <ul>
+                        <li>
+                            <div>
+                                <i ng-class="{'realName':item.ident_status.name,'noRealName':!item.ident_status.name}"></i>
+                            </div>
+                            实名认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'portrait':item.ident_status.face,'noPortrait':!item.ident_status.face}"></i>
+                            </div>
+                            肖像认证
+                        </li>
+                        <li>
+                            <div>
+                            <i ng-class="{'blankCard':item.ident_status.card,'noBlankCard':!item.ident_status.card}"></i>
+                            </div>
+                            银行卡认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'plane':item.ident_status.plane,'noNlane':!item.ident_status.plane}"></i>
+                            </div>
+                            乘机认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'operators':item.ident_status.carrieroperator,'noOperators':!item.ident_status.carrieroperator}"></i>
+                            </div>
+                            运营商认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'centralBank':item.ident_status.inquiry,'noCentralBank':!item.ident_status.inquiry}"></i>
+                            </div>
+                            央行征信认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'contacts':item.ident_status.maimai,'noContacts':!item.ident_status.maimai}"></i>
+                            </div>
+                            脉脉认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'accumulationFund':item.ident_status.fund,'noAccumulationFund':!item.ident_status.fund}"></i>
+                            </div>
+                            公积金认证
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'blog':item.ident_status.weibo,'noBlog':!item.ident_status.weibo}"></i>
+                            </div>
+                            微博认证
+                        </li>
+                    </ul>
+                    <p>机构认证</p>
+                    <ul>
+                        <li>
+                            <div>
+                                <i ng-class="{'mailList':item.ident_status.address,'noMailList':!item.ident_status.address}"></i>
+                            </div>
+                            上传通讯录
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'location':item.ident_status.lbs,'noLocation':!item.ident_status.lbs}"></i>
+                            </div>
+                            获取位置
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'phoneReserve':item.ident_status.backup,'noPhoneReserve':!item.ident_status.backup}"></i>
+                            </div>
+                            绑定备用号
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'closeContact':item.ident_status.contact,'noCloseContact':!item.ident_status.contact}"></i>
+                            </div>
+                            亲密联系人
+                        </li>
+                        <li>
+                            <div>
+                                <i ng-class="{'idcard':item.ident_status.idcard,'noIdcard':!item.ident_status.idcard}"></i>
+                            </div>
+                            上传身份证
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

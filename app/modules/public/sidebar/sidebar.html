@@ -1,0 +1,92 @@
+<ul id="sidebar" ng-controller="SidebarCtrl">
+    <li ng-class="getClass(['/overview','/get-cash','/how2-recharge'])" ng-click="goTo('/overview');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-1.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-1-hover.png"/>
+            </span>
+        </span>
+        <a>概况</a>
+    </li>
+
+    <li ng-show="$root.permission.info == 1" ng-class="getClass(['/info','operator-list','add-operator'])"   ng-click="goTo('/info');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-info-hover.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-info.png"/>
+            </span>
+        </span>
+        <a>企业资料</a>
+    </li>
+
+    <li ng-show="$root.permission.staff == 1" ng-class="getClass(['/employee-management', '/employee-list', '/employee-delete'])" ng-click="goTo('/employee-management');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-5.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-5-hover.png"/>
+            </span>
+        </span>
+        <a>员工管理</a>
+    </li>
+    <li ng-show="$root.permission.qiyeFriends == 1" ng-class="getClass(['/friendList','/addFriend'])" ng-click="goTo('/friendList');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-6.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-6-hover.png"/>
+            </span>
+        </span>
+        <a>好友管理</a>
+    </li>
+    <li ng-show="$root.permission.wage == 1" ng-class="getClass(['/pay-management', '/payFst', '/payScd', '/laborFst', '/laborScd', '/optimizeFst', '/optimizeScd', '/optimizeThd', '/optimizeFth', '/wageDetail', '/invalidRecords'])" ng-click="goTo('/pay-management');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-4.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-4-hover.png"/>
+            </span>
+        </span>
+        <a>工资管理</a>
+    </li>
+    <li ng-show="$root.permission.reimb == 1" ng-class="getClass(['/reimbursement-main','/reimbursement-list','/reimbursement-invalid'])" ng-click="goTo('/reimbursement-list');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-reimb.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-reimb-hover.png"/>
+            </span>
+        </span>
+        <a>报销管理</a>
+    </li>
+    <li ng-show="$root.permission.borrow == 1" ng-class="getClass(['/borrowing-management','/borrow'])" ng-click="goTo('/borrowing-management');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-3.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-3-hover.png"/>
+            </span>
+        </span>
+        <a>融资管理</a>
+    </li>
+    <li ng-show="$root.permission.deal == 1" ng-class="getClass(['/deal-search','/details'])"  ng-click="goTo('/deal-search');">
+        <span class="icon">
+            <span class="no-hover">
+                <img src="images/sidebar-icon-2.png"/>
+            </span>
+            <span class="hover">
+                <img src="images/sidebar-icon-2-hover.png"/>
+            </span>
+        </span>
+        <a>交易查询</a>
+    </li>
+</ul>

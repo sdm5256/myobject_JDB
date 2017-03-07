@@ -1,0 +1,8 @@
+<div class="global-tips-bar" ng-init="init();" ng-controller="TipsBarCtrl">
+	<div ng-show="showIdentTips" class="complete-info-warn">
+		<span class="glyphicon glyphicon-warning-sign red"></span> 
+		为了保障企业账号的安全，请您<a ng-href="#/info"> 立即认证企业</a>！
+	</div>
+	<div ng-show="gError" class="hide alert alert-danger text-center global-message global-error">{{gError}}</div>
+	<div ng-show="registerError" class="hide alert alert-danger text-center global-message global-error" >您的企业已注册且认证成功，您可以<a ng-href="#/login" class="must_register">立即登录</a></div>
+</div>

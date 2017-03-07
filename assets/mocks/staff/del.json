@@ -1,0 +1,13 @@
+{
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "ok",
+        "returnUserMessage": "ok"
+    },
+    "data": {
+        "errno": 200,
+        "msg": "ok",
+        "data": [],
+        "erron": 200
+    }
+}

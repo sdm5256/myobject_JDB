@@ -1,0 +1,27 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "products": [
+      {
+        "productId": "9955880010065059219",
+        "principal": "80000",
+        "interest": "50",
+        "repay_amount": "87000",
+        "overdue_fee": "20",
+        "overdue_day": 3,
+        "productReason": "开垦仰山公园的原始森林",
+        "yearRate": "12",
+        "guaranteeName": "赵本山",
+        "guaranteeID": "538522734200627227",
+        "effectiveDate": "2015-12-25",
+        "startDate": "2015-12-20",
+        "endDate": "2016-12-20",
+        "cleanDate": "2016-12-20"
+      }
+    ]
+  }
+}

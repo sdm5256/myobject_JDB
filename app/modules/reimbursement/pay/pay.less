@@ -1,0 +1,322 @@
+.reimbursement-pay {
+
+    .g-btn-fix {
+        width: 140px !important;
+        height: 40px !important;
+        line-height: 40px !important;
+    }
+    .breadcrumb {
+        background: none;
+    }
+    .m-head {
+        .title {
+
+            &:before {
+                display: inline-block;
+                content: ' ';
+                font-size: 0;
+                line-height: 0;
+                width: 4px;
+                height: 14px;
+                margin-right: 8px;
+                background: #ccc;
+                vertical-align: middle;
+            }
+        }
+    }
+    .operation-wrap {
+        padding-top: 33px;
+        .btn-upload {
+            margin-right: 30px;
+        }
+        .btn-down-tpl {
+            color: #1574ea;
+        }
+        .tips {
+            text-align: right;
+            color: #b3b3b3;
+            font-size: 12px;
+            vertical-align: middle;
+            padding: 15px 0 10px;
+
+            &:before {
+                display: inline-block;
+                position:relative;
+                top: -1px;
+                content: ' ';
+                width: 14px;
+                height: 14px;
+                vertical-align: middle;
+                background: url(../../images/reimb-warn.png) no-repeat;
+                margin-right: 11px;
+            }
+        }
+    }
+    .seach-wrap {
+        background: red;
+        line-height: 0;
+        margin-top: 17px;
+        border-radius: 3px;
+        background-color: rgb(230, 230, 230);
+        padding: 19px 12px 21px;
+
+        .m-tips .tips-container {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            text-align: justify;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 1px #eee;
+            border: solid 1px #d4d4d4;
+            border-radius: 4px;
+            padding: 5px 10px;
+            background: #fff;
+            color: #808080;
+            font-size: 12px;
+            line-height: 18px;
+
+            &:after {
+                content: '';
+                box-shadow: 1px 1px 1px #eee;
+                display: block;
+                width: 8px;
+                height: 8px;
+                background: #fff;
+                border-bottom: solid 1px #d4d4d4;
+                border-right: solid 1px #d4d4d4;
+                transform: rotate(45deg) translate(0, -55%);
+                -webkit-transform: rotate(45deg) translate(0, -55%);
+                position: absolute;
+                top: 100%;
+                left: 40px;
+            }
+        }
+        input {
+            border: 1px solid #999;
+            border-radius: 2px;
+            height: 24px;
+            padding: 0 5px;
+            width: 150px;
+            outline: none;
+        }
+        .input-money {
+            padding-left: 11px
+        }
+        .input-money-wrap {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        .money-content {
+            position: relative;
+        }
+        .money-bg {
+            display: inline-block;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #999;
+            border-radius: 2px;
+            top: -9px;
+            left: -5px;
+            width: 332px;
+            height: 42px;
+        }
+        .input-money {
+            padding-left: 11px
+        }
+        .input-wrap {
+            display: inline-block;
+            position: relative;
+        }
+        .input-content {
+            position: relative;
+        }
+        .input-bg {
+            display: inline-block;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #999;
+            border-radius: 2px;
+            top: -9px;
+            left: -5px;
+            width: 332px;
+            height: 42px;
+        }
+        .remark-bg {
+            width: 307px;
+        }
+
+        .btn-cancel {
+            width: 15px;
+            height: 25px;
+            background: url(../../images/reimb-cancel.png) no-repeat center center;
+            line-height: 15px;
+            float: right;
+            margin-right: 11px;
+            margin-top: 8px;
+            text-align: center;
+        }
+        .btn-ok {
+            width: 22px;
+            height: 26px;
+            text-align: center;
+            background: url(../../images/reimb-ok.png) no-repeat center center;
+            margin-top: 7px;
+            float: right;
+            line-height: 16px;
+            margin-right: 13px;
+        }
+        .input-remark-wrap {
+            display: inline-block;
+            position: relative;
+            margin-left: 30px;
+        }
+        .input-remark {
+            width: 153px;
+        }
+    }
+    .table-area {
+        .uncheck td {
+            color: #b3b3b3 !important;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px 0;
+            .loading-txt {
+                display: inline-block;
+                vertical-align: middle;
+                color: #4c4c4c;
+                font-size: 14px;
+                &:before {
+                    vertical-align: middle;
+                    width: 20px;
+                    height: 20px;
+                    display: inline-block;
+                    content: ' ';
+                    background: url('../../images/loading.svg') no-repeat center center;
+                    background-size: cover;
+                    margin-right: 9px;
+                }
+            }
+        }
+        padding-bottom: 46px;
+        .table-wrap {
+            height: 418px;
+            overflow-y: auto;
+            background: #f3f6fa;
+        }
+        .fixed-table {
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        .check-col {
+            width: 59px;
+            text-align: center !important;
+            padding-left: 8px;
+            label {
+                margin-bottom: 0;
+            }
+        }
+        .name-col {
+            width: 155px;
+        }
+        .phone-col {
+            width: 200px;
+        }
+        .money-col {
+            width: 260px;
+        }
+        .remark-col {
+
+        }
+        th, td {
+            padding: 9px 8px 9px 20px;
+            vertical-align: middle;
+        }
+        .th-mark {
+            color: #dfe0e2;
+        }
+    }
+    .table-footer-wrap {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        height: 46px;
+        background: #fff;
+        padding: 13px 23px 0;
+
+        .checked-num {
+            float: left;
+            margin-right: 63px;
+        }
+        .total-amount {
+            float: left;
+        }
+    }
+    .pager-wrap {
+        float: right;
+        .jump-form {
+            display: inline-block;
+        }
+        .jump-input {
+            width: 50px;
+            text-align: right;
+        }
+    }
+    .m-footer {
+        padding-top: 41px;
+        .warn-wrap {
+            border: 1px dotted #b3b3b3;
+            border-radius: 2px;
+            margin-top: 25px;
+            padding: 20px 21px 17px;
+
+            .tt {
+                font-size: 14px;
+                line-height: 14px;
+                color: rgb(48, 126, 220);
+                vertical-align: middle;
+                padding-bottom: 7px;
+
+                &:before {
+                    position: relative;
+                    top: -2px;
+                    display: inline-block;
+                    margin-right: 5px;
+                    width: 16px;
+                    height: 13px;
+                    content: ' ';
+                    vertical-align: middle;
+                    background: url(../../images/reimb-top-arrow.png) no-repeat;
+                }
+            }
+            p {
+                margin: 0;
+                font-size: 14px;
+                color: #4c4c4c;
+                line-height: 28px;
+            }
+        }
+    }
+}
+.modal-reimb-info-size {
+    width: 400px;
+}
+.d-group-btn {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 12px;
+
+    .btn.btn-disabled {
+        border: none !important;
+    }
+}
+.modal-dialog .modal-content .d-body {
+    padding: 36px 20px 40px !important;
+}
+.ml55 {
+    margin-left: 55px;
+}

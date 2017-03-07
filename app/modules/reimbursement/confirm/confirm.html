@@ -1,0 +1,79 @@
+<div id="js-reimbursement-confirm" class="reimbursement-confirm">
+    <div class="m-head">
+        <ol class="breadcrumb">
+            <li class="active">您所在的位置：<a href="javascript:;" ng-click="goToIndex()">报销管理</a>&gt;&nbsp; 向员工付款</li>
+        </ol>
+        <div class="title">向员工付款</div>
+    </div>
+    <div class="m-content">
+        <div ng-include="tplInfoUrl"></div>
+        <div class="table-title">报销列表
+            <a
+                ng-show="showDownloadExcel"
+                class="download-list"
+                href="{{Url.exportExcel}}"
+                class="btn btn-link">
+                下载报销列表
+            </a>
+        </div>
+        <div class="table-area js-table-area">
+            <div class="table-wrap js-table-wrap">
+                <table class="table">
+                    <colgroup>
+                        <col class="name-col"></col>
+                        <col class="phone-col"></col>
+                        <col class="money-col"></col>
+                        <col class="status-col" ng-if="showStatusCol"></col>
+                        <col class="remark-col"></col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>报销金额<span class="th-mark">（元）</span></th>
+                            <th ng-if="showStatusCol">状态</th>
+                            <th>备注<span class="th-mark">（可不填）</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in listData">
+                        <td>{{item.name}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.amount === '' ? '' : (item.amount/100 | amountFormater)}}</td>
+                        <td ng-if="showStatusCol" class="{{getWarnStatus(item.status) ? 'red-txt' : ''}}">{{item.statusText}}</td>
+                        <td>{{item.remk}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="loading" ng-show="hasMore">
+                    <span class="loading-txt">正在加载</span>
+                </div>
+            </div>
+            <table class="table fixed-table">
+                <colgroup>
+                    <col class="name-col"></col>
+                    <col class="phone-col"></col>
+                    <col class="money-col"></col>
+                    <col ng-if="showStatusCol" class="status-col"></col>
+                    <col class="remark-col"></col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>报销金额<span class="th-mark">（元）</span></th>
+                        <th ng-if="showStatusCol">状态</th>
+                        <th>备注<span class="th-mark">（可不填）</span></th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="table-footer-wrap">
+                <span class="checked-num">员工人数：{{stats.number}}人</span>
+                <span class="total-amount">报销总额：{{stats.totalAmount/100 | amountFormater}}元</span>
+                <span class="other-checked-num" ng-if="undefined !== stats.succNumber && stats.succNumber !== -1">其中：成功人数： {{stats.succNumber}}人</span>
+                <span class="total-amount" ng-if="undefined !== stats.succAmount && stats.succAmount !== -1">成功总额：{{stats.succAmount/100 | amountFormater}}元</span>
+            </div>
+        </div>
+    </div>
+</div>

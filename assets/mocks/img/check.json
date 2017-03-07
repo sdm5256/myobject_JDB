@@ -1,0 +1,11 @@
+{
+   "error": {
+       "returnCode": "0",
+       "returnMessage": "该图片验证码不存在",
+       "returnUserMessage": "该图片验证码不存在"
+   },
+   "data" :{
+      "post":"http://119.254.111.25:180/img/check?code=7c990545f333af91e68a0669edd05d30",
+      "img":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3320670811,1178842717&fm=116&gp=0.jpg"
+   }
+}

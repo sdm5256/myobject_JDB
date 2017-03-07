@@ -1,0 +1,99 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": [
+    {
+      "ID": 1,
+      "PROV_CD": "01",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "北京"
+    },
+    {
+      "ID": 2,
+      "PROV_CD": "02",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "河南"
+    },
+    {
+      "ID": 3,
+      "PROV_CD": "03",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "北京"
+    },
+    {
+      "ID": 4,
+      "PROV_CD": "04",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "河北"
+    },
+    {
+      "ID": 5,
+      "PROV_CD": "05",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "广东"
+    },
+    {
+      "ID": 6,
+      "PROV_CD": "06",
+      "PROV_LVL": 1,
+      "PROV_ACS_STS": 1,
+      "CNCT_BOSS_STS": 1,
+      "BOSS_PROV": "01",
+      "LPS_CD": "01210100",
+      "VGOP_PROV": 100,
+      "PPD_OPN_FLG": 0,
+      "UPD_DT": 20100706,
+      "TM_SMP": "20101124101004",
+      "PROV_LNM": " ",
+      "PROV_NM": "山东"
+    }
+  ]
+}

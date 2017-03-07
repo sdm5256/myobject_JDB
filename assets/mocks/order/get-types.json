@@ -1,0 +1,18 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+           "0": "全部",
+           "1": "充值",
+           "2": "提现",
+           "3": "转帐",
+           "4": "借入",
+           "5": "还款",
+           "6": "代发",
+           "7": "报销",
+           "8": "其他"       
+    }
+}

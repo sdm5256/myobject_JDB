@@ -1,0 +1,94 @@
+{
+  "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+  "data": {
+    "level": "见习生",    
+    "avatar_url": "http://jdbserver.b0.upaiyun.com/images/8e4c49747f907a480207a09f436601d8.png",      
+    "name": "测七零",     
+    "phone": "191****0070",    
+    "ident": 1,     
+    "bank_card": 0, 
+    "face": 1,     
+    "sex": 1,      
+    "register": "2015年12月03日",      
+    "overdue": 1,      
+    "relation": 1,
+    "ident_status": {
+      "name": 1,        
+      "face": 0,       
+      "card": 0,      
+      "plane": 0,      
+      "carrieroperator": 0,    
+      "inquiry ": 0,       
+      "maimai": 0,     
+      "fund": 0,       
+      "weibo": 0,      
+      "address": 1,     
+      "lbs": 0,     
+      "backup": 0,      
+      "contact": 0,    
+      "idcard": 0      
+    },
+    "edu": {
+         "verified": [ 
+            {
+                "schoolID": 1,
+                "schoolName": "北京大学",
+                "degree": "大学本科",
+                "major": "计算机",
+                "startTime": "2013年09", 
+                "endTime": "至今", 
+                "authStatus": 1, 
+                "area": "北京市"
+            },
+            {
+                "schoolID": 2,
+                "schoolName": "北京科技大学",
+                "degree": "硕士研究生",
+                "major": "计算机",
+                "startTime": "2009年09月",
+                "endTime": "2013年07",
+                "authStatus": 1,
+                "area": "北京市"
+            }
+        ],
+        "unverified": [ 
+            {
+                "schoolID": 3,
+                "schoolName": "清华大学",
+                "degree": "大学本科",
+                "major": "计算机",
+                "startTime": "2012年09月",
+                "endTime": "2016年07月",
+                "authStatus": 0, 
+                "area": "北京市"
+            }
+        ]
+    },
+    "workExpire": {
+      "verified": [ 
+            {
+                  "company": "杨宇测试测试一",
+                  "authStatus": 1
+            }
+       ],
+       "unverified": [ 
+          {
+                "id":2,
+                "company":"人人行科技", 
+                "depart":"互联网研发部", 
+                "position":"研发工程师", 
+                "startTime":"2005年09月",
+                "endTime":"至今",  
+                "auth_time":0,
+                "authStatus":0 
+            }
+      ],
+      "sum": 1
+    }
+  },
+  "originCode": 200
+}

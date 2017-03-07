@@ -1,0 +1,24 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "tags": "",
+        "friendIdList": "toAll",
+        "amount": "100",
+        "rate": "",
+        "effectiveTime": "",
+        "guaranteeID": "538522734200627602",
+        "images": "",
+        "term": "2016-07-15",
+        "remark": "泡妞",
+        "companyID": "601442833053190685",
+        "id": "3928",
+        "img": "http://jdbserver.b0.upaiyun.com/qrcode/601442833053190685/3928.png",
+        "status": 2,
+        "guarantee": "测二九",
+		"auto_renewal_url": "/protocol/auto_renewal_url"
+    }
+}

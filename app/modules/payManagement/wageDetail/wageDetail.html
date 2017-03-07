@@ -1,0 +1,235 @@
+<div id="wageDetail">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span>
+                返回
+            </a>
+        </li>
+		<li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; {{type2titleText[total.operation_type]}}</li>
+    </ol>
+
+	<div class="wage-detail-content">
+
+		<!-- 有优化 -->
+		<div class="status-wrapper status-result" ng-show="total.status == 3 && optimizeNum > 0">
+			<img class="status-icon" src="images/auth-success.png"/>
+			<p class="status-result-tips">{{type2text[total.operation_type]}}发放受理成功</p>
+			<p>通过本次优化，您让<em>{{optimizeNum}}</em>名员工税后收入共增加<em>{{total.optimized_amount}}</em>元</p>
+			<p>返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+		</div>
+
+		<!-- 无优化 -->
+		<div class="status-wrapper status-result" ng-show="total.status == 3 && optimizeNum === 0">
+			<img class="status-icon" src="images/auth-success.png"/>
+			<p class="status-result-tips">{{type2text[total.operation_type]}}发放受理成功</p>
+			<p>管理员已确认&nbsp;&nbsp;&nbsp;&nbsp;返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+		</div>
+
+		<!-- 已失效状态 -->
+		<div class="status-wrapper status-result" ng-show="total.status == 4">
+			<img class="status-icon" src="images/auth-fail.png"/>
+			<p class="status-result-tips">{{type2text[total.operation_type]}}发放已失效</p>
+			<p>{{cancelStatus2Text[total.cancel_status]}}&nbsp;&nbsp;&nbsp;&nbsp;返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+		</div>
+
+		<!-- 员工表格模块 -->
+		<div>
+			<h2 class="short-title">发放信息</h2>
+			<a ng-show="wageList.length > 0 && !isFromFinishBtn" class="excel-export" href="javascript:;" ng-click="excelExport();">导出到Excel</a>
+
+            <div class="search-field" ng-show="total.status != 4">
+                <div class="search-group">
+                    <label class="search-label">状态：</label>
+                    <label ng-repeat="st in detailStatus track by $index" class="btn" ng-class="{'btn-primary': queryStatus.status == $index}">
+                        {{st.text}}
+                        <input class="hidden" type="radio" name="status" ng-model="queryStatus.status" ng-change="getTable();" value="{{$index}}" ng-disabled="wagePageDisabled">
+                    </label>
+                </div>
+            </div>
+
+			<!--已成功状态-->
+			<div class="complete-table">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>姓名</th>
+						<th>手机号</th>
+						<th>身份证号码</th>
+
+						<!-- 发工资 -->
+						<th ng-show="total.operation_type == 0">实发工资</th>
+
+						<!-- 发工资+劳务报酬 -->
+						<th ng-show="total.operation_type == 1">社保公积金个人部分</th>
+						<th ng-show="total.operation_type == 1">个人所得税</th>
+						<th ng-show="total.operation_type == 1">应发工资</th>
+						<th ng-show="total.operation_type == 1">实发工资</th>
+
+
+						<!-- 发工资+年终奖 -->
+						<th ng-show="total.operation_type == 2">类型</th>
+						<th ng-show="total.operation_type == 2">应发金额</th>
+						<th ng-show="total.operation_type == 2">社保公积金个人部分</th>
+						<th ng-show="total.operation_type == 2">个人所得税</th>
+						<th ng-show="total.operation_type == 2">实发金额</th>
+
+
+						<!-- 劳务报酬 -->
+						<th ng-show="total.operation_type == 3">实发劳务报酬</th>
+
+						<!-- 如果是从工资＋劳务报酬“我已完成”落地而来, 则不显示状态、原因、操作-->
+						<th ng-show="!isFromFinishBtn && total.status != 4">状态</th>
+						<th ng-show="!isFromFinishBtn && total.status != 4">原因</th>
+						<th ng-show="!isFromFinishBtn && total.status != 4">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="item in wageList track by $index">
+						<td>{{item.name}}</td>
+						<td>{{item.phone}}</td>
+						<td>{{item.id_card}}</td>
+
+
+						<!-- 发工资+劳务报酬 -->
+						<td ng-show="total.operation_type == 1">{{item.fund_amount}}</td>
+						<td ng-show="total.operation_type == 1">{{item.tax_amount}}</td>
+						<td ng-show="total.operation_type == 1">{{item.should_amount}}</td>
+
+
+						<!-- 发工资+年终奖 -->
+						<td ng-show="total.operation_type == 2">{{item.type_text}}</td>
+						<td ng-show="total.operation_type == 2">{{item.should_amount}}</td>
+						<td ng-show="total.operation_type == 2">{{item.fund_amount}}</td>
+						<td ng-show="total.operation_type == 2">{{item.tax_amount}}</td>
+
+
+						<td>{{item.amount}}</td>
+						<!-- 如果是从工资＋劳务报酬“我已完成”落地而来, 则不显示状态、原因、操作-->
+						<td ng-show="!isFromFinishBtn && total.status != 4">{{item.status_text}}</td>
+						<td ng-show="!isFromFinishBtn && total.status != 4">{{item.reason}}</td>
+						<td ng-show="!isFromFinishBtn && total.status != 4">
+							<span ng-if="item.oper_type == 0">{{item.oper_text}}</span>
+							<a href="" ng-click="modify(item);" ng-if="item.oper_type == 1">修改后重发</a><!--修改姓名、身份证、手机号-->
+							<a href="" ng-href="#/how2-recharge" ng-if="item.oper_type == 2">充值</a>
+							<span ng-if="item.oper_type == 3"><a href="" ng-show="!repayLoading" ng-click="rePay(item.id)">重发</a><i class="fa fa-spinner fa-spin"  ng-show="repayLoading" ></i></span>
+							<!--item.oper_type: 4 => 只能修改手机号; 5 => 修改手机号和取消冻结; 6 => 只能取消冻结-->
+							<a href="" ng-click="modify(item);" ng-if="item.oper_type == 4 || item.oper_type == 5">修改后重发</a><!--只可修改手机号-->
+							<a href="" ng-click="cancelFreeze(item.id)" style="margin-left: 15px" ng-if="item.oper_type == 5 || item.oper_type == 6">取消冻结</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="table-area" ng-show="wageList.length">
+				<div class="clearfix table-bottom">
+					<uib-pagination class="table-pagination" ng-change="getTable(wagePageNo);"
+									ng-disabled="wagePageDisabled"
+									total-items="total.number"
+									items-per-page="pageSize"
+									ng-model="wagePageNo" max-size="5" rotate="false"
+									class="pagination-sm" boundary-links="true"
+									previous-text="上一页"
+									next-text="下一页"
+									first-text="首页"
+									last-text="尾页"
+							></uib-pagination>
+				</div>
+				<div class="table-tip">
+					员工人数：{{total.number}}人&nbsp;&nbsp;&nbsp;&nbsp;
+					实发金额：{{total.amount | amountFormater }}元
+				</div>
+			</div>
+		</div>
+
+		<!-- 提示模块 -->
+		<!-- 发工资和发劳务报酬显示提示 -->
+		<p class="important-tips-wrap" ng-show="total.operation_type == 0 || total.operation_type == 3">
+			<img src="images/ia.png">
+			<span class="import-text">重要提示：</span>
+			<br>1.「待领取」状态的员工需要注册借贷宝，完成身份认证后可在当日24点前收到工资
+			<br>2.「进行中」表示正在排队处理，系统会在当日24点前全部处理完毕
+		</p>
+
+		<div ng-show="total.operation_type == 1 && optimizeNum > 0" class="download-labor-mod">
+			<h2 class="short-title">劳务报酬</h2>
+			<div class="download-wrapper">
+				<a ng-click="fixWorkWageExport();" class="larboDload">下载劳务报酬明细</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/ng-template" id="modifyWageItemModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">修改后重发</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" ng-submit="submit(modifyForm.$valid);" novalidate>
+            <div class="step-content">
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.name.$invalid, 'ok': submitted && modifyForm.name.$valid}">
+                    <label class="control-label col-xs-4">
+                        姓名
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证-->
+                                {{submitForm.cusName}}
+                            </div>
+                            <input class="form-control" name="name" type="text" ng-model="submitForm.cusName" autocomplete="off" maxlength="25" required  ng-if="!operType4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.phone.$invalid, 'ok': submitted && modifyForm.phone.$valid}">
+                    <label class="control-label col-xs-4">
+                        手机号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <input class="form-control" name="phone" type="text" ng-model="submitForm.cusPhone"   maxlength="11"  ng-change="phoneMacth()" />
+                            <div  ng-show="phoneError">
+                                <span  class="red"><span class="glyphicon glyphicon-remove-circle red"></span>手机号输入格式错误</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.idCard.$invalid, 'ok': submitted && modifyForm.idCard.$valid}">
+                    <label class="control-label col-xs-4">
+                        身份证号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证-->
+                                {{submitForm.cusIdNo}}
+                            </div>
+                            <input class="form-control" name="idCard" type="text" ng-model="submitForm.cusIdNo" autocomplete="off" maxlength="18" required  ng-if="!operType4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'error': submitted && modifyForm.idCard.$invalid, 'ok': submitted && modifyForm.idCard.$valid}">
+                    <label class="control-label col-xs-4">
+                        发放金额
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <div class="control-text">
+                                {{item.amount}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': !modifyForm.$error.required}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+            <div class="red text-center" ng-if="operType4"> <!--oper_type == 4 : 不可修改姓名和身份证, 弹框底部提示：#已验证姓名与身份证信息，仅可修改手机号#-->
+                已验证姓名与身份证信息，仅可修改手机号
+            </div>
+        </form>
+    </div>
+</script>

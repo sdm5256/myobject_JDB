@@ -1,0 +1,7 @@
+<div id="js-reimbursement-main" class="reimbursement-main">
+    <div ng-switch="page">
+        <reimb-confirm ng-switch-when="confirm"></reimb-confirm>
+        <reimb-pay ng-switch-when="pay"></reimb-pay>
+        <div ng-switch-default></div>
+    </div>
+</div>

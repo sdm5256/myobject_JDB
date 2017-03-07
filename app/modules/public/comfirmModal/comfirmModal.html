@@ -1,0 +1,16 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{modalParams.tipsTitle}}</h3>
+</div>
+<div class="modal-body">
+	<form data-role="form" name="tipForm" class="form-horizontal">
+		<div class="step-content clearfix">
+			<p>{{modalParams.tipsText}}</p>
+		</div>
+		<div class="step-actions">
+			<div class="col-xs-12 text-center">
+				<button class="btn btn-primary btnmr20" type="button" ng-click="ok()">{{modalParams.OkText}}</button>
+				<button class="btn btn-primary" type="button" ng-click="cancel()">{{modalParams.cancelText}}</button>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,13 @@
+{
+    "/staff/list": "mocks/staff/list.json",
+    "/staff/get-staff-type": "mocks/staff/get-staff-type.json",
+    "/staff/search": "mocks/staff/search.json",
+    "/staff/upload-staff-excel": "mocks/staff/upload-staff-excel.json",
+    "/staff/del-excel": "mocks/staff/del-excel.json",
+    "/staff/del-excel-result": "mocks/staff/del-excel-result.json",
+    "/staff/add-one-staff": "mocks/staff/add-one-staff.json",
+    "/staff/edit": "mocks/staff/edit.json",
+    "/staff/del": "mocks/staff/del.json",
+    "/staff/get-status-type": "mocks/staff/get-status-type.json",
+    "/staff/export-list": "mocks/staff/export-list.json"
+}

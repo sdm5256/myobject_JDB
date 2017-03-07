@@ -1,0 +1,219 @@
+#header {
+  display: block;
+  min-width: 750px;
+  #check-company-wrap{
+    width: 230px!important;
+    height: 30px!important;
+    display: inline-block;
+    //overflow: hidden;
+    position: relative;
+    top: 11px;
+    border-radius: 15px;
+    .form-control{
+      position: absolute;
+      top: 0;
+      left: 0;
+      /*很关键：将默认的select选择框样式清除*/
+      appearance:none;
+      -moz-appearance:none;
+      -webkit-appearance:none;
+      /*在选择框的最右侧中间显示小箭头图片*/
+      background: url('images/arrow.png') no-repeat scroll right center #f5f7fa;
+      /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+      background-position: 96% 10px;
+      padding-right: 33px!important;
+    /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+    &&::-ms-expand { display: none; }
+      border-radius: 15px!important;
+      height: 30px!important;
+      line-height: 30px!important;
+      width: 230px!important;
+    }
+  }
+  .company-tips{
+    display: inline-block;
+    text-align: center;
+    width: 198px;
+    margin-left: 10px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    color: #808080;
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+    &::before{
+      content: '';
+      width: 10px;
+      height: 10px;
+      border: 1px solid #d4d4d4;
+      background: #fff;
+      position: absolute;
+      left: -6px;
+      top: 13px;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      border-top-style: none;
+      border-right-style: none;
+    }
+  }
+  #leave {
+    margin-left: 30px;
+  }
+  .float-right {
+    float: right;
+  }
+
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  height: 54px;
+  border-bottom: 1px solid #bbb;
+  background-color: #fff;
+  width: 100%;
+
+  .logo {
+    float: left;
+    margin: 15px 0px 0 25px;
+    width: 240px;
+
+    img {
+      width: 161px;
+      height: 26px;
+    }
+  }
+  .headTitle {
+    color: #5c5c5c;
+    font-size: 16px;
+    position: relative;
+    top: 8px;
+    width: 90px;
+    &:before {
+      position: absolute;
+      left: -12px;
+      content: '';
+      height: 20px;
+      width: 2px;
+      background-color: #0b7bf8;
+      // box-shadow: 1px 1px 0 #2f2f33;
+    }
+  }
+  .login-link,
+  .home {
+    width: inherit;
+    font-size: 16px;
+    margin-top: 17px;
+    a {
+      color: #5c5c5c;
+    }
+    .active {
+      color: #1283fc;
+    }
+  }
+  .home {
+    a {
+      margin-right: 31px;
+    }
+  }
+  .login-link {
+    font-size: 14px;
+    a {
+      margin-right: 25px;
+    }
+    .links-img {
+      margin-right: 2px;
+      position: relative;
+      top: -1px;
+    }
+    .registe:after {
+      display: inline-block;
+    }
+  }
+  .user-dropdown {
+    .user-info {
+      display: block;
+      height: 54px;
+      line-height: 54px;
+
+      .head {
+        display: inline-block;
+        width: 34px;
+        cursor: pointer;
+        height: 34px;
+        vertical-align: middle;
+        border: 2px solid #1584fb;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          float: left;
+        }
+      }
+
+      .username {
+        margin: 0 10px 0 15px;
+        color: #2d2d2d;
+        display: inline-block;
+        max-width: 100px;
+        overflow: hidden;
+        cursor: pointer;
+        white-space: nowrap;
+        vertical-align: middle;
+        text-overflow: ellipsis;
+      }
+
+      .dropdown-icon {
+        color: #969696;
+        cursor: pointer;
+        top: 2px;
+        font-size: 12px;
+      }
+    }
+
+    &.open {
+      .dropdown-icon {
+        color: #333;
+      }
+    }
+  }
+
+  .nav-bar {
+    list-style-type: none;
+
+    & > li {
+      float: left;
+      height: 51px;
+      line-height: 51px;
+      margin-top: 1px;
+      padding: 0 25px;
+      border-left: 1px solid #ececec;
+
+      a {
+        color: #5c5c5c;
+        text-decoration: none;
+      }
+
+      &:hover {
+        a {
+          color: #333;
+        }
+      }
+
+      &.active {
+        a {
+          color: #1283fc;
+        }
+      }
+
+      &:first-child {
+        border-left: 0;
+      }
+    }
+  }
+
+  .nav-margin {
+    margin-right: 30px;
+  }
+}

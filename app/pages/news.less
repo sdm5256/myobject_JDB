@@ -1,0 +1,117 @@
+#news,
+#news-detail {
+  background-color: #ebebeb;
+  .wrapper {
+    font-family: "microsoft yahei";
+    width: 950px;
+    margin: 0 auto;
+    padding-top: 40px;
+    border-bottom: solid 1px transparent;
+    .news-item {
+      background-color: #fff;
+      padding: 35px 50px 45px;
+      box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+    }
+  }
+  p {
+    margin: 0;
+  }
+  .title {
+    font-weight: bold;
+    font-size: 22px;
+    color: #000;
+  }
+  .create-time:after {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    margin: 0 10px;
+    width: 1px;
+    height: 13px;
+    background-color: #dfdfdf;
+    content: "";
+  }
+  .desc {
+    font-size: 12px;
+    color: #8f8f8f;
+    padding: 10px 0;
+  }
+  .content {
+    font-size: 14px;
+    color: #2d2d2d;
+    text-indent: 2em;
+    margin-bottom: 10px;
+  }
+}
+#news{
+  .mult-row-overflow {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -moz-line-clamp: 2;
+    -moz-box-orient: vertical;
+    -ms-line-clamp: 2;
+    -ms-box-orient: vertical;
+    overflow: hidden;
+  }
+  .wrapper {
+    .news-item {
+      border-left: 3px solid #1283fc;
+      margin-bottom: 22px;
+      .pull-left {
+        width: 95%;
+      }
+      .glyphicon {
+        color: #ebebeb;
+      }
+    }
+    .news-item:hover {
+      background-color: #1283fc;
+      border-left-color: #0063cd;
+      cursor: pointer;
+//      background-color: #000;
+      .title,
+      .desc,
+      .content {
+        color: #fff;
+      }
+      .create-time:after {
+        background-color: #fff;
+      }
+      .glyphicon {
+        color: #52a6ff;
+      }
+    }
+    .read-more {
+      font-size: 14px;
+      color: #bdbdbd;
+      text-align: center;
+      cursor: pointer;
+    }
+    .read-more:after {
+      display: block;
+      width: 19px;
+      height: 20px;
+      padding-bottom: 50px;
+      margin: 6px auto 0;
+      background: url("../../images/read-more.png") no-repeat;
+      content: '';
+    }
+  }
+}
+#news-detail {
+  padding-bottom: 108px;
+
+  .link-img {
+//    height: 276px;
+//    margin-bottom: 25px;
+    margin-bottom: 15px;
+  }
+  .image-title {
+    margin-bottom: 16px;
+    color: #8f8f8f;
+    text-align: center;
+  }
+}

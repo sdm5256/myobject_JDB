@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>借贷宝企业版 - 企业自助式创新融资服务平台</title>
+  <meta name="description" content="借贷宝企业版是九鼎控股推出的自助式创新融资服务平台，平台致力于加强企业与员工的互动，帮助双方共同进步、互利共赢。了解借贷宝企业版的使用问题、融资流程，请直接登录借贷宝企业版官方网站。">
+  <meta content="借贷宝企业版，借贷宝融资流程，借贷宝企业版优势，企业融资，自助融资" name="Keywords">
+  <!--[if lt IE 9]>
+	<script>
+		location.href = 'https://open.jiedaibao.com/lowVersion.html';
+	</script>
+  <![endif]-->
+  <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<!-- 初始时隐藏body，路由执行之后显示body，避免闪烁 -->
+<body class="hide {{curRoutePath}}" ng-class="{'show': curRoutePath}">
+	<div class="page-wrapper">
+		<div class="header">
+			<div ng-include="'modules/public/header/header.html'" ng-show="showHeader"></div>
+		</div>
+		<div class="sidebar">
+			<div ng-include="'modules/public/sidebar/sidebar.html'" ng-show="showSideBar"></div>
+		</div>
+		<div class="main" ng-class="{'hide-sidebar': !showSideBar}">
+			<div class="page-container">
+				<div ng-include="'modules/public/tipsbar/tipsbar.html'"></div>
+				<!-- View 入口 -->
+				<div ng-view class="main-view"></div>
+			</div>
+		</div>
+		<div ng-include="'modules/public/footer/footer.html'" ng-show="showFooter"></div>
+	</div>
+</body>
+
+</html>

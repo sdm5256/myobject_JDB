@@ -1,0 +1,11 @@
+{
+	"error": {
+		"returnCode": 1,
+		"returnMessage": "您还有2次输入机会，请输入正确的金额",
+		"returnUserMessage": "输入失败"
+	},
+	"data": {
+		"status": 7,
+		"verifyErrorNum":1
+	}
+}

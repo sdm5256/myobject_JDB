@@ -1,0 +1,11 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "level": "A",
+    "amount": "0"
+  }
+}

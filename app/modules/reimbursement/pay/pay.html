@@ -1,0 +1,91 @@
+<style>
+    body .page-container {
+        overflow: hidden;
+        height: auto;
+    }
+</style>
+<div id="js-reimbursement-pay" class="reimbursement-pay">
+    <div class="m-head">
+        <ol class="breadcrumb">
+            <li class="active">您所在的位置：<a href="javascript:;" ng-click="goToIndex()">报销管理</a>&gt;&nbsp; 填写员工报销金额</li>
+        </ol>
+        <div class="title">填写员工报销金额</div>
+    </div>
+    <div class="operation-wrap">
+        <div class="update-data-wrap">
+            <button ng-disabled="isUploading" id="upload-excel-btn" class="btn btn-primary g-btn-fix btn-upload" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern="" ngf-accept="" ngf-max-size="20MB">{{isUploading ? '正在上传......' : '上传表格'}}</button>
+
+            <a class="btn-down-tpl" href="{{Url.downloadExcel}}">下载报销模板</a>
+        </div>
+        <reimb-pay-batch-input></reimb-pay-batch-input>
+        <div class="tips">此表默认显示与企业为好友关系的员工</div>
+    </div>
+
+    <reimb-pay-list-table></reimb-pay-list-table>
+
+    <div class="m-footer">
+        <div class="next-step-wrap">
+            <button class="btn btn-primary g-btn-fix" ng-disabled="!canNext" ng-click="nextStepHandler()">下一步</button>
+        </div>
+        <div class="warn-wrap">
+            <div class="tt">重要提示</div>
+            <p>1.批量输入金额及备注后，列表将自动同步已输入的内容，点击报销金额或备注的单元格可单独编辑；
+</p>
+            <p>2.也可下载模板，填写并上传后，列表将显示上传的内容。</p>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="commonAlert.html">
+    <div>
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="modal-body text-center">
+            <p>{{content}}</p>
+            <button class="btn btn-primary" ng-click="modalClose();">知道了</button>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="checkFail.html">
+    <div>
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="modal-body text-center">
+            <p>{{content}}</p>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="commonAlert.html">
+    <div>
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="modal-body d-body">
+            <div>
+                <p>{{content}}</p>
+
+                    <div class="d-group-btn">
+                        <button class="btn btn-primary center" type="submit" ng-click="modalClose();">知道了</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="BalanceTips.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="cancel();"></i>
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body d-body">
+        <p style="text-align: center">{{content}}</p>
+        <div class="d-group-btn">
+            <button class="btn btn-disabled" type="submit" ng-click="cancel();">取消</button>
+			<button class="btn btn-primary ml55" type="submit" ng-click="goRecharge();">去充值</button>
+        </div>
+    </div>
+</script>

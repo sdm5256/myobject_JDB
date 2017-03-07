@@ -1,0 +1,66 @@
+<div id="optimizeThd">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; 优化并发放工资</li>
+    </ol>
+    <div class="thdContent optimizeStep">
+        <div class="steps">
+            <ul class="commonStep">
+                <li>
+                    <div><i>1</i></div><span>选择薪资构成</span></li>
+                <li>
+                    <div><i>2</i></div><span>上传工资表</span></li>
+                <li>
+                    <div><i>3</i> </div><span>薪资优化计算</span></li>
+                <li>
+                    <div><i>4</i></div><span>发放</span></li>
+            </ul>
+        </div>
+        <div class="thdstep" ng-show="fixBefore.should_amount">
+            <div class="selectSandard" ng-show="!struct_type">
+                请选择员工的劳务报酬标准：
+                <input type="radio" name="salary" ng-value="0" ng-model="fixType" ng-change="optimizeCalculate()" />&nbsp;&nbsp;<span>每人800元</span>
+                <input type="radio" name="salary" ng-value="1" ng-model="fixType" ng-change="optimizeCalculate()" />&nbsp;&nbsp;<span>最优金额</span>
+            </div>
+            <div class="table-area">
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>应发金额总计</th>
+                            <th>实发金额总计</th>
+                            <th>优化金额</th>
+                            <th>查看明细</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>优化前</td>
+                            <td>{{fixBefore.should_amount}}</td>
+                            <td>{{fixBefore.actual_amount}}</td>
+                            <td>{{fixBefore.fix_amount}}</td>
+                            <td><a href="#/ptimizeTable/{{orderId}}&{{fixBefore.type}}" target="_blank">明细</a></td>
+                        </tr>
+                        <tr>
+                            <td>优化后</td>
+                            <td>{{fixAfter.should_amount}}</td>
+                            <td>{{fixAfter.actual_amount}}</td>
+                            <td>{{fixAfter.fix_amount}}</td>
+                            <td><a href="#/ptimizeTable/{{orderId}}&{{fixAfter.type}}" target="_blank">明细</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="promptText" ng-show="!calculateRst">工资没有优化空间，点击下一步将进入工资发放流程</div>
+            <div class="promptText" ng-show="calculateRst">应发金额总额{{fixAfter.should_amount}}元，优化后实发金额总额{{fixAfter.actual_amount}}元，对比优化前，员工多得{{fixAfter.fix_amount}}元，点击下一步进行发放</div>
+            <div class="optimizeBtn">
+                <a class="btn btn-primary selfa btncom" ng-click="preStep()" >上一步</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary selfa" ng-click="nextStep()">下一步</a>
+                <!-- <a  class="simulation" href="">体验模拟发放流程</a> -->
+            </div>
+        </div>
+    </div>
+</div>

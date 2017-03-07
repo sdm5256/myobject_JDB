@@ -1,0 +1,34 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "hasMore": 0,
+    "list": [
+      {
+        "name": "张三",
+        "phone": "13846148888",
+        "amount": "1000",
+        "status": 3,
+        "statusText": "支付失败",
+        "remk": "加班餐补"
+      },
+      {
+        "name": "李四",
+        "phone": "13846147777",
+        "amount": "2000",
+        "status": 1,
+        "statusText": "已发送",
+        "remk": "加班餐补+打车"
+      }
+    ],
+    "stats": {
+      "number": 2,
+      "totalAmount": "3000",
+      "succNumber": 1,
+      "succAmount": "2000"
+    }
+  }
+}

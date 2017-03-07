@@ -1,0 +1,39 @@
+{
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "ok",
+        "returnUserMessage": "ok"
+    },
+    "data": {
+        "stats": {
+            "rows": "4",
+            "wage": "2000.00",
+            "draw": 2000,
+            "serviceFee":200,
+            "overdueFee": 200,
+            "charge": "2000.00",
+            "borrow": 2000,
+            "wageWork":200,
+            "wageBonus": 200,
+            "reimburse": "2000.00",
+            "repay": 2000,
+            "transferIn":200
+        },
+        "list": [{
+            "time": "2016/05/26 21:16:08",
+            "amount": "-500.00",
+            "status": "成功",
+            "order": "7079a7383eed6e5effaa",
+            "to": "李四",
+            "type": "代发工资",
+            "orderType":5
+        }, {
+            "time": "2016/05/26 21:16:08",
+            "amount": "-500.00",
+            "status": "失败",
+            "order": "7079a7383eed6e5effaa",
+            "to": "李四",
+            "type": "代发工资"
+        }]
+    }
+}

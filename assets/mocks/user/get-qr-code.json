@@ -1,0 +1,10 @@
+{
+    "data": {
+        "token": "aa111111111111111111111111a"
+    },
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "获取成功！",
+        "returnUserMessage": "获取成功！"
+    }
+}

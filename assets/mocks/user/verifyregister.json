@@ -1,0 +1,7 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "当前用户名已经注册",
+    "returnUserMessage": "当前用户名已经注册"
+  }
+}

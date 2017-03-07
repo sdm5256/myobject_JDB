@@ -1,0 +1,45 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "traceId": "0fe111f40a5c4f56f474336dee2933e1",
+  "data": {
+    "userinfo": {
+      "thumbnail_url": "http://jdbserver.b0.upaiyun.com/images/8e4c49747f907a480207a09f436601d8.png",
+      "name": "五好",
+      "operator_user_phone_num": "13526550215",
+      "vali_status": {
+        "ident": true
+      }
+    },
+    "companyList": [
+      {
+        "company_id": "677976538658979867",
+        "name": "今天的最后一个",
+        "bindTime": 1482377346
+      },
+      {
+        "company_id": "677976538658979843",
+        "name": "两个企业一个苹果",
+        "bindTime": 1482326305
+      },
+      {
+        "company_id": "677976538658979840",
+        "name": "咕咕嘟嘟之满身小疙瘩",
+        "bindTime": 1482323802
+      },
+      {
+        "company_id": "676096111972336100",
+        "name": "五好是个好同志之花鸟虫兽哔哩哔哩电影",
+        "bindTime": 1481877511
+      },
+      {
+        "company_id": "672400619014479967",
+        "name": "遥远星球呵呵哒布达拉宫公司",
+        "bindTime": 1480999542
+      }
+    ]
+  }
+}

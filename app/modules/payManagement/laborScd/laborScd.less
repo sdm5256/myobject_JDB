@@ -1,0 +1,158 @@
+#laborScd{
+
+  .content-wrapper {
+	  background-color: #fff;
+	  padding: 12px 12px 6px;
+	  .sub-title {
+		  border-left: 0;
+		  padding-left: 0;
+	  }
+	  .excel-export {
+		position: absolute;
+		right: 30px;
+		top: 72px;
+		font-size: 12px;
+		color: #0f7df8;
+		cursor: pointer;
+		width: 100px;
+		height: 30px;
+		line-height: 30px;
+		border-radius: 2px;
+		text-align: center;
+		box-sizing: border-box;
+		border: 1px solid #0f7df8;
+		&::before{
+		  display: inline-block;
+		  content: "";
+		  background: url("../../images/export.png") center center  no-repeat;
+		  background-size: 100% auto;
+		  width: 13px;
+		  height: 11px;
+		  margin-right: 5px;
+		  position: relative;
+		  top: 1px;
+		}
+	  }
+	  i{
+		font-style: normal;
+	  }
+	  .short-info {
+		margin-bottom: 18px;
+		font-weight: 700;
+		font-size: 14px;
+	  }
+
+	  .table-excel {
+		th,td {
+		  text-align: center;
+		}
+	  }
+
+	  .excel-warning {
+		.alert-btn {
+		  color: #6da4e7;
+		  &:hover .alert-tip {
+			display : block;
+		  }
+		}
+		.alert-tip {
+		  position         : absolute;
+		  display          : none;
+		  bottom           : 35px;
+		  left             : -100px;
+		  width            : 300px;
+		  border-radius    : 5px;
+		  background-color : #fff;
+		  padding          : 10px;
+		  text-align       : left;
+		  &:after {
+			content          : "";
+			position         : absolute;
+			bottom           : -20px;
+			left             : 98px;
+			width            : 0;
+			height           : 0;
+			border           : 10px solid transparent;
+			border-top-color : #fff;
+		  }
+		}
+		.warning-line {
+		  /* padding-left : 18px; */
+		}
+	  }
+
+	  .head-actions {
+		margin-bottom : 20px;
+	  }
+
+	  .alert-danger {
+		border-style : dashed !important;
+		background   : #f2f2f2;
+		color        : #4d4d4d;
+		.alert-title {
+		  color       : #2f7edb;
+		  font-weight : 700;
+		  margin      : 0 0 15px;
+		}
+
+		.list {
+		  list-style-type : decimal;
+		  padding-left    : 20px;
+		}
+	  }
+
+	  .pay-info-header {
+		margin : 0 0 25px 0;
+
+		.qr-code {
+		  float      : left;
+		  width      : 150px;
+		  height     : 150px;
+		  box-shadow : 1px 1px 2px #ddd;
+		  padding    : 10px;
+
+		  img {
+			width : 100%;
+		  }
+		}
+		.qr-message {
+		  margin-left : 150px;
+		  padding     : 10px 20px;
+		  .admin_bold{
+			font-weight: 400;
+		  }
+		  .cancel-one{
+			span{
+			  display:block;
+			  font-size:14px;
+			  &.first{
+				font-size:18px;
+				margin-bottom:20px;
+			  }
+			  a{
+				padding-left:4px;
+			  }
+			}
+		  }
+		  .qr-init {
+			.lighten {
+			  color : #1283fc;
+			}
+		  }
+
+		  .text-big {
+			font-size : 18px;
+		  }
+
+		}
+	  }
+	  .red {
+		color: red;
+	  }
+	  #tips {
+		margin-top: 30px;
+	  }
+  
+  }
+
+}

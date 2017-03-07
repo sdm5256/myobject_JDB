@@ -1,0 +1,14 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "系统未能成功响应邀请码。请先完成注册，注册成功后在“企业资料”页面再次验证您的邀请码",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "recommend_code": "20REXCXCC1",
+    "recommend_person": "XXX",
+    "channel_name":"推广经理的名字",
+    "code_type": "recommend",
+    "isBind": 1
+  }
+}

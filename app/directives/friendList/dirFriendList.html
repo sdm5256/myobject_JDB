@@ -1,0 +1,8 @@
+<div id="js-friend-list" class="friend-manage-list" ng-class="">
+    <ul class="friend-list-ul clearfix">
+        <li class="item-wrap" ng-repeat="item in list">
+            <div class="fm-item" ng-if="activecurrent" ng-include="'directives/friendList/include/company.html'"></div>
+            <div class="fm-item" ng-if="!activecurrent" ng-include="'directives/friendList/include/individual.html'"></div>
+        </li>
+    </ul>
+</div>

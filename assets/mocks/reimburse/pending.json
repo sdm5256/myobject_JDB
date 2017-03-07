@@ -1,0 +1,20 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "OK",
+        "returnUserMessage": "OK"
+    },
+    "traceId": "2454ae5263d6337b5ee3877e5b04cf44",
+    "data": {
+        "id": "4708",
+        "img": "http://jdbserver.b0.upaiyun.com/qrcode/608345965609698670/4708.png",
+        "number": "3",
+        "orderId": "2cc439d5789d74eef6ed009defbe9b33",
+        "status": 0,
+        "total": "15000",
+        "balance": "10000000",
+        "selectAll":"1",
+        "adminName":"骆世平",
+        "adminPhone":"1892222122"
+    }
+}

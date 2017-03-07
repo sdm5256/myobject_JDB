@@ -1,0 +1,146 @@
+.optimizeStep {
+    .steps {
+        position: relative;
+        height: 80px;
+        .commonStep {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 5px;
+            width: 100%;
+            text-align: center;
+            li {
+                text-align: center;
+                width: 13%;
+                display: inline-block;
+                color: #cdcdcd;
+                div {
+                    position: relative;
+                    z-index: 5;
+                    color: #fff;
+                    margin-bottom: 12px;
+                    i {
+                        display: block;
+                        width: 30px;
+                        height: 30px;
+                        color: #fff;
+                        border-radius: 50%;
+                        background: #cdcdcd;
+                        text-align: center;
+                        line-height: 30px;
+                        font-style: italic;
+                        font-size: 18px;
+                        margin: 0 auto;
+                        position: relative;
+                        z-index: 20;
+                    }
+                    span {
+                        display: block;
+                        margin-top: 15px;
+                    }
+                }
+                div:after {
+                    position: absolute;
+                    top: 14px;
+                    z-index: 1;
+                    right: -62px;
+                    width: 120px;
+                    height: 4px;
+                    content: '';
+                    background: #cdcdcd;
+                }
+            }
+            li:nth-child(1) {
+                color: #848484;
+                div {
+                    i {
+                        background: #0c7bf8;
+                    }
+                }
+            }
+            li:nth-child(4) {
+                div:after {
+                    display: none;
+                }
+            }
+        }
+    }
+    .optimizeBtn {
+        height: 120px;
+        text-align: center;
+        line-height: 80px;
+        margin-top: 10px;
+        .simulation {
+            float: right;
+        }
+        .btn-primary{
+            height: 40px !important;
+            line-height: 40px !important;
+            width: 140px !important;
+            margin-right: 40px;
+        }
+    }
+}
+
+#optimizeFst {
+    .stepContent {
+        background: #fff;
+        .firstSelct {
+            padding: 70px 68px 0px 70px;
+            .labor {
+                height: 122px;
+                border: 1px solid #d9d9d9;
+                border-radius: 4px;
+                margin-bottom: 20px;
+                &:hover{
+                    cursor: pointer;
+                }
+                .fstLeft {
+                    float: left;
+                    width: 58px;
+                    height: 100%;
+                    border-right: 1px solid #d9d9d9;
+                    position: relative;
+                    background: #f5f5f5;
+                    i {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        background: url(images/slect.png) no-repeat;
+                        margin: 50px 0px 0px 19px;
+                    }
+                    input {
+                        position: absolute;
+                        top: 41px;
+                        left: 20px;
+                        width: 30px;
+                        height: 30px;
+                        opacity: 0;
+                        cursor: pointer;
+                    }
+                }
+                .fstRight {
+                    float: left;
+                    height: 100%;
+                    padding: 22px 0px 0px 22px;
+                    h4 {
+                        color: #4d4d4d;
+                    }
+                    p {
+                        color: #999999;
+                    }
+                }
+            }
+            .selectedBg {
+                border: 1px solid #0c7bf8;
+                 background: #edf5ff;
+                .fstLeft {
+                    background: #0c7bf8;
+                    i {
+                        background: url(images/slected.png) no-repeat;
+                    }
+                }
+            }
+        }
+    }
+}

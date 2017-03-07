@@ -1,0 +1,63 @@
+<div id="friendList">
+    <ol class="breadcrumb">
+        <li class="active">您所在的位置：好友管理</li>
+    </ol>
+    <div class="friendListCont">
+        <div class="listTitle">
+            <a ng-class="{'active': activeCurent}" ng-click="tabSwitch(1)">企业({{companyNum}})</a>
+            <a ng-class="{'active': !activeCurent}" ng-click="tabSwitch(2)">个人({{personNum}})</a>
+            <div class="titleRight">
+                <form ng-submit="search()" >
+                <input type="text" class="form-control" ng-model="queryText" placeholder="从好友中搜索企业或个人" ><i ng-click="search()"></i><a href="#/addFriend">添加好友</a>
+                </form>
+            </div>
+        </div>
+        <div class="listDetail" ng-class='{"changeBg":friendList.length == 0}'>
+            <div class="selectShow" ng-show="activeCurent && !isFromSearch">   <!--activeCurent: 个人tab时不显示; isFromSearch : search时不显示-->
+                <div>
+                    <span>{{filterRadio || '全部'}}</span>
+                    <ul>
+                        <li>
+                            <label for="" uib-btn-radio="'全部'" ng-model="filterRadio">全部</label>
+                        </li>
+                        <li>
+                            <label for="" uib-btn-radio="'关注'" ng-model="filterRadio">关注</label>
+                        </li>
+                        <li>
+                            <label for="" uib-btn-radio="'宝粉'" ng-model="filterRadio">宝粉</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-show="friendList.length > 0">
+                <div ng-if="friendList.length > 0">
+                    <friend-list data-list='friendList' data-activecurrent='activeCurent' needpage='1'></friend-list>
+                </div>
+                <div class="list-bottom clearfix">
+                    <ul class="pager friend-list-pagination" ng-show="totalItems > PAGE_SIZE">
+                        <li class="previous" ng-class="{disabled: prevDisable}">
+                            <a href="" ng-click="turnToPage( '-1' )"></a>
+                        </li>
+                        <li class="page-num">{{currentPage}} / {{totalPage}}</li>
+                        <li class="next" ng-class="{disabled: nextDisable}">
+                            <a href="" ng-click="turnToPage( '1' )"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="noFriend" ng-show="friendList.length == 0">
+            <img src="../../images/no-result.png" alt="">
+            <span>你可以通过添加好友关注其他企业，也可以获得企业宝粉，<br>宝粉可以投资{{shortName}}发布的理财计划。</span>
+        </div>
+    </div>
+    <div class="recommend-part" ng-show="activeCurent && recommendList.length > 0">
+        <h4 class="recommend-title clearfix">可能感兴趣的企业</h4>
+        <div class="recommend-content">
+            <a href="javascript:;" class="rechange" ng-click="getRecommendList( recomendPageNo )"><i class="i-refresh"></i>换一换</a>
+            <div ng-if="recommendList.length > 0">
+                <friend-list data-list='recommendList' data-activecurrent='activeCurent'></friend-list>
+            </div>
+        </div>
+    </div>
+</div>

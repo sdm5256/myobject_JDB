@@ -1,0 +1,17 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": [
+    {
+      "memberName": "测零二",
+      "mobile": "19100000002",
+      "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/53851449492789610",
+      "thumbnailUrl": "http://jdbserver.b0.upaiyun.com/images/53851449492789610!percent25",
+      "uuid": 538522734200627221
+    }
+
+  ]
+}

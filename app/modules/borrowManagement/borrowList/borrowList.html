@@ -1,0 +1,186 @@
+<div id="borrowing-management">
+    <ol class="breadcrumb">
+<!--         <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span>
+                返回
+            </a>
+        </li> -->
+        <li class="active">您所在的位置：融资管理</li>
+    </ol>
+    <h2 class="short-title">融资管理</h2>
+    <div class="borrow-content">
+        <div class="borrow-content-actions">
+            <a class="btn btn-primary" href="" ng-click="goToBorrow();">发起融资</a>
+        </div>
+        <uib-tabset>
+            <uib-tab heading="进行中">
+                <div class="empty-list" ng-hide="data.borrowingList && data.borrowingList.length">
+                    暂无进行中的融资
+                </div>
+                <div ng-show="data.borrowingList && data.borrowingList.length">
+                    <ul class="borrow-list">
+                        <li ng-repeat="borrow in data.borrowingList track by $index">
+                            <div class="list-item clearfix">
+                                <div ng-class="{'item-head': borrow.tips != '今天到期' && borrow.status != 14 && borrow.overdue_day != 1, 'item-head-warn': borrow.tips == '今天到期' || borrow.status == 14 || borrow.overdue_day == 1 }">
+                                    已借：<br>
+                                    <span class="number">{{ borrow.principal | amountFormater }}</span> 元<br>
+                                    <span id="tips">{{ borrow.tips }}</span>
+									<span class="auto-renewal-tips" ng-show="borrow.systemPublishedFlag"><i class="auto-renewal-icon"></i>自动续标</span>
+									<br>
+                                    <!-- <span ng-show="borrow.tips == '今天到期'">今天到期</span> -->
+                                    <!-- <span ng-show="borrow.overdue_day == 1">今天是宽限期</span> -->
+                                    <!-- <span ng-show="borrow.status == 14 && borrow.overdue_day != 1">已逾期{{borrow.overdue_day}}天</span><br> -->
+                                    <div class="actions">
+                                        <button class="btn" ng-click="confirm(borrow.productId);" ng-show="borrow.status == 10">不借了</button>
+                                        <span class="glyphicon glyphicon-question-sign how-pay" ng-click="howPay();" ng-show="borrow.status != 10">了解如何还款</span>
+                                    </div>
+                                </div>
+                                <div class="item-content clearfix">
+                                    <div class="item-content-left">
+                                        <span class="left-item" ng-show="borrow.status == 10">待借金额： <span class="number">{{ borrow.avaliableAmount | amountFormater }}</span> 元</span>
+                                        <span class="left-item" ng-show="borrow.tips != '今天到 期' && borrow.status != 14 && borrow.overdue_day != 1 && borrow.status != 10">本息合计： <span class="number">{{  borrow.totalAmount | amountFormater }}</span> 元</span>
+                                        <span class="left-item" ng-show="borrow.tips == '今天到期' || borrow.status == 14 || borrow.overdue_day == 1">应还款： <span class="number">{{((borrow.totalAmount*100) - (borrow.repay_amount*100)  +  borrow.overdue_fee*100)/100| amountFormater }}</span> 元 <span class="glyphicon glyphicon-exclamation-sign blue" ng-mouseenter="mouseEnter($index);" ng-mouseleave="mouseLeave($index);"><span id="remind" ng-show="showWarn && $index == currentFocus">本息合计:<br>{{borrow.totalAmount | amountFormater}}元<br>已还:<br>{{borrow.repay_amount | amountFormater}}元<br>应还:<br>{{((borrow.totalAmount*100) - (borrow.repay_amount*100)  +  borrow.overdue_fee*100)/100 | amountFormater }}元</span></span></span>
+                                        <span class="left-item">年利率： <span class="lighten"><span class="number">{{borrow.yearRate}}%</span></span></span>
+                                        <span class="left-item">融资用途： 生产经营</span>
+                                        <span class="left-item">担保人： {{ borrow.guaranteeName }}</span>
+                                        <!-- <div class="red" ng-show="showWarn && $index == currentFocus">本息合计{{borrow.totalAmount}}元，已还{{borrow.repay_amount}}元，应还{{borrow.totalAmount - borrow.repay_amount}}元</div> -->
+                                    </div>
+                                    <div class="item-content-right">
+                                        <span class="right-item">发布日： {{ borrow.startDate }}</span>
+                                        <span class="right-item">到期日： {{ borrow.endDate }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--<uib-pagination ng-change="getBorrowingList(borrowingPageNo);"-->
+                                    <!--ng-disabled="borrowingPageDisabled"-->
+                                    <!--total-items="borrowingListTotal"-->
+                                    <!--items-per-page="pageSize"-->
+                                    <!--ng-model="borrowingPageNo" max-size="10"-->
+                                    <!--class="pagination-sm" boundary-links="true"-->
+                                    <!--previous-text="上一页"-->
+                                    <!--next-text="下一页"-->
+                                    <!--first-text="首页"-->
+                                    <!--last-text="尾页"></uib-pagination>-->
+                </div>
+            </uib-tab>
+            <!-- <uib-tab heading="已清偿">
+                <div class="empty-list" ng-hide="data.borrowedList && data.borrowedList.length">
+                    暂无已借入
+                </div>
+                <div ng-show="data.borrowedList && data.borrowedList.length">
+                    <ul class="borrow-list">
+                        <li ng-repeat="borrow in data.borrowedList track by $index">
+                            <div class="list-item clearfix">
+                                <div class="item-head">
+                                    本金：<br>
+                                    <span class="number">{{borrow.principal}}</span> 元<br>
+                                    <span ng-show="borrow.status == '14'">已经逾期{{borrow.overdue_day}}天</span><br>
+                                    <span> {{borrow.endDate}}到期</span><br>
+                                    <div class="actions">
+                                        <button class="btn btn-default" ng-click="howPay();">查看如何还款</button>
+                                    </div>
+                                </div>
+                                <div class="item-content clearfix">
+                                    <div class="item-content-left">
+                                        <span class="left-item">本息合计： <span class="number">{{borrow.totalAmount}}</span> 元</span>
+                                        <span class="left-item">年利率： <span class="lighten"><span class="number">{{borrow.yearRate}}%</span></span></span>
+                                        <span class="left-item">融资用途： {{borrow.productReason}}</span>
+                                        <span class="left-item">担保人： {{borrow.guaranteeName}}</span>
+                                    </div>
+                                    <div class="item-content-right">
+                                        <span class="right-item">发布日： {{borrow.startDate}}</span>
+                                        <span class="right-item">到期日： {{borrow.endDate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--<uib-pagination ng-change="getBorrowedList();"-->
+                                    <!--ng-disabled="borrowedPageDisabled"-->
+                                    <!--total-items="borrowedListTotal"-->
+                                    <!--items-per-page="pageSize"-->
+                                    <!--ng-model="borrowedPageNo" max-size="10"-->
+                                    <!--class="pagination-sm" boundary-links="true"-->
+                                    <!--previous-text="上一页"-->
+                                    <!--next-text="下一页"-->
+                                    <!--first-text="首页"-->
+                                    <!--last-text="尾页"></uib-pagination>-->
+                <!-- </div> -->
+            <!-- </uib-tab> --> 
+            <uib-tab heading="已还清">
+                <div class="empty-list" ng-hide="data.borrowCleanList && data.borrowCleanList.length">
+                    暂无已清偿
+                </div>
+                <div ng-show="data.borrowCleanList && data.borrowCleanList.length">
+                    <ul class="borrow-list">
+                        <li ng-repeat="borrow in data.borrowCleanList track by $index">
+                            <div class="list-item clearfix">
+                                <div class="item-head empty-color">
+                                    本金：<br>
+                                    <span class="number">{{borrow.principal | amountFormater }}</span> 元<br>
+                                    已于{{borrow.cleanDate}}全部还清 <br>
+                                    <div class="actions">
+                                    </div>
+                                </div>
+                                <div class="item-content clearfix">
+                                    <div class="item-content-left">
+                                        <span class="left-item">偿还金额： <span class="number">{{borrow.repay_amount | amountFormater }}</span> 元</span>
+                                        <span class="left-item">年利率： <span class="lighten"><span class="number">{{borrow.yearRate}}%</span></span></span>
+                                        <span class="left-item">融资用途： {{borrow.productReason}}</span>
+                                        <span class="left-item">担保人： {{borrow.guaranteeName}}</span>
+                                    </div>
+                                    <div class="item-content-right">
+                                        <span class="right-item">发布日： {{borrow.startDate}}</span>
+                                        <span class="right-item">到期日： {{borrow.endDate}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--<uib-pagination ng-change="getBorrowClean();"-->
+                                    <!--ng-disabled="cleanPageDisabled"-->
+                                    <!--total-items="cleanTotalPage"-->
+                                    <!--items-per-page="pageSize"-->
+                                    <!--ng-model="cleanPageNo" max-size="10"-->
+                                    <!--class="pagination-sm" boundary-links="true"-->
+                                    <!--previous-text="上一页"-->
+                                    <!--next-text="下一页"-->
+                                    <!--first-text="首页"-->
+                                    <!--last-text="尾页"></uib-pagination>-->
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>
+
+<script type="text/ng-template" id="confirm-borrow.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            确定终止融资？
+        </div>
+        <div class="actions text-center">
+            <button class="btn btn-default btn-left" type="button" ng-click="cancel()">取消</button>
+            <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="how-pay.html">
+    <div class="modal-header">
+        <h3 class="modal-title">如何还款</h3>
+    </div>
+    <div class="modal-body">
+        <div class="content">
+            到期日起，系统将会自动从账户余额中扣款，以完成还款。请及时充值确保余额充足。
+        </div>
+        <div class="actions text-center">
+            <button class="btn btn-primary" type="button" ng-click="ok()">我知道了</button>
+        </div>
+    </div>
+</script>

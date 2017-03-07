@@ -1,0 +1,17 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "total": {
+      "number": 1,
+      "amount": "1000.00",
+      "person_amount": "1000.00"
+    },
+    "list": [
+      
+    ]
+  }
+}

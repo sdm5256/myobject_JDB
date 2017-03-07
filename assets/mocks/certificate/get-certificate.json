@@ -1,0 +1,90 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "traceId": "325f923cf2ab2f7a05546a0b45772fd1",
+  "data": {
+    "certificate_status": "0",
+    "certificate_content": "您修改的企业资料审核未通过，请修改后重新提交审核!",
+    "operating": {
+      "operating_img": "http://jdbserver.b0.upaiyun.com/images/123416848882411480563101712746",
+      "operating_img_bak": "",
+      "operating_effect_time": "1",
+      "operating_effect_time_bak": "",
+      "company_id_type": "1",
+      "company_id_type_bak": "",
+      "company_id_no": "234567890345678",
+      "company_id_no_bak": "",
+      "company_address": "1234123412341234",
+      "company_address_bak": "",
+      "operating_img_status": "0",
+      "operating_img_result": "",
+      "operating_info_status": "0",
+      "operating_info_result": ""
+    },
+    "tax": {
+      "tax_img": "",
+      "tax_img_bak": "",
+      "tax_id": "",
+      "tax_id_bak": "",
+      "tax_img_status": "0",
+      "tax_img_result": "",
+      "tax_info_status": "0",
+      "tax_info_result": ""
+    },
+    "organizational": {
+      "organizational_img": "",
+      "organizational_img_bak": "",
+      "organizational_id": "",
+      "organizational_id_bak": "",
+      "organizational_img_status": "0",
+      "organizational_img_result": "",
+      "organizational_info_status": "0",
+      "organizational_info_result": ""
+    },
+    "bank": {
+      "bank_img": "",
+      "bank_img_bak": "",
+      "bank_id": "",
+      "bank_id_bak": "",
+      "bank_img_status": "0",
+      "bank_img_result": "",
+      "bank_info_status": "0",
+      "bank_info_result": ""
+    },
+    "legal": {
+      "legal_img": "",
+      "legal_img_bak": "",
+      "legal_opposite_img": "",
+      "legal_opposite_img_bak": "",
+      "legal_name": "",
+      "legal_name_bak": "",
+      "legal_id": "",
+      "legal_id_bak": "",
+      "legal_effect_time": "",
+      "legal_effect_time_bak": "",
+      "legal_img_status": "0",
+      "legal_img_result": "",
+      "legal_info_status": "0",
+      "legal_info_result": "",
+      "legal_info_error_num": "0"
+    },
+    "memberInfo": {
+      "stockholder_type": "1",
+      "stockholder_name": "",
+      "stockholder_id": "",
+      "stockholder_effect_time": "",
+      "controll_type": "1",
+      "controll_name": "",
+      "controll_id": "",
+      "controll_effect_time": "",
+      "transactor_name": "",
+      "transactor_id": "",
+      "transactor_effect_time": "",
+      "industry": "",
+      "business": ""
+    }
+  }
+}

@@ -1,0 +1,58 @@
+<div id="add-operator">
+	<!-- 面包屑 -->
+	<ol class="breadcrumb">
+			<!-- <li>
+	            <a href="" ng-click="historyBack();">
+	                <span class="glyphicon glyphicon-triangle-left"></span>
+	                返回
+	            </a>
+	        </li> -->
+        <li class="active">您所在的位置：概览&nbsp;>&nbsp;企业资料&nbsp;>&nbsp;操作员</li>
+    </ol>
+    <div class="ao-container">
+    	<strong>添加操作员</strong>
+    	<div>
+    		<span class="name">操作员手机号：</span>
+    		<input type="text" class="input-text" ng-model="phoneText" maxlength="11" ng-blur="checkPhone()">
+    	</div>
+    	<div class="code">
+    		<span class="name">短信验证码：</span>
+    		<input type="text" class="input-text" ng-model="codeText" maxlength="6">
+    		<a href="javascript:;" ng-click="getCode()">{{btnText}}</a>
+    	</div>
+
+    	<div class="permissions">
+    		<span class="name">权限设置：</span>
+    		<ul>
+    			<li>
+    				<input type="checkbox" checked="true" disabled="true">
+    				<span>企业资料</span>
+    			</li>
+    			<li>
+    				<input type="checkbox" checked="true" disabled="true">
+    				<span>交易查询</span>
+    			</li>
+    			<li>
+    				<input type="checkbox" checked="true" disabled="true">
+    				<span>员工管理</span>
+    			</li>
+                <li>
+                    <input type="checkbox" checked="true" disabled="true">
+                    <span>工资管理</span>
+                </li>
+                <li>
+                    <input type="checkbox" checked="true" disabled="true">
+                    <span>融资管理</span>
+                </li>
+                <li>
+                    <input type="checkbox" checked="true" disabled="true">
+                    <span>报销管理</span>
+                </li>
+    		</ul>
+    	</div>
+    	<div class="submit">
+    		<a href="javascript:;" ng-click="addOperator()">完成</a>
+    	</div>
+    </div>
+</div>
+

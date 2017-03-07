@@ -1,0 +1,51 @@
+<div id="change-request">
+    <!-- 面包屑 -->
+    <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-caret-left" aria-hidden="true"> &nbsp;上一级</i> | 您当前所在位置：<a href="#/info">企业资料</a>>&nbsp; 证件审核</li>
+    </ol>
+    <h2 class="cr-title">证件审核</h2>
+    <!--中间内容区-->
+    <div class="cr-container" ng-hide="successUploaded">
+        <h2 class="cr-container-title txt-center">变更申请</h2>
+        <div class="cr-tips alert alert-danger">
+            <!--步骤列表-->
+            <ul class="list">
+                <li>1. 下载<a  ng-click="downloadExcel()">“企业信息变更申请表”</a></li>
+                <li>2. 打印申请表，并将内容填写完整，加盖企业公章</li>
+                <li>3. 拍照并上传</li>
+                <li>4. 待工作人员审核通过后，修改生效</li>
+            </ul>
+        </div>
+        <div class="btn-group cr-btn-group txt-center">
+
+            <button ng-disabled ="loadStatus" id="upload-excel-btn" class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file">
+                <i ng-show="!loadStatus">上传申请表照片</i>
+                <i class="fa fa-spinner fa-spin"  ng-show="loadStatus" ></i>
+            </button>
+            <a ng-href="" class="btn btn-default" ng-click="cancelModify()">取消修改</a>
+        </div>
+    </div>
+    <!--success-->
+    <div class="cr-container cr-container-suc txt-center" ng-show="successUploaded">
+        <div class="icon-success"></div>
+        <h2 class="cr-container-sucTip">企业信息变更申请已提交！</h2>
+        <p class="sub-tip">工作人员将尽快为您审核，请耐心等待</p>
+        <div class="btn-group cr-btn-group">
+            <a ng-href="#/info" class="btn btn-primary">返回企业资料</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="uploadChangeRequest.html">
+    <div id="uploadChangeRequestModal">
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">提示</h3>
+        </div>
+        <div class="modal-body text-center modal-upload-employeelist">
+            <!--<p>企业信息变更申请表上传失败，照片大小需控制在5M以内，请确认后重新尝试。 </p>-->
+            <p>{{tipText}}</p>
+            <button class="btn btn-primary" ng-click="modalClose();">知道了</button>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,13 @@
+{
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "操作成功",
+        "returnUserMessage": "操作成功"
+    },
+    "data": {
+        "token": "lDCqbw1Hw87XCLVQK2qy",
+        "companyID": "570701133228549002",
+      "post":"http://119.254.111.25:180/img/check?code=7c990545f333af91e68a0669edd05d30",
+      "img":"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3320670811,1178842717&fm=116&gp=0.jpg"
+    }
+}

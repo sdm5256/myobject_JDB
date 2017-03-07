@@ -1,0 +1,16 @@
+
+<div class="modal-body">
+    <i class="modal-close-icon" ng-click="close();"></i>
+    <div class="cf-qr" ng-show="!isCancelFreezeQRFinish"><!--二维码态-->
+        <div class="qr-wrap">
+            <img ng-src="{{imgSrc}}" alt="扫码确认" />
+        </div>
+        <p class="qr-text">您正在进行取消冻结，请扫码确认！</p>
+    </div>
+    <div class="cf-qr-success" ng-show="isCancelFreezeQRFinish"><!--完成态-->
+        <div class="qr-wrap">
+            <img src="images/auth-success.png" alt="取消冻结成功" />
+        </div>
+        <p class="qr-text">取消冻结成功</p>
+    </div>
+</div>

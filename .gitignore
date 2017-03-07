@@ -1,0 +1,14 @@
+rev-manifest.json
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+dest
+prod
+.temp
+.DS_Store
+.idea
+npm-debug.log
+/dist
+a.sh

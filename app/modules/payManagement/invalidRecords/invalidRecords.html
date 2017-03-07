@@ -1,0 +1,55 @@
+<div id="invalid-records" ng-init="initInvalidTable()">
+    <ol class="breadcrumb">
+        <li class="active">您所在的位置：<a href="#/pay-management">工资管理</a>>&nbsp; 已失效记录</li>
+    </ol>
+    <h2 class="short-title">已失效记录</h2>
+	<div class="table-area" ng-show="wageList && wageList.length > 0">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>时间</th>
+				<th>类型</th>
+				<th>总额</th>
+				<th>人数</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in wageList track by $index">
+                <td>{{item.date}}</td>
+				<td>{{type2text[item.operation_type]}}</td>
+                <td>¥{{item.totalAmount | amountFormater }}</td>
+                <td>{{item.totalNumber}}</td>
+                <td>{{status2text[item.status]}}</td>
+                <td>
+					<a ng-click="goToDetail(item.order);">详情</a>
+				</td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-show="wageList.length" class="clearfix table-bottom">
+            <uib-pagination class="table-pagination" ng-change="initInvalidTable(wagePageNo);"
+                            ng-disabled="wagePageDisabled"
+                            total-items="wageListTotal"
+                            items-per-page="pageSize" rotate="false"
+                            ng-model="wagePageNo" max-size="5"
+                            class="pagination-sm" boundary-links="true"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            first-text="首页"
+                            last-text="尾页"
+            ></uib-pagination>
+            <div class="table-tip">
+                笔数：{{stats.number}}笔&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center" ng-show="wageList && wageList.length == 0">
+
+        <span class="big-font">暂无失效纪录</span><br>
+
+    </div>
+</div>
+

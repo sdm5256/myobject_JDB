@@ -1,0 +1,213 @@
+#borrowing-management {
+  .blue {
+    color: #6da4e7;
+  }
+  #remind {
+    width: 100px;
+    color: #808080;
+    font-size: 12px;
+    display: inline-block;
+    position: absolute;
+    top: -9px;
+    left: 200%;
+    background-color: #feeee8;
+    border: 1px solid #c71e1e;
+    padding: 5px 10px;
+    border-radius: 3px;
+    white-space: normal;
+
+    &:before {
+      content: '';
+      background: url('images/error-tip.png') no-repeat;
+      position: absolute;
+      display: block;
+      width: 8px;
+      height: 15px;
+      background-size: 8px;
+      top: 7px;
+      left: -8px;
+    }
+  }
+  .borrow-content {
+    position: relative;
+
+    .borrow-content-actions {
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+
+    .nav-tabs {
+      li {
+        a {
+          border: 0 !important;
+          border-radius: 0 !important;
+          background: transparent!important;
+          color: #4c4c4c!important;
+          padding: 10px 20px!important;
+        }
+
+        &.active {
+          a {
+            border-bottom: 4px solid #1283fc!important;
+            color: #1283fc!important;
+          }
+        }
+      }
+    }
+
+    .empty-list {
+      text-align: center;
+      padding: 50px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .borrow-list {
+      margin: 20px 0;
+
+      li {
+        margin-top: 10px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        .list-item {
+          border-radius: 3px;
+          background-color: #fff;
+          font-size: 14px;
+          min-height: 120px;
+          max-height: 120px;
+          overflow: hidden;
+          .empty-color {
+            background-color: #40bd6f!important;
+          }
+          .item-head {
+            position: relative;
+            width: 290px;
+            float: left;
+            padding: 15px 15px;
+            color: #fff!important;
+            background-color: #64a1eb;
+            min-height: 120px;
+            
+            .number {
+              font-size: 30px;
+            }
+
+            .actions {
+              position: absolute;
+              right: 10px;
+              top: 20px;
+
+              .btn {
+                height: 24px!important;
+                line-height: 24px!important;
+                width: auto!important;
+                padding: 0 10px!important;
+                font-size: 12px!important;
+                background-color: #fff!important;
+                color: #64a1eb!important;
+              }
+            }
+          }
+          
+          .item-head-warn {
+            position: relative;
+            width: 290px;
+            float: left;
+            padding: 15px 15px;
+            color: #fff!important;
+            background-color: #f68c4c;
+            min-height: 120px;
+            
+            .number {
+              font-size: 30px;
+            }
+
+            .actions {
+              position: absolute;
+              right: 10px;
+              top: 10px;
+
+              .btn {
+                height: 24px!important;
+                line-height: 24px!important;
+                width: auto!important;
+                padding: 0 10px!important;
+                font-size: 12px!important;
+                background-color: #fff!important;
+                color: #64a1eb!important;
+              }
+            }
+          }
+
+          .item-content {
+            margin-left: 290px;
+            padding: 0 15px 0 15px;
+            position: relative;
+
+            .item-content-left {
+              margin-right: 190px;
+              .left-item {
+                display: inline-block;
+                width: 49%;
+                margin-top: 25px;
+                // white-space: nowrap;
+                // overflow: hidden;
+                // text-overflow: ellipsis;
+                line-height: 20px;
+
+                .lighten {
+                  color: #1283fc;
+                }
+
+                .number {
+                  font-size: 24px;
+                  color: #1283fc;
+                }
+              }
+            }
+
+            .item-content-right {
+              position: absolute;
+              top: 0;
+              right: 0;
+              width: 190px;
+              text-align: right;
+              padding: 24px 20px 0 0;
+
+              .right-item {
+                display: inline-block;
+                font-size: 14px;
+                margin-bottom: 27px;
+              }
+            }
+          }
+
+		  .how-pay {
+			cursor: pointer;
+		  }
+
+		  .auto-renewal-tips{
+			display: inline-block;
+			margin-left: 20px;
+			font-size: 12px;
+			.auto-renewal-icon{
+				width: 15px;
+				height: 12px;
+				display: inline-block;
+				background: url(images/auto-renewal-icon.png);
+				background-size: 100% 100%;
+				margin-right: 5px;
+				position: relative;
+				top: 2px;
+			} 
+		  }
+
+        }
+      }
+    }
+  }
+}

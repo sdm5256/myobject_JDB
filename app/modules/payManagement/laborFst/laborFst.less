@@ -1,0 +1,101 @@
+#laborFst {
+    .excel-export {
+        position: absolute;
+        right: 30px;
+        top: 72px;
+        font-size: 12px;
+        color: #0f7df8;
+        cursor: pointer;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 2px;
+        text-align: center;
+        box-sizing: border-box;
+        border: 1px solid #0f7df8;
+        &::before {
+            display: inline-block;
+            content: "";
+            background: url("../../images/export.png") center center no-repeat;
+            background-size: 100% auto;
+            width: 13px;
+            height: 11px;
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
+        }
+    }
+    .wage-list {
+        padding: 0 13px;
+        background-color: #fff;
+    }
+    .step-save {
+        text-align: center;
+        padding: 40px 0;
+        border-top: 1px solid #ecf0f5;
+        margin-top: 10px;
+    }
+    .head-actions {
+        height: 120px;
+        background-color: #fff;
+        button.upload-excel {
+            width: 140px !important;
+            height: 40px !important;
+            margin: 40px 0 0 40px;
+            float: left;
+        }
+        a.download-template {
+            float: left;
+            margin-top: 52px;
+            margin-left: 30px;
+        }
+        div.balance-tips {
+            float: left;
+            margin-top: 52px;
+            margin-left: 80px;
+            span {
+                color: #f5a622;
+            }
+        }
+    }
+    .alert-info {
+        border-style: dashed !important;
+        background: #f2f2f2;
+        color: #4d4d4d;
+        margin-top: 10px !important;
+        .alert-title {
+            color: #2f7edb;
+            font-weight: 700;
+            margin: 0 0 15px;
+        }
+        .list {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+    }
+    .alert-info {
+        margin-top: 30px !important;
+        border-color: #b3b3b3;
+    }
+    #table {
+        .table {
+            thead {
+                th:nth-child(1) {
+                    width: 50px;
+                }
+                th:nth-child(2) {
+                    width: 130px;
+                }
+                th:nth-child(3) {
+                    width: 160px;
+                }
+                th:nth-child(4) {
+                    width: 220px!important;
+                }
+                th:nth-child(5) {
+                    width: 180px!important;
+                }
+            }
+        }
+    }
+}

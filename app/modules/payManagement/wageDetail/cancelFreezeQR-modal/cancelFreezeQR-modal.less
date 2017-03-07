@@ -1,0 +1,53 @@
+.modal-dialog{
+  &.modal-modify-cfQR-size{
+    width: 360px !important;
+    height: 390px !important;
+    border-radius: 5px;
+    background: #fff;
+    .modal-content{
+      border: none !important;
+    }
+    .modal-close-icon{
+      cursor:pointer;
+      position:absolute;
+      display: block;
+      top:16px;
+      right:16px;
+      z-index:100;
+      background:url(./images/modal-close-icon.png) no-repeat;
+      width:17px;
+      height:17px;
+    }
+    .modal-body{
+      position: relative;
+      text-align: center;
+      padding: 90px 0 0 !important;
+      .cf-qr{
+        .qr-wrap{
+          width: 200px;
+          height: 200px;
+          margin: 0 auto 16px;
+          box-shadow: 0 0 10px #aaa;
+          img{
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .qr-text{
+          color: #808080;
+        }
+      }
+      .cf-qr-success{
+        padding: 10px 0 0 !important;
+        .qr-wrap{
+          margin-bottom: 45px;
+        }
+        .qr-text{
+          font-size: 18px;
+          color: #4c4c4c;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "error": {
+    "returnCode": "0",
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "list": [
+      {
+        "id": "1",
+        "compId": "568835951258771475",
+        "cusName": "高蕊",
+        "cusPhone": "13911441064",
+        "cusIdNo": "220381198501246829",
+        "status": "0",
+        "rank": 0
+      },
+            {
+        "id": "1",
+        "compId": "568835951258771475",
+        "cusName": "高蕊",
+        "cusPhone": "13911441064",
+        "cusIdNo": "220381198501246829",
+        "status": "0",
+        "rank": 0
+      },
+            {
+        "id": "1",
+        "compId": "568835951258771475",
+        "cusName": "高蕊",
+        "cusPhone": "13911441064",
+        "cusIdNo": "220381198501246829",
+        "status": "0",
+        "rank": 0
+      }
+    ],
+    "count": "3"
+  }
+}

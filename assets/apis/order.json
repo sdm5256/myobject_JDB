@@ -1,0 +1,5 @@
+{
+	"/order/get-types": "mocks/order/get-types.json",
+	"/order/list": "mocks/order/list.json",
+	"/order/get-detail": "mocks/order/get-detail.json"
+}

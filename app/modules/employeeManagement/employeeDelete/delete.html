@@ -1,0 +1,112 @@
+<div id="employee-delete">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span>
+                返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/employee-management">员工管理</a>>&nbsp; 删除离职员工</li>
+    </ol>
+
+    <!-- 加载模块 -->
+    <div ng-show="loading" class="loading-box">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    </div>
+
+
+    <!-- 上传模块 -->
+    <div ng-hide="excelResult.res && !excelResult.excelError">
+        <div class="short-info">请上传企业离职员工表（excel格式）</div>
+        <div class="head-actions">
+            <button id="upload-delexcel-btn" class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern=""
+                    ngf-accept="" ngf-max-size="20MB">上传</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/qrcode/离职员工模版.xlsx" target="_blank">下载模版</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-danger">{{uploadError}}</span>
+        </div>
+    </div>
+
+    <!-- 失败模块 -->
+    <div ng-show="excelResult.res && excelResult.excelError">
+        <div class="failed-box">
+            <div class="failed-title"><span class="glyphicon glyphicon-warning-sign"></span> 上传失败</div>
+            {{excelResult.excelErrorMessage}}
+        </div>
+    </div>
+
+    <!-- 示例图模块 -->
+    <div ng-hide="excelResult.res && !excelResult.excelError" class="sample-box">
+        <img width="470" src="images/employee-delete-sample.jpg">
+    </div>
+
+    <!-- 初始提示模块 -->
+    <div ng-hide="excelResult.res && !excelResult.excelError">
+        <!-- <h2 class="short-title"></h2> -->
+        <div class="alert alert-danger">
+            <div class="alert-title"><span class="glyphicon glyphicon-warning-sign"></span> 重要提示</div>
+            <ul class="list">
+                <li>及时删除离职员工，避免非法集资风险。</li>
+                <li>请先下载模版，在此基础上录入离职员工信息，再进行上传。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 成功模块 -->
+    <div ng-show="hasExcelResult" class="success-box">
+        <div class="success-logo">
+            <img src="images/icon-success.png">
+            <p class="success-tip">离职员工删除成功</p>
+            <!--<div class="success-txt">共<span>{{resultCount}}</span>离职员工,系统已自动将其在企业列表中删除.</div>-->
+            <div class="success-txt">共<span>{{resultCount}}</span>名离职员工(系统自动去重)，<span>{{filterNum}}</span>人信息重复，<span>{{sucessNum}}</span>人删除成功，<span>{{failNum}}</span>人删除失败。</div>
+        </div>
+    </div>
+
+    <!-- 表格模块 -->
+    <div ng-show="hasExcelResult">
+        <h2 class="short-title">离职员工花名册</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in employeeDelList track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.mobilephone}}</td>
+                <td>{{delStatus[item.del_status]}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="table-area">
+            <div ng-show="employeeDelList.length" class="clearfix table-bottom">
+                <span class="absolute-left">人员：{{resultCount}}人</span>
+                <uib-pagination class="table-pagination" ng-change="getTable(wagePageNo);"
+                                ng-disabled="wagePageDisabled"
+                                total-items="resultCount"
+                                items-per-page="pageSize"
+                                ng-model="wagePageNo" max-size="5" rotate="false"
+                                class="pagination-sm" boundary-links="true"
+                                previous-text="上一页"
+                                next-text="下一页"
+                                first-text="首页"
+                                last-text="尾页">
+                </uib-pagination>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script type="text/ng-template" id="uploadEmployeelist.html">
+    <div>
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">温馨提示</h3>
+        </div>
+        <div class="modal-body text-center modal-upload-employeelist">
+            <p>企业向员工融资符合相关监管法规，向非员工筹款有非法集资风险。请确认列表中员工与企业存在雇佣劳动关系，员工离职后请及时解除好友关系。 </p>
+            <button id="upload-excel-btn" class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern="" ngf-accept="" ngf-max-size="20MB">确定</button>
+        </div>
+    </div>
+</script>-->

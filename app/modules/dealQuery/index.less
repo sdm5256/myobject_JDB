@@ -1,0 +1,113 @@
+#deal-search {
+  //.tip-with{
+  //  width: 520px;
+  //  overflow: auto;
+  //}
+
+  .fs14{
+    font-size: 12px;
+  }
+  .search-label {
+    width: 75px;
+  }
+  .form-group {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 0;
+  }
+  .excel-export {
+    position: absolute;
+    right: 30px;
+    top: 72px;
+    font-size: 12px;
+    color: #0f7df8;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #0f7df8;
+    &::before{
+      display: inline-block;
+      content: "";
+      background: url("../../images/export.png") center center  no-repeat;
+      background-size: 100% auto;
+      width: 13px;
+      height: 11px;
+      margin-right: 5px;
+      position: relative;
+      top: 1px;
+    }
+  }
+  .table-area {
+    .view-details:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.deal-details{
+  width:900px;
+  margin: 0 auto;
+  .details-content{
+    width: 100%;
+    height: 590px;
+    img{
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .lding{  
+      position: fixed;
+      z-index: 100;
+      top: 35%;
+      width:900px;
+      height:800px;
+      padding-bottom:50px; 
+      .ldimg{
+        display: block;
+        margin: 0 auto;
+        font-size: 6em;
+      }
+  }
+
+  .details-btn{
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    margin-bottom:20px; 
+     position: relative;
+    a{
+      display: inline-block;
+      border-radius: 5px;
+      width:88px;
+      height: 32px;
+      line-height: 32px;
+      margin-left: 30px;
+      background: #3476e1;
+      color: #fff;
+     
+          
+    }
+    .pop {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width:100%;
+          height: 32px;
+          border-radius: 5px;
+          margin: 0 auto ;
+          background: rgba(0,0,0,0);
+      }
+    a:nth-child(3){
+      background: #fafafa;
+      color: #4c4c4c;
+      border: 1px solid #cccccd;
+    }
+    a:hover {
+      cursor: pointer;
+    }
+  }
+}

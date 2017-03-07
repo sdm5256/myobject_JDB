@@ -1,0 +1,366 @@
+<div id="info" ng-init="init()">
+	<!-- 面包屑 -->
+	<ol class="breadcrumb">
+		<!--         
+			<li>
+	            <a href="" ng-click="historyBack();">
+	                <span class="glyphicon glyphicon-triangle-left"></span>
+	                返回
+	            </a>
+	        </li>
+	    -->
+        <li class="active">您所在的位置：企业资料</li>
+    </ol>
+    <!-- 资料完整度 -->
+    <div class="info-data-integrity" ng-if='isShowBqpBtn'>
+        <i class="box-style" ng-class="{'level-one-style':levelOne,'level-two-style':levelTwo,'level-three-style':levelThree,'level-four-style':levelFour}"></i>
+		<ul ng-show="!levelFour">
+			<li ng-class="{'active': levelOne || levelTwo || levelThree || levelFour}">
+				<span>管理员/操作员</span>
+			</li>
+			<li class="info-border-none">
+				<img src="images/info-data-integrity.png" ng-show="levelOne">
+				<img src="images/info-data-integrity-active.png" ng-show="!levelOne">
+			</li>
+			<li ng-class="{'active': levelTwo || levelThree}">企业认证</li>
+			<li class="info-border-none">
+				<img src="images/info-data-integrity.png" ng-show="levelOne || levelTwo">
+				<img src="images/info-data-integrity-active.png" ng-show="levelThree">
+			</li>
+			<li ng-class="{'active': levelThree}">证件审核</li>
+		</ul>
+		<div class="info-data-integrity-wa">
+			<span ng-show="levelOne" class="info-text-align-left">绑定企业管理员/操作员,关联企业账户管理权限</span>
+			<span ng-show="levelTwo" class="info-text-align-center">完成企业认证,即可体验企业融资</span>
+			<span ng-show="levelThree" class="info-text-align-right">通过企业证件审核,保障企业账户支付功能安全</span>
+			<span ng-show="levelFour" class="info-text-align-center info-color-blue">太好了！您的企业已完成证件审核,获得了全部功能权限。</span>
+		</div>
+    </div>
+
+    <!-- 企业认证 -->
+   	<div class="info-company-attestation info-border">
+   		<div class="info-title row info-title-custom-padding clearfix">
+   			<div class="col-md-2 col-lg-2 info-title-name info-title-left">企业认证</div>
+    		<div class="col-md-2 col-lg-2 info-title-right" ng-class="{'info-delete-border':data.verify_status == 7, 'info-add-border': data.verify_status != 7}">
+    			<i class="icon-default" ng-class="{'icon-success':data.verify_status == 7}"></i>
+    			<span class="info-title-status" ng-if="data.verify_status != 7" >未认证</span>
+                <span class="info-title-status" ng-if="data.verify_status == 7">已认证</span>
+    		</div>
+    		<div class="col-md-6 col-lg-6 info-attestation-intro info-center-parent">
+                <!-- 未绑定管理员和操作员 -->
+                <div ng-if="data.verify_status == 1" class="info-center-child">
+                    <p>添加操作员和管理员后即可进行验证: 完成认证,将获得以下好处: </p>
+                    <p>1、企业身份被唯一确认,保证企业账号安全。</p>
+                    <p>2、可以立即发起融资,体验借贷宝的急速融资功能。</p>
+                    <p>3、可以添加员工为企业好友,向员工融资。</p>
+                </div>
+                <!-- 以绑定管理员和操作员，但未接受汇款 -->
+                <div ng-if="data.verify_status == 2" class="info-center-child">
+                    <p>
+                        借贷宝将通过鹰皇金佰仕向您以下企业对公账户汇款,请您收到银行汇款后，在此处点击“认证”填入汇款金额完成认证。
+                    </p>
+                    <p><span>户名:</span>{{data.plan_company_name || data.company_name}}</p>
+                    <p><span>银行账号:</span>{{data.new_bank_card_no || data.company_bank_card}}</p>
+                    <p><span>开户银行:</span>{{data.new_bank_name || data.company_bank_name}}</p>
+                </div>
+                <div ng-if="data.verify_status == 4" class="info-center-child">
+                    <p>
+                       借贷宝已通过鹰皇金佰仕向您的企业对公账户汇款，请在收到银行汇款后，点击“认证”填入汇款金额完成认证。
+                    </p>
+                    <p>若未收到汇款,也可以通过<a href="javascript:;" ng-click="goToRecharge();">充值</a>方式,完成认证。</p>
+                </div>
+                <!-- 银行信息有误，汇款被退回 -->
+                <div ng-if="data.verify_status == 5" class="info-center-child">
+                    <p>您填写企业银行账号信息有误,请将企业名称、银行账号及支行信息修改正确后,点击"重新认证"。您还有2次接收汇款认证的机会。</p>
+                </div>
+                <!-- 超过上限次数，接受汇款失败 -->
+                <div ng-if="data.verify_status == 6" class="info-center-child">
+                    <p class="remiFail">接收汇款认证失败</p>
+                </div>
+                <!-- 认证处理中 -->
+                <div ng-if="data.verify_status == 8" class="info-center-child">
+                    <p>认证信息已提交，请稍后刷新页面查看认证状态</p>
+                </div>
+                <!-- 接受汇款 认证成功 -->
+                <!-- <div ng-if="data.verify_status == 7" class="info-center-child">
+                    <p ng-if="data.verify_status == 7">已认证</p>
+                </div> -->
+    		</div>
+            <div class="col-md-2 col-lg-2 pull-right pull-right-center">
+                <a href="javascript:;" ng-if="false">银行处理中</a>
+                <a href="javascript:;" ng-click="receiveMoney()" ng-if="data.verify_status == 2">接收汇款</a>
+                <button ng-if="data.verify_status == 4" ng-click="data.verifyErrorNum == 0 ? authStatus('verify') : modify('汇款金额','verifyCodes')" class=" btn-primary btn-default-info">认证</button>
+                <button href="javascript:;" ng-click="aaa()" class="btn-primary btn-default-info" ng-if="data.verify_status == 5">重新认证</button>
+                <a href="javascript:;" ng-click="goToRecharge();" ng-if="data.verify_status == 6">充值认证</a>
+                <button class="btn btn-primary disabled" ng-if="data.verify_status == 8">认证处理中</button>
+            </div>
+   		</div>
+
+   		<div class="info-container row info-border-top">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name">企业名称</div>
+    		<div class="right col-md-10 col-lg-10">
+                <p class="span-left">
+                    {{data.company_name}}
+                    <span class="plan-to" ng-show="data.company_status.is_ident && data.company_name && data.plan_company_name">拟改成&nbsp;&nbsp;&nbsp;&nbsp;{{data.plan_company_name}}</span>
+                </p>
+                <div ng-show="!data.new_bank_card_no">
+					<a href="" ng-hide="data.company_status.is_ident == 1 || hideUpdateBtn" ng-click="modify('修改企业名称', 'company_name');" class="info-btn-bind btn-default-info">修改</a>
+                    <a href="" ng-hide="data.company_status.is_ident != 1 || hideUpdateBtn" ng-click="modify('修改企业名称', 'plan_company_name');" class="info-btn-bind btn-default-info">修改</a>
+                </div>
+    		</div>
+    	</div>
+
+    	<div class="info-container row info-border-top custom-bank-style">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name" ng-class="{'custom-bank-style-left':!bankInfoError,'custom-bank-style-left-one':bankInfoError}">银行账号</div>
+    		<div class="right col-md-10 col-lg-10 custom-bank-style-right">
+    			<p class="span-left" ng-if="!bankInfoError">
+                    <span class="plan-to colors" ng-show="data.company_bank_card">{{data.company_bank_card}}（{{data.company_bank_name}}）</span><br>
+                    <span class="plan-to" ng-show="data.company_bank_card && data.new_bank_card_no || data.company_bank_name && data.new_bank_name">
+                        拟改成：{{data.new_bank_card_no}}（{{data.new_bank_name}}）
+                    </span>         
+                </p>
+                <p class="span-left" ng-if="bankInfoError" ng-class="{'tips':bankInfoError}">
+                    <span class="info-color-red span-position plan-to">您手工添加的支行信息有误，请及时修改，以免影响提现。</span>
+                </p>
+                <span ng-if="!data.plan_company_name" class="btn-box" ng-class="{'no-padding':bankInfoError}">
+                    <a href="javascript:;" class="btn-default-info" ng-click="modifyBankInfo();" ng-class="{'text-disabled': data.plan_company_name}" ng-show="data.company_bank_card || hideUpdateBtn">修改</a>
+                    <a href="javascript:;" class="btn-default-info" ng-click="modifyBankInfo();" ng-class="{'text-disabled': data.plan_company_name}" ng-show="!data.company_bank_card">添加</a>
+                </span>
+    		</div>
+    	</div>
+   	</div>
+    <!-- 证件审核 -->
+    <div class="info-papers-audit info-border">
+        <div class="info-title row">
+            <div class="col-md-2 col-lg-2 info-title-name info-title-left">证件审核</div>
+            <div class="col-md-2 col-lg-2 info-title-right" ng-class="{'certificate-delete-border':deleteBorder,'certificate-add-border':addBorder}">
+                <i class="icon-default" ng-class="{'icon-success':verifySuccess,'icon-failure': btnFailureSwitch || btnTriesLimit}"></i>
+                <span class="info-title-status">{{titleContent}}</span>
+            </div>
+            <div class="col-md-6 col-lg-6 info-verify-error">
+                <span ng-if="data.certificate.certificate_content">{{certificateContent}}</span>
+            </div>
+            <div class="col-md-2 col-lg-2 info-text-align-right pull-right">
+                <a ng-href="{{dataUrl}}" class="btn-default-info" ng-class="{'btn-failure-info': btnFailureSwitch, 'btn-disabled-info': btnTriesLimit}" ng-if="btnHideSwitch">{{btnContent}}</a>
+            </div>
+        </div>
+    </div>
+    <!-- 操作员 -->
+    <div class="account-oper" ng-if=" data.userinfo.role == 1 ">
+        <strong>操作员</strong>
+        <span>(已有{{data.operatorNum || 0}}人)</span>
+        <a href="#/operator-list" ng-if="data.operatorNum && data.operatorNum != 0 ">设置</a>
+        <a href="#/add-operator" ng-if="!data.operatorNum || data.operatorNum ==0 ">添加</a>
+    </div>
+    <!-- 其他信息 -->
+   	<div class="info-else info-border">
+		<div class="info-title info-title-name info-title-left info-else-padding">其他信息</div>
+		<div class="info-container row info-border-top">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name">企业logo</div>
+    		<div class="col-md-8 col-lg-8">
+                <img class="company-logo" ng-src="{{data.avatar_url}}" ng-show="data.avatar_url"/>
+    		</div>
+            <div class="col-md-2 col-lg-2 right">
+                <a href="javascript:;" class="btn-default-info" ng-click="modifyLogo();">修改</a>
+            </div>
+    	</div>
+    	<div class="info-container row info-border-top">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name">企业简称</div>
+    		<div class="right col-md-10 col-lg-10">
+    			<span class="span-left">{{data.company_abbr_name}}</span>
+    			<a href="javascript:;" class="btn-default-info" ng-click="modify('修改企业简称', 'company_abbr_name');">修改</a>
+    		</div>
+    	</div>
+    	<div class="info-container row info-border-top">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name">员工人数</div>
+    		<div class="right col-md-10 col-lg-10">
+    			<span class="span-left">{{data.staff_num}}</span>
+    			<a href="javascript:;" class="btn-default-info" ng-click="modify('修改员工人数', 'staff_num');">修改</a>
+    		</div>
+    	</div>
+    	<div class="info-container row info-border-top">
+    		<div class="left col-md-2 col-lg-2 info-border-right info-name">邀请码</div>
+    		<div class="right col-md-10 col-lg-10">
+    			<span class="span-left">{{data.extension_code}}</span>
+    			<a href="javascript:;" class="btn-default-info" ng-click="modify('补填邀请码','extension_code');" ng-show="!data.extension_code">填写</a>
+    		</div>
+    	</div>
+   	</div>
+</div>
+
+<!-- 通用modal -->
+<script type="text/ng-template" id="modifyModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">{{modifyData.label}}</h3>
+    </div>
+    <div class="modal-body">
+        <form ng-show="modifyData.attr != 'verifyCodes'" data-role="form" name="modifyForm" class="form-horizontal" ng-submit="submit(modifyForm.$valid);" novalidate>
+            <div class="step-content">
+                <div class="form-group" ng-class="{'error': submitted && modifyForm.modify.$invalid,'ok': submitted && modifyForm.modify.$valid}">
+                    <div class="col-xs-12">
+                        <div class="control-wrap" ng-mouseleave="leaveBanksLayer();">
+                            <div ng-show="modifyData.attr == 'company_id_no'" class="col-xs-12">
+                                <label class="radio-inline pull-left">
+                                    <input type="radio" ng-model="company_id_type" value="1"> 普通营业执照
+                                </label>
+                                <label class="radio-inline  pull-right">
+                                    <input type="radio" ng-model="company_id_type" value="2"> 统一社会信用代码
+                                </label>
+                            </div>
+                            <p ng-show="modifyData.attr == 'verifyCodes'">{{remitErrorCode}}</p>
+                            <input class="form-control" name="modify" type="text" placeholder="{{placeholder}}" ng-model="modifiedValue" autocomplete="off" maxlength="{{maxLength}}" required ng-keyup="getBanksLayer();" ng-pattern = "checkData"/>
+                            <div class="extensionCode5002Error">{{extensionCode5002Error}}</div>
+                            <div class="extensionCode30003Error error-messages excode-err">{{extensionCode30003Error}}</div>
+                            <div ng-show="submitted && modifyData.attr == 'extension_code'" ng-messages="modifyForm.modify.$error" class="error-messages excode-err">
+                                <div ng-message="pattern">请输入正确的邀请码</div>
+                            </div>
+                            <div ng-show="submitted && modifyData.attr == 'verifyCodes'" ng-messages="modifyForm.modify.$error" class="error-messages">
+                                <div ng-message="pattern">请输入正确的金额</div>
+                            </div>
+                            <ul class="banks-layer" ng-show="showBanksLayer && banksList.length">
+                                <li ng-repeat="bank in banksList track by $index" ng-click="selectBank(bank);">
+                                    {{bank.LBNK_NM}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled btn-full" ng-class="{'btn-primary': !modifyForm.$error.required}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <form class="modifyForm1" ng-show="modifyData.attr == 'verifyCodes'" data-role="form" name="modifyForm1" class="form-horizontal" ng-submit="submit(modifyForm1.$valid);" novalidate>
+            <div class="step-content">
+                <div class="form-group" ng-class="{'error': submitted && modifyForm1.unit.$invalid,'ok': submitted && modifyForm1.unit.$valid}">
+                    <div class="control-wrap" ng-mouseleave="leaveBanksLayer();">
+                        <div class="input-group">
+                            <input class="form-control" min="1" max="9" type="text" name="unit" ng-model="unit" autocomplete="off" maxlength="1" required ng-pattern = "checkData"/>
+                        </div>
+                    </div>
+                </div>
+                <span class="spot">.</span>
+                <div class="form-group" ng-class="{'error': submitted && modifyForm1.unit1.$invalid,'ok': submitted && modifyForm1.unit1.$valid}">
+                    <div class="control-wrap" ng-mouseleave="leaveBanksLayer();">
+                        <div class="input-group">
+                            <input class="form-control" min="1" max="9" type="text" name="unit1" ng-model="unit1" autocomplete="off" maxlength="1" required ng-pattern = "checkData"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'error': submitted && modifyForm1.unit2.$invalid,'ok': submitted && modifyForm1.unit2.$valid}">
+                    <div class="control-wrap" ng-mouseleave="leaveBanksLayer();">
+                        <div class="input-group">
+                            <input class="form-control" min="1" max="9" type="text" name="unit2" ng-model="unit2" autocomplete="off" maxlength="1" required ng-pattern = "checkData"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <!-- <div ng-show="submitted && modifyData.attr == 'verifyCodes'" ng-messages="modifyForm1.modify.$error" class="error-messages">
+                <div ng-message="pattern">请输入正确的金额</div>
+            </div>-->
+            <div ng-show="submitted && modifyData.attr == 'verifyCodes'" class="text-center">
+                <span ng-show="(!modifyForm1.unit.$error.required && !modifyForm1.unit1.$error.required && !modifyForm1.unit2.$error.required && modifyForm1.unit.$error.pattern) || (!modifyForm1.unit.$error.required && !modifyForm1.unit1.$error.required && !modifyForm1.unit2.$error.required && modifyForm1.unit1.$error.pattern) || (!modifyForm1.unit.$error.required && !modifyForm1.unit1.$error.required && !modifyForm1.unit2.$error.required && modifyForm1.unit2.$error.pattern)" class="red">
+                    <span class="glyphicon glyphicon-remove-circle red"></span>请输入正确的金额
+                </span>
+                <span ng-show="modifyForm1.unit.$error.required || modifyForm1.unit1.$error.required || modifyForm1.unit2.$error.required" class="red">
+                    <span class="glyphicon glyphicon-remove-circle red"></span>汇款金额输入不能为空
+                </span>
+            </div>
+            <div ng-show="submitted && modifyData.attr == 'verifyCodes'" class="text-center">
+                <span class="red" ng-show="remitErrorCode && !modifyForm1.unit.$error.required && !modifyForm1.unit.$error.pattern && !modifyForm1.unit1.$error.required && !modifyForm1.unit1.$error.pattern && !modifyForm1.unit2.$error.required && !modifyForm1.unit2.$error.pattern"><span class="glyphicon glyphicon-remove-circle red"></span>{{remitErrorCode}}</span>
+            </div>
+            <div class="sub clearfix">
+                <div class="col-xs-12 text-center">
+                    <button class="btn btn-disabled btn-full" ng-disabled ="loadStatus" ng-class="{'btn-primary': !modifyForm1.$error.required}" type="submit">
+                        <i ng-show="!loadStatus">提交</i>
+                        <i class="fa fa-spinner fa-spin"  ng-show="loadStatus" ></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 绑定logo的 -->
+<script type="text/ng-template" id="modifyLogoModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">修改企业LOGO</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" ng-submit="ok();" novalidate>
+            <div class="step-content">
+                1、图片格式必须为：jpeg、png；<br>
+                2、图片不大于2M。<br><br>
+                <div class="btn btn-default" ngf-select="upload($file)" ng-model="file" name="file"
+                     ngf-accept="'image/jpeg, image/png'">选择图片</div>
+                <div class="preview-area clearfix">
+                    <div class="preview-left">
+                        <div class="head head-big">
+                            <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                        </div>
+                        <div class="error-messages">
+                            {{uploadError}}
+                        </div>
+                    </div>
+
+                    <div class="preview-right">
+                        <div class="preview-title">
+                            头像预览
+                        </div>
+                        <div class="clearfix">
+                            <div class="head head-block">
+                                <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                            </div>
+                            <div class="head head-circle">
+                                <img ng-src="{{headBaseUrl}}{{avatorUrl}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': hasUploaded}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+<!-- 企业认证模板 -->
+<script type="text/ng-template" id="AuthStatus.html">
+    <div ng-show="modifyData.dialogType == 'verify'">
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="hideDialog();"></i>
+            <h3 class="modal-title">提示</h3>
+        </div>
+        <div class="modal-body text-center">
+            <p>您已输错3次汇款金额，已达上限</p>
+            <p>请通过向借贷宝账户充值认证！</p>
+            <p>
+                <a class="btn btn-default" ng-click="init()">知道了</a>
+                <a class="btn btn-primary btn-right" ng-click="recharge()">充值认证</a>
+            </p>
+        </div>    
+    </div>
+    <div ng-show="modifyData.dialogType == 'reVerify'">
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="hideDialog();"></i>
+            <h3 class="modal-title">温馨提示</h3>
+        </div>
+        <div class="modal-body text-center">
+            <p>您注册时填写的企业名称,银行账号或支行信息有误,请您修改后,点击"重新认证"。</p>
+            <p>
+                <a class="btn btn-default" ng-click="hideDialog()">确定</a>
+            </p>
+        </div>
+    </div>
+</script>

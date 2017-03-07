@@ -1,0 +1,76 @@
+<div id="operator-list">
+	<!-- 面包屑 -->
+	<ol class="breadcrumb">
+			<!-- <li>
+	            <a href="" ng-click="historyBack();">
+	                <span class="glyphicon glyphicon-triangle-left"></span>
+	                返回
+	            </a>
+	        </li> -->
+        <li class="active">您所在的位置：概览&nbsp;>&nbsp;企业资料&nbsp;>&nbsp;操作员</li>
+    </ol>
+    <div class="ol-container">
+    	<div class="header">
+    		<strong>操作员权限列表</strong>
+    		<a href="javascript:;" ng-click="checkOperatorNum()">添加操作员</a>
+    	</div>
+    	<div class="ol-content table-area">
+    		<table class="table">
+    			<thead>
+    				<th>姓名</th>
+    				<th>企业资料</th>
+    				<th>交易查询</th>
+                    <th>员工管理</th>
+                    <th>工资管理</th>
+                    <th>融资管理</th>
+                    <th>报销管理</th>
+    				<th>操作</th>
+    			</thead>
+    			<tbody>
+    				<tr ng-repeat="oc in operatorContent">
+    					<td>{{oc.name}}</td>
+                        <td ng-class="{'img': oc.permissions.info == '1'}"></td>
+                        <td ng-class="{'img': oc.permissions.deal == '1'}"></td>
+                        <td ng-class="{'img': oc.permissions.staff == '1'}"></td>
+                        <td ng-class="{'img': oc.permissions.wage == '1'}"></td>
+                        <td ng-class="{'img': oc.permissions.borrow == '1'}"></td>
+                        <td ng-class="{'img': oc.permissions.reimb == '1'}"></td>
+    					
+    					<td><a href="javascript:;" ng-click="deleteOperatorTip(oc)">删除</a></td>
+    				</tr>
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+</div>
+
+<!-- 操作员添加数量提示 -->
+<script type="text/ng-template" id="limitExport.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <p>操作员最多只能添加10个。</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="go();">知道了</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 删除操作员提示 -->
+<script type="text/ng-template" id="deleteOperator.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <p>是否要删除该操作员？</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="deleteOperator()">删除</button>
+                <button class="btn btn-primary center" type="submit" ng-click="cancel()">取消</button>
+            </div>
+        </div>
+    </div>
+</script>

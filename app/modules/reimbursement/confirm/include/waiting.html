@@ -1,0 +1,13 @@
+<div class="info-area m-pre">
+    <div class="side-img">
+        <img ng-src="{{logo}}" >
+    </div>
+    <div class="main-info">
+        <div class="stat-wrap">
+            <div class="stat">您正在发放报销款：共<span>{{pendingData.number}}</span>人，合计<span>{{pendingData.total/100 | amountFormater}}</span>元</div>
+        </div>
+        <div class="desc first-desc">已向管理员<span>{{name}}({{phone}})</span>发送小秘书消息，</div>
+        <div class="desc">请管理员打开APP，进入消息，确认发放</div>
+    </div>
+</div>
+

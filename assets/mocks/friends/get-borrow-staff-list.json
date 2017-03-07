@@ -1,0 +1,74 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "idlist": [
+      {
+        "memberName": "1",
+        "mobile": "19100000123",
+        "tagId": "1",
+        "uuid": "123",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "普通员工"
+      },
+      {
+        "memberName": "2",
+        "mobile": "19100000123",
+        "tagId": "2",
+        "uuid": "223",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "中层"
+      },
+      {
+        "memberName": "3",
+        "mobile": "19100000123",
+        "tagId": "3",
+        "uuid": "323",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "高管"
+      },
+      {
+        "memberName": "4",
+        "mobile": "19100000123",
+        "tagId": "2",
+        "uuid": "423",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "中层"
+      },
+      {
+        "memberName": "5",
+        "mobile": "19100000123",
+        "tagId": "3",
+        "uuid": "523",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "高管"
+      },
+      {
+        "memberName": "6",
+        "mobile": "19100000123",
+        "tagId": "3",
+        "uuid": "623",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "高管"
+      },
+      {
+        "memberName": "7",
+        "mobile": "19100000123",
+        "tagId": "3",
+        "uuid": "723",
+        "avatarUrl": "",
+        "thumbnailUrl": "",
+        "tagName": "高管"
+      }
+    ]
+  }
+}

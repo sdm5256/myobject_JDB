@@ -1,0 +1,20 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+   "data" :{
+     "list":[
+       {
+        "id":1,
+        "name":"张领",
+        "mobilephone":18010190521
+      },{
+        "id":2,
+        "name":"张领2",
+        "mobilephone":18010190521
+      }
+     ]
+   }
+}

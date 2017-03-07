@@ -1,0 +1,138 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "traceId": "19e2e5f9d81df2f574597b0900d562a2",
+  "data": {
+    "operators": [
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比甲",
+        "mobile": "2222222222",
+        "memberID": "11222",
+        "permissions": {
+          "overview": 1,
+          "info": 1,
+          "staff": 0,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 1,
+          "reimb":1
+        }
+      },
+      {
+        "name": "逗比乙",
+        "mobile": "11111111",
+        "memberID": "222223333",
+        "permissions": {
+          "overview": 1,
+          "info":0,
+          "staff": 1,
+          "wage": 0,
+          "borrow": 1,
+          "deal": 0,
+          "reimb": 0
+        }
+      }
+    ]
+  }
+}

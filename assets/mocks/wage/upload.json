@@ -1,0 +1,18 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "OK",
+    "returnUserMessage": "OK"
+  },
+  "traceId": "c2f70d706fe6dc2772995e5633a9b667",
+  "data": {
+    "number": 3,
+    "total": "1500.00",
+    "amount": "500.00",
+    "orderId": "2cc439d5789d74eef6ed009defbe9b33",
+    "img": "http://jdbserver.b0.upaiyun.com/qrcode/608345965609698670/4708.png",
+    "id": "4708",
+    "status": "",
+    "banlance": 10000000
+  }
+}

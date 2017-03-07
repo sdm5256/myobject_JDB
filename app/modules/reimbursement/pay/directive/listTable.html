@@ -1,0 +1,58 @@
+<div class="table-area">
+    <div class="table-wrap js-table-wrap">
+        <table class="table">
+            <colgroup>
+                <col class="check-col"></col>
+                <col class="name-col"></col>
+                <col class="phone-col"></col>
+                <col class="money-col"></col>
+                <col class="remark-col"></col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="check-col"><input type="checkbox" ng-model="isCheckedAll" ng-click="checkAllHandler()"></th>
+                    <th>姓名</th>
+                    <th>手机号</th>
+                    <th>报销金额<span class="th-mark">（元）</span></th>
+                    <th>备注<span class="th-mark">（可不填）</span></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in listData" ng-class="!item.selected ? 'uncheck': ''">
+                <td class="check-col"><input type="checkbox" ng-model="item.selected" ng-click="checkHandler($event, item.id)"></td>
+                <td>{{item.name}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{(item.amount !== '') ? (item.amount/100 | amountFormater) : ''}}</td>
+                <td>{{item.remk}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="loading" ng-show="hasMore">
+            <span class="loading-txt">正在加载</span>
+        </div>
+    </div>
+
+    <div class="table-footer-wrap">
+        <span class="checked-num">已全选中{{number}}人</span>
+        <span class="total-amount">报销总额：{{total/100 | amountFormater }}元</span>
+    </div>
+
+    <table class="table fixed-table">
+        <colgroup>
+            <col class="check-col"></col>
+            <col class="name-col"></col>
+            <col class="phone-col"></col>
+            <col class="money-col"></col>
+            <col class="remark-col"></col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="check-col"><label><input type="checkbox" ng-model="isCheckedAll" ng-click="checkAllHandler()"></label></th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <th>报销金额<span class="th-mark">（元）</span></th>
+                <th>备注<span class="th-mark">（可不填）</span></th>
+            </tr>
+        </thead>
+    </table>
+</div>

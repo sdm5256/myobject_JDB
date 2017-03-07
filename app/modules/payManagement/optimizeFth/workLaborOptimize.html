@@ -1,0 +1,110 @@
+<div ng-show="workOptimize">
+    <div class="optimizeResult" ng-show="true">
+        <span>根据优化结果，你需要：<i>1</i>发放{{total.actual_amount}}元工资; &nbsp;&nbsp;&nbsp;&nbsp;<i>2</i>发放{{total.work_actual_amount}}元劳务报酬</span>
+    </div>
+    <div class="first">
+        <h4 ng-show="true"><span>第一步：发放工资</span></h4>
+    </div>
+    <!-- 扫码鉴权 -->
+    <div class="scan-auth" ng-show="shaoMajianQuan">
+        <scan-auth order-id="{{orderId}}" sel-type="2"></scan-auth>
+    </div>
+    <div class="workSucess" ng-show="workSucessFst">
+        <p>工资受理成功&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管理员已确认</p>
+    </div>
+    <div class="slidDown" ng-show="!shaoMajianQuan"><a ng-click="slidDown()">展开本次工资发放信息</a></div>
+    <div ng-show="workSalaryDetail" class="salaryDetail">
+        <p>本次工资发放信息</p>
+        <div class="table-area" ng-show="wageList.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>身份证号</th>
+                        <th>应发工资</th>
+                        <th>社保公积金个人部分</th>
+                        <th>个人所得税</th>
+                        <th>实发工资</th>
+                        <th ng-show="threeCol">状态</th>
+                        <th ng-show="threeCol">原因</th>
+                        <th ng-show="threeCol">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in wageList track by $index">
+                        <td>{{item.name}}</td>
+                        <td>{{item.phone}}</td>
+                        <td>{{item.idcard}}</td>
+                        <td>{{item.should_amount}}</td>
+                        <td>{{item.fund_amount}}</td>
+                        <td>{{item.tax_amount}}</td>
+                        <td>{{item.actual_amount}}</td>
+                        <td ng-show="threeCol">{{item.status_text}}</td>
+                        <td ng-show="threeCol">{{item.reason}}</td>
+                        <td ng-show="threeCol">
+                            <span ng-if="item.oper_type == 0">{{item.oper_text}}</span>
+                            <a href="" ng-click="modify(item);" ng-if="item.oper_type == 1">修改后重发</a>
+                            <!--修改姓名、身份证、手机号-->
+                            <a href="" ng-href="#/how2-recharge" ng-if="item.oper_type == 2">充值</a>
+                            <span ng-if="item.oper_type == 3"><a href="" ng-show="!repayLoading" ng-click="rePay(item.id)">重发</a><i class="fa fa-spinner fa-spin"  ng-show="repayLoading" ></i></span>
+                            <a href="" ng-click="modify(item);" ng-if="item.oper_type == 4">修改后重发</a>
+                            <!--只可修改手机号-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-show="wageList.length" class="clearfix table-bottom">
+                <uib-pagination class="table-pagination" ng-change="slaryListFst(wagePageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotal" items-per-page="pageSize" rotate="false" ng-model="wagePageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                <div class="table-tip">
+                    员工人数：{{total.number}}人&nbsp;&nbsp;&nbsp;&nbsp; 实发金额：{{total.actual_amount}}元
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="second">
+        <h4 ng-show="true"><span>第二步：发放劳务报酬</span></h4>
+    </div>
+    <p ng-show="sedText" class="sedText"><!-- {{totalScd.number}}名员工 -->共要发放<span>{{totalScd.amount}}</span>元劳务报酬(请先完成发放工资步骤)</p>
+    <div ng-show="laowubaochou">
+        <div class="larboSlory">
+            <div>
+                <p>共要发放<span>{{totalScd.amount}}</span>元劳务报酬<a class="larboDload" ng-click="larboDload()">下载劳务报酬明细</a><a class="larboOver" ng-click="worklaborFinish()">我已完成</a></p>
+                <p>您可下载劳务报酬发放明细，请第三方完成发放</p>
+            </div>
+        </div>
+        <div class="larboSaloryDetail">
+            <p>本次劳务报酬发放信息</p>
+            <div class="table-area" ng-show="wageListScd.length">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>身份证号</th>
+                            <th>应发劳务报酬</th>
+                            <th>个人所得税</th>
+                            <th>实发劳务报酬</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in wageListScd track by $index">
+                            <td>{{item.name}}</td>
+                            <td>{{item.phone}}</td>
+                            <td>{{item.idcard}}</td>
+                            <td>{{item.work_should_amount}}</td>
+                            <td>{{item.work_tax_amount}}</td>
+                            <td>{{item.work_actual_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="wageListScd.length" class="clearfix table-bottom">
+                    <uib-pagination class="table-pagination" ng-change="slaryListScd(pageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotalScd" items-per-page="pageSize" rotate="false" ng-model="pageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                    <div class="table-tip">
+                        员工人数：{{totalScd.number}}人&nbsp;&nbsp;&nbsp;&nbsp; 实发金额：{{totalScd.amount}}元
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

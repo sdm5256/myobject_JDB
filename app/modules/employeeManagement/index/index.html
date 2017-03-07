@@ -1,0 +1,229 @@
+<div id="employee-management">
+    <ol class="breadcrumb">
+        <!--<li>-->
+            <!--<a href="" ng-click="historyBack();">-->
+                <!--<span class="glyphicon glyphicon-triangle-left"></span>-->
+                <!--返回-->
+            <!--</a>-->
+        <!--</li>-->
+        <li class="active">您所在的位置：员工管理</li>
+    </ol>
+    <div class="upload-btn-wrapper " >
+        <!--<a class="btn btn-primary" ng-href="#/employee-list">上传花名册</a>-->
+        <!--<span  class="desc">上传花名册，批量添加员工为好友，获得更高融资额度！</span>-->
+        <a class="btn btn-primary selfa" ng-href="#/employee-list">添加员工</a>
+        <a class="btn btn-default selfa" ng-href="#/employee-delete">删除离职员工</a>
+    </div>
+    <br>
+    <div ng-class="{'show': ra==0 && showStaffTip}" class="hide">
+        <p class="ra-text"><img src="images/ra.png">共{{data.totalStaff}}名员工，{{data.totalFriend}}位已添加为好友，充值认证后将自动给其余{{data.totalStaff-data.totalFriend}}位员工发送好友请求，<a ng-href="#/info">立即认证</a></p>
+        <!--<a class="btn btn-primary" ng-click="goToRecharge()">充值认证</a>-->
+        <!--<p class="ra-tip">温馨提示：<br> 1. 使用企业对公账号进行充值以确保企业真实性；  为什么要充值认证？ <br>2. 充值认证后将会自动给员工发送好友请求，员工确认即可发起融资</p>-->
+    </div>
+    <div class="content-title clearfix">
+        <div class="pull-left">员工列表</div>
+        <div class="staff-search">
+            <input type="button" class="search-icon" ng-class="{'gray':!abledStatus}" ng-disabled="!abledStatus" ng-click="searchHandler()"/>
+
+            <angucomplete-alt id="members"
+                  placeholder="输入员工姓名或手机号搜索"
+                  parse-input = "inputFormat"
+                  selected-object="filterName"
+                  remote-url="/staff/search"
+                  title-field="name"
+                  pause="400"
+                  text-searching = "搜索中"
+                  text-no-results = "无结果"
+                  description-field="mobilephone"
+                  minlength="1"
+                  input-changed = "iptChange"
+                  remote-url-request-formatter="remoteUrlRequestFn"
+                  remote-url-data-field="data.list"
+                  input-class="form-control form-control-small"
+                  match-class="highlight"
+            />
+        </div>
+        <div class="pull-right" ng-click="exportStaff()">导出到Excel</div>
+    </div>
+    <div class="search-field">
+        <div class="search-group">
+            <label class="search-label">员工类型：</label>
+            <label class="btn" ng-class="{'btn-primary': query.ttype == 'all'}">
+                全部
+                <input class="hidden" type="radio" name="ttype" ng-model="query.ttype" ng-change="getEmployeeList();" value="all" ng-disabled="employeePageDisabled">
+            </label>
+            <label ng-repeat="tt in ttypes track by $index" class="btn" ng-class="{'btn-primary': query.ttype == tt.tagId}">
+                {{tt.tagName}}
+                <input class="hidden" type="radio" name="ttype" ng-model="query.ttype" ng-change="getEmployeeList();" value="{{tt.tagId}}" ng-disabled="employeePageDisabled">
+            </label>
+        </div>
+        <div class="search-group">
+            <label class="search-label">好友状态：</label>
+            <label ng-repeat="ss in staffStatus track by $index" class="btn" ng-class="{'btn-primary': query.status == ss.id}">
+                {{ss.text}}
+                <input class="hidden" type="radio"  name="status" ng-model="query.status" ng-change="getEmployeeList();" value="{{ss.id}}" ng-disabled="employeePageDisabled">
+            </label>
+        </div>
+    </div>
+    <div class="table-area">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>身份证号码</th>
+                <th>手机号</th>
+                <th>类型</th>
+                <th>累计发工资</th>
+                <!--<th ng-click="refresh()" class="refresh">状态<i class="fa fa-refresh" aria-hidden="true"></i></th>-->
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in data.employeeList track by $index">
+                <td>{{item.name}}</td>
+                <td>{{item.id_no}}</td>
+                <td>{{item.mobilephone}}</td>
+                <td>{{item.staffTypeText}}</td>
+                <td>{{item.salary  | amountFormater }}</td>
+                <td ng-class="{'yellow': item.status==3,'red': item.status==5}">{{item.statusText}}</td>
+				<td><a ng-click="modify(item);" class="modify-btn">修改</a><a ng-click="remove(item);" ng-class="{'disabled': item.role != 0}">删除</a></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+        <div ng-show="data.employeeList.length" class="clearfix table-bottom">
+            <uib-pagination class="table-pagination" ng-change="getEmployeeList(employeePageNo);"
+                            ng-disabled="employeePageDisabled"
+                            total-items="data.total" rotate="false"
+                            items-per-page="employeePageSize"
+                            pause = "400"
+                            ng-model="employeePageNo" max-size="4"
+                            class="pagination-sm" boundary-links="true"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            first-text="首页"
+                            last-text="尾页"
+                    ></uib-pagination>
+            <div class="table-tip" ng-show="searchStatus">
+                <span >人数：{{data.total}}</span>
+                <span class="query-all" ng-show="idList" ng-click="allStaff()">查看全部员工</span>
+            </div>
+            <div class="table-tip" ng-hide="searchStatus" >
+                <span >搜索结果：{{data.total}} 人</span>
+                <span class="query-all" ng-click="allStaff()">查看全部员工</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-tip show-result-tip" ng-show="showTotalTips " >
+        <span >搜索结果：0 人</span>
+        <span class="query-all" ng-click="allStaff()">查看全部员工</span>
+    </div>
+    <div class="upload-btn-wrapper2 hide" ng-class="{'show': data.employeeList.length==0 &&  !showTotalTips}">
+        <p class="title text-center">暂无员工记录</p>
+        <p class="desc text-center">上传花名册，批量添加员工为好友，获得更高融资额度！</p>
+        <a class="btn btn-primary" ng-href="#/employee-list">上传花名册</a>
+    </div>
+    <!--<div ng-show="!!searchString">共{{data.employeeList.length}}人</div>-->
+    <br><br>
+    <p class="out-wrap">
+		<img src="images/ia.png">
+		<span class="import-text">重要提示：</span><br>
+        1. 员工实名认证并关注企业后就可以向他们发起融资了。<br>
+        2. 关注步骤：打开手机借贷宝-发现-小秘书，点击企业邀请信息关注企业。<br>
+        3. 待员工确认：需要员工下载注册借贷宝并通过实名认证后关注企业。<br>
+        4. 根据《最高人民法院关于审理民间借贷案件适用法律若干问题的规定》，企业向本单位职工筹集资金，用于本单位生产、经营，该借款行为受法律保护。<br>
+        5. 及时删除离职员工，避免非法集资风险。
+    </p>
+</div>
+<script type="text/ng-template" id="modifyStaffModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">修改员工资料</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" ng-submit="submit(modifyForm.$valid);" novalidate>
+            <div class="step-content">
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.name.$invalid, 'ok': submitted && modifyForm.name.$valid}">
+                    <label class="control-label col-xs-4">
+                        姓名
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <input class="form-control" name="name" type="text" ng-model="submitForm.name" autocomplete="off" maxlength="25" ng-disabled="flag" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.idCard.$invalid, 'ok': submitted && modifyForm.idCard.$valid}">
+                    <label class="control-label col-xs-4">
+                        身份证号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <input class="form-control" name="idCard" type="text" ng-model="submitForm.id_no" autocomplete="off" maxlength="18" ng-disabled="flag" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group error-tip" ng-class="{'error': submitted && modifyForm.phone.$invalid, 'ok': submitted && modifyForm.phone.$valid}">
+                    <label class="control-label col-xs-4">
+                        手机号
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <input class="form-control" name="phone" type="text" ng-model="submitForm.mobilephone" ng-pattern=/^1\d{10}/ autocomplete="off" maxlength="11" ng-disabled="flag" required/>
+                            <div ng-messages="modifyForm.phone.$error">
+                                <span ng-message="pattern" class="red"><span class="glyphicon glyphicon-remove-circle red"></span>手机号输入格式错误</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'ok': submitted}">
+                    <label class="control-label col-xs-4">
+                        类型
+                    </label>
+                    <div class="col-xs-8">
+                        <div class="control-wrap">
+                            <!--<select class="form-control" ng-model="submitForm.staff_type" value="submitForm.staff_type">
+                                <option ng-repeat="tt in ttypes track by $index" value="{{tt.tagId}}">
+                                    {{tt.tagName}}
+                                </option>
+                            </select>-->
+                            <select class="form-control" ng-model="submitForm.staff_type" ng-options="tt.tagId as tt.tagName for tt in ttypes">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': !modifyForm.$error.required}" type="submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/ng-template" id="delStaffModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="cancel();"></i>
+        <h3 class="modal-title">删除企业员工</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="modifyForm" class="form-horizontal" novalidate>
+            <div class="step-content">
+                <p>你确认要在企业员工中删除 {{name}} 吗？<br> 删除后该员工不再看到企业融资信息！</p>
+            </div>
+            <div class="step-actions">
+                <div class="form-group">
+                    <div class="col-xs-12 text-center">
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': !modifyForm.$error.required}" type="button" ng-click="cancel()">取消</button>
+                        <button class="btn btn-disabled" ng-class="{'btn-primary': !modifyForm.$error.required}" type="button" ng-click="del()">删除</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

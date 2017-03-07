@@ -1,0 +1,142 @@
+<div id="employee-list">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/employee-management" class="activeStaff">员工管理</a>>&nbsp; 添加员工</li>
+    </ol>
+    <!-- tap切换 -->
+    <ul class="tap-title">
+        <li ng-class="{'title-active':batchAdd}" ng-click="tapChange(true)">批量添加</li>
+        <li ng-class="{'title-active':!batchAdd}" ng-click="tapChange(false)">手动添加</li>
+    </ul>
+    <!-- 加载模块 -->
+    <div ng-show="loading" class="loading-box">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    </div>
+    <!-- 批量添加 -->
+    <div ng-show="batchAdd">
+        <!-- 上传模块 -->
+        <div ng-hide="excelResult.res && !excelResult.excelError">
+            <div class="short-info">请上传企业员工花名册（excel格式）</div>
+            <div class="head-actions">
+                <button id="upload-excel-btn" class="btn btn-primary" ng-click="uploadConfirm()">上传</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/qrcode/花名册模版.xlsx" target="_blank">下载模版</a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-danger">{{uploadError}}</span>
+            </div>
+        </div>
+        <!-- 示例图模块 -->
+        <div ng-hide="excelResult.res" class="sample-box">
+            <img width="770" src="images/upload-sample.jpg">
+        </div>
+        <!-- 初始提示模块 -->
+        <div ng-hide="excelResult.res">
+            <!-- <h2 class="short-title"></h2> -->
+            <div class="alert alert-danger">
+                <div class="alert-title"><span class="glyphicon glyphicon-warning-sign"></span> 重要提示</div>
+                <ul class="list">
+                    <li>请先下载模版，在此基础上录入员工信息，再进行上传。</li>
+                    <li>最多上传5000名员工，请勿超出数量。</li>
+                </ul>
+            </div>
+        </div>
+        <!-- 失败模块 -->
+        <div ng-show="excelResult.res && excelResult.excelError">
+            <div class="failed-box">
+                <div class="failed-title"><span class="glyphicon glyphicon-warning-sign"></span> 上传失败</div>
+                {{excelResult.excelErrorMessage}}
+            </div>
+        </div>
+        <!-- 成功模块 -->
+        <div ng-show="hasExcelResult" class="success-box">
+            <div class="success-logo">
+                <img src="images/upload-success.png">
+                <div class="success-txt">共<span>{{resultCount}}</span>名员工,系统将自动发送好友请求</div>
+                <a ng-show="ident == 0" class="btn btn-primary" ng-click="goToRecharge();">充值认证</a>
+            </div>
+        </div>
+        <!-- 表格模块 -->
+        <div ng-show="hasExcelResult">
+            <h2 class="short-title">员工花名册</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>身份证号码</th>
+                        <th>手机号</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in employeeList track by $index">
+                        <td>{{item.name}}</td>
+                        <td>{{item.id_no}}</td>
+                        <td>{{item.mobilephone}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="table-area">
+                <div ng-show="employeeList.length" class="clearfix table-bottom">
+                    <span class="absolute-left">人员：{{resultCount}}人</span>
+                    <uib-pagination class="table-pagination" ng-change="getTable(wagePageNo);" ng-disabled="wagePageDisabled" total-items="resultCount" items-per-page="pageSize" ng-model="wagePageNo" max-size="5" rotate="false" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页">
+                    </uib-pagination>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 手动添加 -->
+    <div ng-show="!batchAdd" class="tabs2">
+        <ul class="manualAdd">
+            <li>
+                <label>姓名：</label>
+                <input type="text" maxlength="15"  class="form-control inputType" ng-class="{'errorBorde':nameErrorMsg}" ng-model="staffMsg.name" ng-trim="false" ng-blur="nameCheck()"/>
+                <span ng-class="{'errorMsg':nameErrorMsg}">{{nameErrorMsg}}</span>
+            </li>
+            <li>
+                <label>手机号：</label>
+                <input type="text" maxlength="11" class="form-control inputType" ng-class="{'errorBorde':phoneErrorMsg}" ng-model="staffMsg.mobilephone" ng-trim="false" ng-blur="phoneCheck()"/>
+                <span ng-class="{'errorMsg':phoneErrorMsg}">{{phoneErrorMsg}}</span>
+            </li>
+            <li>
+                <label>身份证号：</label>
+                <input type="text" maxlength="18" class="form-control inputType" ng-class="{'errorBorde':cardErrorMsg}"  ng-model="staffMsg.id_no" ng-trim="false" ng-blur="cardCheck()"/>
+                <span ng-class="{'errorMsg':cardErrorMsg}">{{cardErrorMsg}}</span>
+            </li>
+            <li>
+                <label>类型：</label>
+                <select class="form-control selectType" ng-model="staffType" ng-options="type for type in employeeType">
+                   
+                </select>
+            </li>
+            <li>
+                <button type="button" ng-class="{'btnActive':btnDisable}" ng-click="saveMsg(1)">保存</button>
+                <button type="button" ng-class="{'manualAddBtn':btnDisable}" ng-click="saveMsg(2)">保存并继续添加</button>
+            </li>
+        </ul>
+        <div class="addLoading" ng-show="addLoading">
+           <div class="loadingBg">
+               <div ng-show="loading2" class="loading-box loadColor">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                </div>
+                <ul ng-show="successLoading">
+                    <li><img src="../../images/successicon.png" alt=""></li>
+                    <li ng-show="!promptMsg">添加成功<br>系统将自动发送好友邀请</li>
+                    <li ng-show="promptMsg">好友添加成功</li>
+                </ul>
+           </div>           
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="uploadEmployeelist.html">
+    <div>
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">温馨提示</h3>
+        </div>
+        <div class="modal-body text-center modal-upload-employeelist">
+            <p>企业向员工融资符合相关监管法规，向非员工筹款有非法集资风险。请确认列表中员工与企业存在雇佣劳动关系，员工离职后请及时解除好友关系。 </p>
+            <button id="upload-excel-btn" class="btn btn-primary" ngf-select="upload($file)" ng-model="file" name="file" ngf-pattern="" ngf-accept="" ngf-max-size="20MB">确定</button>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,139 @@
+<form data-role="form" name="bankForm"  class="bank-form form-horizontal" ng-submit="submitStep(bankForm.$valid);" novalidate>
+    <div class="step-content">
+        <div class="form-group" ng-show="$parent.pageType == 'updateBank'">
+            <label class="control-label" ng-class="{'col-xs-2': !isUpdate,'col-xs-3': isUpdate}">
+                户名
+            </label>
+            <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                <div class="control-text">
+                    {{data.company_name}}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group error-tip" ng-class="{'error': bankSubmitted && bankForm.bankCard.$invalid || bankForm.bankCard._invalid || bankinfoTips, 'ok': bankSubmitted && bankForm.bankCard.$valid && bankForm.bankCard._valid}">
+            <label class="control-label col-xs-3">
+                银行账号<!--<span class="star">*</span>-->
+            </label>
+            <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                <div class="control-wrap">
+                    <input bank-num bank-pattern="/.{5,}/" class="form-control" name="bankCard" type="text"  ng-model="bankinfo.bank_card_no" ng-blur="bankinfoBlur()" ng-focus="bcFocus()" autocomplete="off" maxlength="50"
+                           placeholder="请输入银行账号" required/>
+                   <span class="control-icon icon" ng-class="{'icon-bank':!bankinfoTips,'icon-bank-blue':bcStatus ,'icon-bank-red':bankinfoTips || bankForm.bankCard._invalid }"></span>
+                </div>
+            </div>
+            <div class="col-xs-4 " ng-show="bankinfoTips">
+                <p class="help-message help-message1 " >
+                    请输入正确的银行账号
+                </p>
+            </div>
+        </div>
+        <div class="form-group error-tip" ng-class="{'error': bankSubmitted && bankForm.searchBankText.$invalid || bankTextBloon, 'ok': bankSubmitted && bankForm.searchBankText.$valid}">
+            <label class="control-label col-xs-3">
+                开户银行
+            </label>
+            <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                <div ng-show="bankinfo.other_bank_name" class="row">
+                    <div class="col-xs-10">
+                        <div class="control-text">
+                            {{bankinfo.other_bank_name}}
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="control-text text-right">
+                            <a href="" ng-click="reset();">修改</a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="bankinfo.other_bank_name" class="row">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" style="padding-left: 20px!important" placeholder="输入银行名称进行查询" name="searchBankText" ng-pattern='/[\u4e00-\u9fa5]{2,}/' ng-blur="bankBlur()" ng-model="dropdownWidget.searchBankText" value="" ng-click="dropdownWidget.show($event)" autocomplete="off" ng-change="dropdownWidget.search()">
+                            <!--<input type="text" class="form-control" placeholder="默认查询全部银行" name="searchBankText" ng-pattern='/[\u4e00-\u9fa5]{2,}/' ng-model="dropdownWidget.searchBankText" value="" ng-click="dropdownWidget.show()"  ng-change="test()">-->
+                            <div class="input-group-btn" ng-class="{'open':dropdownWidget.open}">
+                                <ul class="dropdown-menu dropdown-menu-right" >
+                                    <li ng-repeat="bank in banks track by $index" ng-click="dropdownWidget.selectBank(bank)"><a>{{bank.BNK_NM}}</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                            <div ng-messages="bankForm.searchBankText.$error">
+                                <div class="error-messages" ng-message="pattern">至少输入两个中文进行模糊匹配</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--控制显示 未找到银行信息-->
+            <div class="col-xs-3" ng-show="bankTextBloon">
+                <p class="help-message" >
+                    {{ nonBankText }}
+                </p>
+            </div>
+        </div>
+        <div ng-hide="bankinfo.other_bank_name" class="form-group error-tip" ng-class="{'error': bankSubmitted && (bankForm.province.$invalid || bankForm.city.$invalid), 'ok': bankSubmitted && (bankForm.province.$valid && bankForm.city.$valid)}">
+            <label class="control-label col-xs-3">
+                支行归属省市
+            </label>
+            <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="control-wrap">
+                            <select class="form-control show-pro" name="province" type="text" ng-model="bankinfo.province"  ng-required="!bankinfo.other_bank_name" ng-change="getCityList();">
+                                <option value="">省</option>
+                                <option value="{{province.PROV_CD}}" ng-repeat="province in provinces track by $index">{{province.PROV_NM}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="control-wrap">
+                            <select class="form-control" name="city" type="text" ng-model="bankinfo.city" ng-change="getCmmtbkinList(true);">
+                                <option value="">市</option>
+                                <option value="{{city.CITY_CD}}" ng-repeat="city in cities track by $index">{{city.CITY_NM}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-hide="bankinfo.other_bank_name" class="form-group error-tip" ng-class="{'error': bankSubmitted && bankForm.subbranchSearchText.$invalid || noFindBranBankTextBloon, 'ok': bankSubmitted && bankForm.subbranchSearchText.$valid}">
+            <label class="control-label col-xs-3">
+                支行信息
+            </label>
+            <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                <div class="control-wrap">
+                    <div class="input-group">
+                        <input type="text"  style="padding-left: 20px!important" class="form-control" placeholder="请输入支行名称中的关键词搜索" name="subbranchSearchText" ng-pattern='/[\u4e00-\u9fa5]{2,}/' ng-blur="brBankBlur()" ng-model="subbranchWidget.subbranchSearchText" value="" ng-click="subbranchWidget.show($event)"  ng-change="subbranchWidget.search()" required>
+                        <div class="input-group-btn" ng-class="{'open':subbranchWidget.open}">
+                            <ul class="dropdown-menu dropdown-menu-right" ng-class="{'dropdown-menu-border':!!cmmtbkins}" data-id="{{!!cmmtbkins}}">
+                                <li ng-repeat="cmmtbkin in cmmtbkins track by $index" ng-click="subbranchWidget.selectBank(cmmtbkin)"><a>{{cmmtbkin.LBNK_NM}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-class="{'col-xs-5': !isUpdate,'col-xs-9': isUpdate}">
+                    <div class="control-text bank-tip">
+                        <a href="" ng-click="openOhter();">找不到开户银行？</a>
+                    </div>
+                </div>
+                <!--控制显示 未找到该支行-->
+                <div class="col-xs-11 bank-no-padding" ng-show="noFindBranBankTextBloon">
+                    <p class="help-message" >
+                        {{ noFindBranBankText }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <span ng-hide="true" id="isValid">{{bankForm.$valid}}</span>
+    <div class="step-actions" ng-show="$parent.pageType == 'updateBank'">
+        <div class="step-actions">
+            <div class="form-group">
+                <div class="col-xs-12 text-center">
+                    <button class="btn btn-disabled" ng-class="{'btn-primary': !bankForm.$error.required}" type="submit">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

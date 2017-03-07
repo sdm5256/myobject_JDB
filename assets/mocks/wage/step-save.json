@@ -1,0 +1,11 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "余额不足",
+        "returnUserMessage": "余额不足"
+    },
+    "traceId": "b021d4d2a22cdf24e86422bffc1d92f7",
+    "data": {
+        "amount": "31000.00"
+    }
+}

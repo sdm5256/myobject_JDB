@@ -1,0 +1,31 @@
+{
+  "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+   },
+  "data": {
+    "hasMore": 1,
+    "pageNo": 1,
+    "list": [
+      {
+        "member_id": "594545256292553113",
+        "name": "测试反季的了卡上就疯狂地",
+        "avatar_url": "",
+        "relation":0
+      },
+      {
+        "member_id": "594545256292555335",
+        "name": "苹果（中国）股份公司",
+        "avatar_url": "http://jdbserver.b0.upaiyun.com/images/18027483054b2ef262fd740536e4d547.jpg",
+        "relation":0
+      },
+      {
+        "member_id": "594545256292555532",
+        "name": "测试试试",
+        "avatar_url": "",
+        "relation":0
+      }
+    ]
+  }
+}

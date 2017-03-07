@@ -1,0 +1,41 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "user_id": "1234567890",
+    "user_type": 1,
+    "level": 1,
+    "user_name": "11",
+    "phone_num": "15810000000",
+    "avatar_url": "http://aaa",
+    "thumbnail_url": "http://aaa",
+    "vali_status": {
+      "create_time": 1111111,
+      "update_time": 1111111,
+      "real_name": true,
+      "ident": false,
+      "face": false,
+      "bank_card": false
+    },
+    "company_name": "ddd",
+    "oper_user_id": "1234",
+    "plan_company_name": "dddd",
+    "company_abbr_name": "d",
+    "company_id_type": 1,
+    "company_id": "1111",
+    "corporation": "厂长",
+    "company_address": "仰山公园",
+    "company_bank_card": "12345",
+    "plan_company_bank_card": "1111",
+    "company_bank_name": "招商银行",
+    "admin_user_id": "2345",
+    "admin_title": "CEO",
+    "company_status": {
+      "is_availe": 1,
+      "is_ident": 1
+    }
+  }
+}

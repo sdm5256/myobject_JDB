@@ -1,0 +1,12 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "success",
+    "returnUserMessage": "success"
+  },
+  "data": {
+    "status":"init",
+    "auth_id":1,
+    "auth_qrcode": "http://qiye.dev.jiedaibao.com/static/images/new_weixin_qr-f68fbb1a26.jpg"
+  }
+}

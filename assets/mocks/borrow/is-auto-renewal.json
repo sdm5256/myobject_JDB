@@ -1,0 +1,10 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+         "is_auto_renewal":1
+    }
+}

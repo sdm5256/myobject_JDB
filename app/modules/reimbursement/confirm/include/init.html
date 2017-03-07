@@ -1,0 +1,14 @@
+<div class="info-area m-pre">
+    <div class="side-img">
+        <img ng-src="{{pendingData.img}}" >
+    </div>
+    <div class="main-info">
+        <div class="stat-wrap">
+            <div class="stat">您正在发放报销款：共<span>{{pendingData.number}}</span>人，合计<span>{{pendingData.total/100 | amountFormater}}</span>元</div>
+            <button class="btn-return-modify" ng-click="returnModifyHandler()">返回修改</button>
+        </div>
+        <div class="desc first-desc">请打开借贷宝APP，扫码确认</div>
+        <div class="desc">二维码72小时内有效</div>
+    </div>
+</div>
+

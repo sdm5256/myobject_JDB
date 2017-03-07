@@ -1,0 +1,37 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "total": {
+            "should_amount": "5000.00",
+            "fund_amount": "1000.00",
+            "tax_amount": "200.00",
+            "actual_amount": "3800.00",
+            "should_bonus_amount": "5000.00",
+            "fund_bonus_amount": "1000.00",
+            "tax_bonus_amount": "200.00",
+            "actual_bonus_amount": "3800.00",
+            "total_should_amount": "5000.00",
+            "total_fund_amount": "1000.00",
+            "total_tax_amount": "200.00",
+            "total_actual_amount": "3800.00",
+            "number": 1
+        },
+        "list": [{
+            "name": "测试",
+            "phone": "15210925952",
+            "idcard": "123456789012345678",
+            "should_amount": "5000.00",
+            "fund_amount": "1000.00",
+            "tax_amount": "200.00",
+            "actual_amount": "3800.00",
+            "fix_should_bonus_amount": "1020.00",
+            "fix_tax_bonus_amount": "20.00",
+            "fix_actual_bonus_amount": "1000.00",
+            "actual_total_amount": "4800.00"
+        }]
+    }
+}

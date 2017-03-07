@@ -1,0 +1,160 @@
+<div id="get-cash">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span>
+                返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/overview">概览</a>>&nbsp; 提现</li>
+    </ol>
+    <div ng-show="!cashSuccess">
+        <table>
+            <tr>
+                <td class="title">户名</td>
+                <td>{{companyName}}</td>
+            </tr>
+            <tr>
+                <td class="title">银行账号</td>
+                <td>{{bankCard}}</td>
+            </tr>
+            <tr>
+                <td class="title">开户银行</td>
+                <td>{{bankName}}</td>
+            </tr>
+            <tr>
+                <td class="title">可提现余额</td>
+                <td>¥ {{trustBalance  | amountFormater }} &nbsp;<div class="glyphicon glyphicon-exclamation-sign blue" ng-mouseenter="display();" ng-mouseleave="display();" ng-show="remind"><div class="red" ng-show="showRemind" id="remind">当前应还款及进行中提现{{frozen | amountFormater}}元，该部分暂不能提现</div></div></td>
+            </tr>
+            <tr>
+                <td class="title">提现金额</td>
+                <td>
+                    <input type="text" ipt-formatter autocomplete="off" id="account" class="form-control" ng-class="{'has-error':getCashError || getCashIllegal1 || getCashIllegal2 }" placeholder="¥" ng-model="getCash" ng-keyup="cashCheck();" ng-blur="blurTips(submitError)" >
+                    <span class="red" ng-show="getCashError">不能超过可提现余额</span>
+                    <span class="red" ng-show="getCashIllegal1">金额只能输入数字和小数点</span>
+                    <span class="red" ng-show="getCashIllegal2">请输入正确的金额，小数点后最多输入2位</span>
+                    <span class="red" ng-show="getCashIllegal3">单笔提现不能低于10元</span>
+                </td>
+            </tr>
+        </table>
+        <p class="tip">非银行工作时间提现可能影响到账速度，建议您在工作日09：00~17：00提现</p>
+        <button id="queding" class="btn btn-disabled" ng-class="{'btn-primary':submitError}" ng-click="submit(submitError);">确定</button>
+    </div>
+    <div ng-show="cashSuccess">
+        <div class="step-content">
+            <div class="success-sign"></h2><span class="fui-check-circle"></span></div>
+            <h2 class="success-title">&nbsp;&nbsp;&nbsp;提现申请已提交！</h2>
+            <div class="success-content">银行处理中，具体到账时间以各银行实际处理时间为准。<br>如提现失败，提现金额将自动退回到您的借贷宝账户</div><br>
+            <p class="success-content" ng-if="!firstGetCash">返回到<a href="" ng-href="#/overview">概览</a></p>
+            <p ng-if="firstGetCash" class="success-content"><a ng-href="#/audit">立即完善</a>证件资料，保障账户安全。</p>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="messageModal.html">
+    <div ng-show="!showImg">
+        <div class="modal-header">
+            <i class="modal-close-icon" ng-click="modalClose();"></i>
+            <h3 class="modal-title">短信验证</h3>
+        </div>
+        <div class="modal-body">
+            <div>
+                <div class="row mb20">
+                    <label class="control-label col-xs-7">手机号：{{phone_num}}</label>
+                    <div class="col-xs-5 text-right">
+                        <button class="btn btn-default" type="button" ng-click="countDown();">{{count}}</button>
+                    </div>
+                </div>
+                <form class="form-horizontal" ng-submit="ok();">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="control-wrap">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="输入验证码" maxlength="6" ng-model="verification">
+                                    <span class="input-group-btn get-cash-group-btn">
+                                        <button class="btn btn-primary code-right" type="submit">确定</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-show="showImg" class="modal-body">
+        <div>为确保账户安全，请输入图片中的验证码：</div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="输入验证码" maxlength="6" ng-model="checkCtn">
+            <img class="btn" ng-src="{{img}}" alt="图片验证码" ng-show="showImg">
+        </div>
+        <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="imgCheck();">确定</button>
+        </span>      
+    </div>
+</script>
+
+<script type="text/ng-template" id="limitExport.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <p>您的企业尚有到期债务未偿还,</p>
+            <p>请您还款成功之后提现。</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="go();">知道了</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!-- 支付合规二期提现tip模板 -->
+
+<script type="text/ng-template" id="payLevelTwo.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <div ng-if="'depositOne' == objKey">
+                <p>您的企业证件资料尚未完善。为保障账户安全，</p>
+                <p>请务必在下次提现前补全信息且通过审核！</p>
+            </div>
+            <div ng-if = "'depositTwo' == objKey">
+                <p>您的企业证件资料尚未提交。为保障账户安全，</p>
+                <p>请立即完善信息，审核通过后可继续提现！</p>
+            </div>
+            <div ng-if = "'checkStatus' == objKey">
+                <p>您的企业证件资料正在审核中，暂时无法提现，</p>
+                <p>审核通过后即可提现！</p>
+            </div>
+            <div ng-if = "'failureStatus' == objKey">
+                <p>您的企业证件资料审核未通过，暂时无法提现，</p>
+                <p>请您修改并通过审核后提现！</p>
+            </div>
+            <div ng-if = "'idCardOverdue' == objKey">
+                <p>您的企业法定代表人身份证已过期，请您修改，</p>
+                <p>通过审核后可以提现！</p>
+            </div>
+            <div ng-if = "'licenseOverdue' == objKey">
+                <p>您的企业营业执照已过期，请您修改，</p>
+                <p>通过审核后可以提现！</p>
+            </div>
+            <div class=" text-center">
+                <!-- 用户首次提现 -->
+                <a ng-href="#/audit" ng-click="go();" class="btn-default-cash" ng-if="'depositOne' == objKey">完善资料</a>
+                <a href="javascript:;" ng-click="goGetCash();" class="btn-default-cash" ng-if="'depositOne' == objKey">继续提现</a>
+                <!-- 第二次提现企业资料未提交 -->
+                <a ng-href="#/audit" ng-click="go();" class="btn-default-cash" ng-if="'depositTwo' == objKey">完善资料</a>
+                <!-- 第二次提现企业资料审核中 -->
+                <a href="javascript:;" ng-click="go();" class="btn-default-cash" ng-if="'checkStatus' == objKey">确定</a>
+                <!-- 第二次提现企业资料未通过 -->
+                <a ng-href="#/audit" class="btn-default-cash" ng-click="go();" ng-if="'failureStatus' == objKey">修改资料</a>
+                <!-- 证件过期 -->
+                <a ng-href="#/audit" ng-click="go();" class="btn-default-cash" ng-if="'idCardOverdue' == objKey || 'licenseOverdue' == objKey">修改资料</a>
+            </div>
+        </div>
+    </div>
+</script>
+

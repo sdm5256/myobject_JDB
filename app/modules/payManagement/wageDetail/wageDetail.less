@@ -1,0 +1,120 @@
+#wageDetail {
+  .wage-detail-content {
+	background-color: #fff;
+    padding: 10px;
+  }
+  .excel-export {
+    position: absolute;
+    right: 40px;
+    top: 250px;
+    font-size: 12px;
+    color: #0f7df8;
+    cursor: pointer;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #0f7df8;
+    &::before{
+      display: inline-block;
+      content: "";
+      background: url("../../images/export.png") center center  no-repeat;
+      background-size: 100% auto;
+      width: 13px;
+      height: 11px;
+      margin-right: 5px;
+      position: relative;
+      top: 1px;
+    }
+  }
+
+  .short-info {
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  div.status-wrapper {
+	&.status-result {
+		height: 170px;
+		text-align: center;	
+		padding-top: 10px;
+		img.status-icon {
+			width: 60px;
+			height: 60px;
+		}
+		p.status-result-tips {
+			font-size: 18px;
+			font-weight: bold;
+			color: #4c4c4c;
+			margin: 15px 0 10px;
+		}
+	}
+	em {
+		color: #f5a622;
+		font-style: normal;
+		margin: 0 5px;
+	}
+  }
+
+  .alert-info {
+    border-style : dashed !important;
+    background   : #f2f2f2;
+    color        : #4d4d4d;
+	margin-top: 30px !important;
+	border-color: #b3b3b3;
+    .alert-title {
+      color       : #2f7edb;
+      font-weight : 700;
+      margin      : 0 0 15px;
+    }
+
+    .list {
+      list-style-type : decimal;
+      padding-left    : 20px;
+    }
+  }
+  .table > thead > tr > th {
+	vertical-align: middle;	
+  }
+
+ .download-labor-mod {
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #ecf0f5;
+	.download-wrapper {
+		height: 80px; 
+		border: 1px solid #d9d9d9;
+		background-color: #f2f2f2;
+		text-align: center;
+
+		.larboDload{
+			border-radius: 4px;
+			border: 1px solid #0d7bf8;
+			padding: 7px 10px;
+			padding-left: 30px;
+			position: relative;
+			margin-top: 21px;
+			display: inline-block;
+		}
+		.larboDload:before{
+			position: absolute;
+			top: 9px;
+			left: 11px;
+			z-index: 1;
+			content: '';
+			width: 13px;
+			height: 12px;
+			background: url(images/dldicon.png) no-repeat;
+		}
+	}
+ }
+
+}
+

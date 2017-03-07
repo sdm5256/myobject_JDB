@@ -1,0 +1,18 @@
+<div class="deal-details">
+	 <div id="details-content" class="details-content">
+	 	  <img ng-src="{{imgUrl}}" alt="">
+	 	  
+	 </div>
+	 <div class="details-btn" ng-show="detailsBtn">
+	 	<a ng-print print-element-id="details-content" >打印</a>
+	 	<a  href="" ng-click="download()">
+	 	        <span ng-show="!loadStatus">下载</span>
+	 			<i class="fa fa-spinner fa-spin" ng-show="loadStatus"></i>
+	 	</a>
+	 	<i class="pop" ng-show="loadStatus"></i>
+	 	<a ng-click="historyBack()">返回</a>
+	 </div>
+	 <div ng-show="loading" class="loading-box lding ng-hide">
+		  <i class="fa fa-spinner fa-spin fa-3x fa-fw ldimg"></i>
+	 </div>
+</div>

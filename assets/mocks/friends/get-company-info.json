@@ -1,0 +1,18 @@
+{
+  "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+  "data": {
+    "company_name": "测试就付款了圣诞节啊",
+    "ident": "1", 
+    "logo": "http://jdbserver.b0.upaiyun.com/images/29fd5ed28e3a3a33dc94420e2284858d.jpg",    
+    "company_id_no": "121345678", 
+    "address": "安立路30号仰山公园",       
+    "legal_name": "周宏伟",   
+    "overdue": 0,          
+    "relation": 1         
+  },
+  "originCode": 200
+}

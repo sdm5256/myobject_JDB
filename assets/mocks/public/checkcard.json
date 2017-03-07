@@ -1,0 +1,10 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "个人卡号暂不支持注册或修改",
+        "returnUserMessage": "个人卡号暂不支持注册或修改"
+    },
+    "data": {
+        "status": 0
+    }
+}

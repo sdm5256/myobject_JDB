@@ -1,0 +1,63 @@
+<div id="login">
+	<div class="lr-container">
+		<!-- 扫码登录 -->
+		<div class="lr-phone-img">
+			<img src="images/login-phone.png" alt="">
+		</div>
+		<div class="lr-code">
+			<h2 class="title">登录借贷宝企业版</h2>
+			<div id="loginImg" class="login-img">
+				<div ng-show="shadowStatus">
+					<span>二维码已失效</span>
+					<a href="javascript:;" ng-click="getLoginCode('p')">刷新</a>
+				</div>
+			</div>
+			<div class="lr-tips">
+				<span class="lr-tips-left">打开借贷宝手机版扫一扫登录</span>
+				<div class="lr-tips-right">
+					<span class="phone-ico">
+						<img src="images/phone-ico.png"></img>
+					</span>
+					<a href="javascript:;" ng-click="downloadTip()">下载借贷宝APP</a>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/ng-template" id="downloadTip.html">
+    <div class="modal-header">
+        <!-- <h3 class="modal-title">提示</h3> -->
+        <span class="modal-close" ng-click="tipClose();"></span>
+    </div>
+    <div class="modal-body">
+        <div class="tip-content">
+        	<div class="content-left">
+				<label for="">扫码下载</label>  
+	            <div class="download-code">
+					<img src="images/download_code.png" alt="">
+				</div>
+        	</div>
+        	<div class="content-right">
+				<label for="">下载到电脑</label>  
+	            <div class="ios-download">
+					<span>
+						<img src="images/ios-ico.png" alt="">
+					</span>
+					<div class="download-desc">
+						<p>下载iOS版</p>
+						<a href="https://itunes.apple.com/cn/app/id983151079" target="_blank">去App Store</a>
+					</div>
+				</div>
+				<div class="android-download">
+					<span>
+						<img src="images/android-ico.png" alt="">
+					</span>
+					<div class="download-desc">
+						<p>下载Android版</p>
+						<a  href="http://rmw2.jdburl.com/prod/officalApks/JDBClient-release.apk" target="_blank">立即下载</a>
+					</div>
+				</div>
+        	</div>
+        </div>
+    </div>
+</script>

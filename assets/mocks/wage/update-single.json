@@ -1,0 +1,36 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "id": "222221111",
+        "warn_ext": {
+            "name": {
+                "notice": 1,
+                "text": "姓名不正确"
+            },
+            "phone": {
+                "notice": 1,
+                "text": "1111手机号不正确"
+            },
+            "idcard": {
+                "notice": 1,
+                "text": "身份证不正确55555555555555555555555"
+            },
+            "should_amount": {
+                "notice": 1,
+                "text": "金额不正确"
+            },
+            "fund_amount": {
+                "notice": 1,
+                "text": "金额不正确"
+            },
+            "remark": {
+                "notice": 1,
+                "text": "备注不正确"
+            }
+        }
+    }
+}

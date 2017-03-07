@@ -1,0 +1,69 @@
+#scanAuth {
+	div.status-wrapper {
+		height: 170px;
+		padding-top: 5px;
+		img.qrcode {
+			width: 130px;
+			margin-top: 10px;
+			float: left;
+			margin-left: 20px;
+			color: red;
+		}
+		div.auth-detail {
+			width: 440px;
+			float: left;
+			font-size: 14px;
+			color: #4c4c4c;
+			padding-top: 35px;
+			padding-left: 22px;
+			p {
+				margin-bottom: 2px;
+				&.desc {
+					font-size: 16px;
+					margin-bottom: 20px;
+				}
+			}
+			em {
+				color: #f5a622;
+				font-style: normal;
+				margin: 0 5px;
+			}
+
+		}
+		div.auth-operate {
+			padding-top: 35px;
+			padding-left: 25px;
+			float: left;
+			button {
+				width: 100px;
+				height: 32px;
+				font-size: 12px !important;
+				cursor: pointer;
+				line-height: 29px;
+				border-radius: 2px;
+				&.back-modify {
+					color: #0f7df8;
+					border: 1px solid #0f7df8;
+					background-color: #fff;
+					vertical-align: middle;
+					margin-right: 25px;
+				}
+			}
+		}
+
+		&.status-result {
+			text-align: center;	
+			img.status-icon {
+				width: 60px;
+				height: 60px;
+			}
+			p.status-result-tips {
+				font-size: 18px;
+				font-weight: bold;
+				color: #4c4c4c;
+				margin: 15px 0 10px;
+			}
+		}
+	}
+}
+

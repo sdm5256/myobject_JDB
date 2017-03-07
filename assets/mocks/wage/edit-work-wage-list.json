@@ -1,0 +1,86 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "hasMore": 1,
+        "total": {
+            "number": 1,
+            "amount": "500.00",
+            "balance": "1000.00"
+        },
+        "list": [
+            {
+            "id": "11111",
+            "name": "测试",
+            "phone": "15210925952",
+            "idcard": "123456789012345678",
+            "should_amount": "5000.00",
+            "fund_amount": "1000.00",
+            "remark": "测试发工资+劳务报酬",
+            "warn_ext": {
+                "name": {
+                    "notice": 0,
+                    "text": "姓名不正确"
+                },
+                "phone": {
+                    "notice": 0,
+                    "text": "手机号不正确"
+                },
+                "idcard": {
+                    "notice": 1,
+                    "text": "身份证不正确55555555555555555555555"
+                },
+                "should_amount": {
+                    "notice": 1,
+                    "text": "金额不正确"
+                },
+                "fund_amount": {
+                    "notice": 1,
+                    "text": "金额不正确"
+                },
+                "remark": {
+                    "notice": 1,
+                    "text": "备注不正确"
+                }
+            }
+        },{
+            "id": "11111",
+            "name": "测试",
+            "phone": "15210925952",
+            "idcard": "123456789012345678",
+            "should_amount": "5000.00",
+            "fund_amount": "1000.00",
+            "remark": "测试发工资+劳务报酬",
+            "warn_ext": {
+                "name": {
+                    "notice": 0,
+                    "text": "姓名不正确"
+                },
+                "phone": {
+                    "notice": 0,
+                    "text": "手机号不正确"
+                },
+                "idcard": {
+                    "notice": 1,
+                    "text": "身份证不正确"
+                },
+                "should_amount": {
+                    "notice": 1,
+                    "text": "金额不正确"
+                },
+                "fund_amount": {
+                    "notice": 1,
+                    "text": "金额不正确"
+                },
+                "remark": {
+                    "notice": 1,
+                    "text": "备注不正确"
+                }
+            }
+        }
+    ]
+    }
+}

@@ -1,0 +1,24 @@
+{
+  "error": {
+    "returnCode": 19015,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "traceId": "03118060e6cfbe91fce8df56b522f6e9",
+  "data": {
+    "newCompany": {
+      "companyID": "667026912406069792",
+      "companyName": "测试笑笑笑笑",
+      "companyAbbrName": "测试",
+      "bankName": "中国民生银行总行",
+      "bankNo": "305100000013"
+    },
+    "companyList": [
+      {
+        "company_id": "667026912406069792",
+        "name": "测试笑笑笑笑",
+        "bindTime": 1479714771
+      }
+    ]
+  }
+}

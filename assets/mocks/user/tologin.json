@@ -1,0 +1,53 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "data": {
+    "user_id": "553015139375208774",
+    "user_type": 2,
+    "user_name": "京北科技",
+    "phone_num": "15910987706",
+    "avatar_url": "http://jdbserver.b0.upaiyun.com/images/t_34520418b6f02c446f77d5fd38d7cb05.png",
+    "thumbnail_url": "http://jdbserver.b0.upaiyun.com/images/t_34520418b6f02c446f77d5fd38d7cb05.png!percent25",
+    "level": "1",
+    "register_time": 1452531344,
+    "ext": {
+      "user_id": "553015139375208774",
+      "oper_user_id": "529050239597989956",
+      "company_type": "1",
+      "company_name": "北京京北科技有限公司",
+      "plan_company_name": "",
+      "company_id_type": "1",
+      "company_id_no": "1123456789123",
+      "company_address": "天安门",
+      "corporation": "江泽民",
+      "admin_user_id": "510760622322256547",
+      "admin_title": "总裁",
+      "company_status": {
+        "is_ident": 0
+      },
+      "oper_user_phone_num": "15910987706",
+      "oper_user_name": "高志伟",
+      "admin_user_phone_num": "13121729882",
+      "admin_user_name": "豆家敏"
+    },
+    "bankinfo": {
+      "company_bank_card": "6223003812120345",
+      "company_bank_name": "中国工商银行股份有限公司北京翠微路支行",
+      "lbnk_cd": "102",
+      "city_code": 100,
+      "prov_code": "01",
+      "lbnk_no": "102100008091",
+      "new_bank_card_no": "",
+      "new_lbnk_no": "",
+      "new_bank_name": "",
+      "new_bank_code": "",
+      "new_lbnk_cd": "",
+      "new_city_code": null,
+      "new_prov_code": null
+    },
+    "company_abbr_name": "京北科技"
+  }
+}

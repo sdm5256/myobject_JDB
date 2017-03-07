@@ -1,0 +1,48 @@
+<div class="table-area" ng-show="reimburseList.length">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>时间</th>
+            <th>报销总额</th>
+            <th>员工人数</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in reimburseList track by $index">
+            <td>{{item.date}}</td>
+            <td>&yen;{{item.totalAmount / 100 | amountFormater}}</td>
+            <td>{{item.totalNumber}}</td>
+            <td ng-class="{'green': item.status == '3','red': item.status == '4'}">{{item.statusText}}</td>
+            <td>
+                <a ng-href="#/reimbursement-main/pay/{{item.order}}" class="blue" ng-if="item.status == 0">编辑</a>
+                <a ng-href="#/reimbursement-main/confirm/{{item.order}}" class="blue" ng-if="item.status != 0">查看</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="" class="red" ng-if="item.status == 0 || item.status == 1 || item.status == 4 || item.status == 5" ng-click="delThisBatch(item, $index)">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="clearfix table-bottom" ng-show="reimburseList.length">
+        <uib-pagination class="table-pagination" ng-change="getTable(wagePageNo);"
+                        ng-disabled="reimbursePageDisabled"
+                        total-items="reimburseListTotal"
+                        items-per-page="pageSize" rotate="false"
+                        ng-model="wagePageNo" max-size="5"
+                        class="pagination-sm" boundary-links="true"
+                        previous-text="上一页"
+                        next-text="下一页"
+                        first-text="首页"
+                        last-text="尾页"
+        ></uib-pagination>
+        <div class="table-tip">
+            共：{{reimburseListTotal}}条记录
+        </div>
+    </div>
+</div>
+<div class="text-center" ng-if="!reimburseListLen">
+    <span class="big-font">暂无报销纪录</span>
+</div>
+<p class="line-bar" ng-show="reimburseListLen && !isReimbursementInvalid">
+    <a href="#/reimbursement-invalid">查看失效记录</a>
+</p>

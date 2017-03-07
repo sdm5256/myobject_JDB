@@ -1,0 +1,33 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "请求成功",
+    "returnUserMessage": "请求成功"
+  },
+  "traceId": "680079709949652998",
+  "data": {
+    "total": "1",
+    "list": [
+      {
+        "id": "6",
+        "uuid": "680070453770842121",
+        "company_id": "678331887593739636",
+        "name": "王玉四",
+        "id_no": "110101201001012459",
+        "mobilephone": "18401767004",
+        "staff_type": 1,
+        "dimission": "0",
+        "status": 7,
+        "create_time": "1482823031",
+        "update_time": "1482823202",
+        "is_salary": "0",
+        "salary": "0.00",
+        "jdb_id": "679783133244578635",
+        "is_process": "0",
+        "role": 0
+      }
+    ],
+    "totalFriend": "2",
+    "totalStaff": "6"
+  }
+}

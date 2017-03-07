@@ -1,0 +1,293 @@
+*{
+	margin: 0;
+	padding:0;
+}
+#financial-service {
+    font-family: "microsoft yahei";
+    position: relative;
+    .backTop {
+    	display: none;
+        position: fixed;
+        bottom: 100px;
+        right: 60px;
+        z-index: 100;
+        color: #d0d0d0;
+        font-size: 12px;
+        span{
+        	display: block;
+        	height: 30px;
+        	line-height: 30px;
+        }
+    }
+    .backTop:before {
+        content: '';
+        position: absolute;
+        top: 12px;
+        left: -15px;
+        width: 10px;
+        height: 6px;
+        background: url('images/uptop.png') no-repeat;
+    }
+    .backTop:hover{
+    	cursor: pointer;
+    }
+    .banner-wrapper {
+        position: relative;
+        background: #2d2d2d;
+        height: 456px;
+        width:100%;
+        .link-img {
+            display: block;
+            font-size: 0;
+            line-height: 0;
+            background-color: #2d2d2d;
+            position: relative;
+            overflow: hidden;
+            zoom: 1;
+            margin: 0 auto;
+            img {
+                width: 1280px;
+                height: 456px;                
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .link-wz {
+            position: absolute;
+            top: 160px;
+            left: 36%;
+            //width:412px;
+            img {
+                width: 100%;
+            }
+        }
+        .fs-service {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            >div {
+                color: #fff;
+                width: 244px;
+                line-height: 20px;
+                text-align: left;
+                span{
+                	display: block;
+                	width: 244px;
+                	text-align: center;
+                	//margin-left:-37px; 
+
+                }
+                span:hover{
+                	cursor: pointer;
+                }
+                >div {
+                    display: none;
+                    border-radius: 5px;
+                    background: rgba(255, 255, 255, .80);
+                    color: #484b4d;
+                    padding: 0px 10px;
+                    padding-bottom: 3px;
+                    margin-top: 5px;
+                    p:nth-child(2){
+                    	padding-bottom: 11px;
+                    }
+
+                }
+                .title {
+                	width: 100%;
+                	padding: 5px 0px;
+                	padding-left: 18px;
+                    margin: 0px 0px 0px -19px;
+                    text-align: center;
+                    line-height: 25px;
+                }
+                .fs-content{
+                	width: 100%;
+                	text-align: center;
+                }
+            }
+            .fs-service1 {
+                position: absolute;
+                top: 150px;
+                left: 20%;
+                
+            }
+            .fs-service2 {
+                position: absolute;
+                top: 305px;
+                left: 23%;
+               
+            }
+            .fs-service3 {
+                position: absolute;
+                top: 340px;
+                left: 43%;
+                
+            }
+            .fs-service4 {
+                position: absolute;
+                top: 264px;
+                right: 20%;
+               
+            }
+            .fs-service5 {
+                position: absolute;
+                top: 140px;
+                right: 15%;
+                
+            }
+            .fs-service1:before,
+            .fs-service2:before,
+            .fs-service3:before,
+            .fs-service4:before,
+            .fs-service5:before {
+                content: '';
+                position: absolute;
+                top: 0px;
+                left: 62px;
+                width: 38px;
+                height: 38px;
+                background: url('images/banner-add.png') no-repeat;
+                background-size: 20px 20px;
+            }
+            .fs-service1:hover,
+            .fs-service2:hover,
+            .fs-service3:hover,
+            .fs-service4:hover,
+            .fs-service5:hover {
+                >div {
+                    display: block;
+                }
+            }
+            .fs-service1:hover:before,
+            .fs-service2:hover:before,
+            .fs-service3:hover:before,
+            .fs-service4:hover:before,
+            .fs-service5:hover:before {
+                background: url('images/banner-ruduce.png') no-repeat;
+                background-size: 20px 20px;
+            }
+        }
+    }
+    .content {
+        .fs-nav {
+            height: 50px;
+            width: 100%;
+            .nav-fix {
+                position: fixed;
+                z-index: 10;
+                top: 0px;
+                left: 0px;
+            }
+            .nav-static {
+                height: 50px;
+                width: 100%;
+                text-align: center;
+                background: #fafafa;
+                border-bottom: 1px solid #d3d3d3;
+                a {
+                    margin-left: 56px;
+                    line-height: 48px;
+                    color: #5e5e5e;
+                }
+                a:hover {
+                    cursor: pointer
+                }
+                .fs-active {
+                    padding-bottom: 16px;
+                    border-bottom: 2px solid #1283fc;
+                }
+            }
+        }
+        .jd-capital,
+        .jz-securitiles,
+        .jt-management,
+        .jx-financial,
+        .ageas {
+            width: 100%;
+            height: 480px;
+            background: #fff;
+            text-align: center;
+            >div {
+                padding-top: 60px;
+                color: #2d2d2d;
+                font-size: 26px;
+            }
+            span {
+                color: #a1a1a1;
+                font-size: 15px;
+            }
+            ul {
+                width: 100%;
+                margin: 0 auto;
+                padding-top: 40px;
+                
+                li {
+                    display: inline-block;
+                    vertical-align: top;
+                    img{
+                    	height: 120px;
+                    }
+                    div {
+                        width: 460px;
+                        margin: 0px 0px 0px 30px;
+                        font-size: 14px;
+                        text-align: left;
+                        span {
+                           color: #808080;
+                           font-size: 14px;
+                           line-height: 26px;
+                        }
+                        a {
+                            float: right;
+                            padding: 5px 15px;
+                            margin: 35px 15px 0px 0px;
+                            color: #85ace7;
+                            font-size: 12px;
+                            border: 1px solid #85ace7;
+                            border-radius: 20px;
+                        }
+                        a:hover {
+                            color: #fff;
+                            cursor: pointer;
+                            background: #1283fc;
+                            border:none;
+                        }
+                    }
+                }
+                .jd-logo {
+                    background: #f5f5f5;
+                    margin-top: 5px;
+                }
+            }
+        }
+        .jz-securitiles,
+        .jx-financial {
+            //height: 550px;
+            background: #f0f0f0;
+            ul {
+                .jd-logo {
+                    background: #fff;
+                }
+            }
+        }
+        .fs-ftnav {
+            height: 50px;
+            text-align: center;
+            background: #3d3c42;
+            span {
+                line-height: 48px;
+                color: #cccccc;
+            }
+            a {
+                margin-left: 70px;
+                line-height: 48px;
+                color: #cccccc;
+            }
+            a:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

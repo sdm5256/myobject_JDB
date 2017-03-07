@@ -1,0 +1,101 @@
+<div id="pay-management">
+    <ol class="breadcrumb">
+        <li class="active">您所在的位置：工资管理</li>
+    </ol>
+    <div class="head-actions">
+		<div class="menu-wrapper">
+			<div ng-click="goToPay('/payFst');" class="pay-entry">
+				<img src="images/pay-direct.png"/>
+			</div>
+			<div ng-click="goToPay('/optimizeFst');" class="pay-entry" ng-show="menuPermissions.optimize">
+				<img src="images/pay-optimize.png"/>
+			</div>
+			<div ng-click="goToPay('/laborFst');" class="pay-entry" ng-show="menuPermissions.labor">
+				<img src="images/pay-labor.png"/>
+			</div>
+		</div>
+    </div>
+    <h2 class="short-title">发放记录</h2>
+    <div class="search-field">
+        <div class="search-group">
+            <label class="search-label">月份：</label>
+            <select class="form-control" ng-model="query.month" ng-change="getTable();" ng-disabled="wagePageDisabled">
+                <option value="{{month}}" ng-repeat="month in months track by $index">{{selectMonth(month)}}</option>
+            </select>
+        </div>
+        <div class="search-group">
+            <label class="search-label">状态：</label>
+            <label ng-repeat="st in status track by $index" class="btn" ng-class="{'btn-primary': query.status == $index}">
+                {{st}}
+                <input class="hidden" type="radio" name="status" ng-model="query.status" ng-change="getTable();" value="{{$index}}" ng-disabled="wagePageDisabled">
+            </label>
+        </div>
+    </div>
+	<div class="table-area" ng-show="wageList && wageList.length > 0">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>时间</th>
+				<th>类型</th>
+				<th>总额</th>
+				<th>人数</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in wageList track by $index">
+                <td>{{item.date}}</td>
+				<td>{{type2text[item.operation_type]}}</td>
+                <td>¥{{item.totalAmount | amountFormater }}</td>
+                <td>{{item.totalNumber}}</td>
+                <td>{{status2text[item.status]}}</td>
+                <td>
+					<a ng-click="goToDetail(item.order);">详情</a>
+				</td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-show="wageList.length" class="clearfix table-bottom">
+            <uib-pagination class="table-pagination" ng-change="getTable(wagePageNo);"
+                            ng-disabled="wagePageDisabled"
+                            total-items="wageListTotal"
+                            items-per-page="pageSize" rotate="false"
+                            ng-model="wagePageNo" max-size="5"
+                            class="pagination-sm" boundary-links="true"
+                            previous-text="上一页"
+                            next-text="下一页"
+                            first-text="首页"
+                            last-text="尾页"
+            ></uib-pagination>
+            <div class="table-tip">
+                笔数：{{stats.number}}笔&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+
+	<div class="invalid-records-wrapper">
+		<a ng-show="wageList.length" ng-href="#/invalidRecords">查看全部已失效记录</a>
+	</div>
+
+    <div class="text-center" ng-show="wageList && wageList.length == 0">
+        <span class="big-font">暂无工资纪录</span><br>
+        <p class="sml-tip-font">发工资后,将自动添加员工为借贷宝好友,这样即可向员工发布借款!</p>
+    </div>
+</div>
+
+<script type="text/ng-template" id="limitExport.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        <div class="step-content">  
+            <p>您的企业尚有到期债务未偿还,</p>
+            <p>请您还款成功之后发工资。</p>
+            <div class="col-xs-12 text-center">
+                <button class="btn btn-primary center" type="submit" ng-click="go();">知道了</button>
+            </div>
+        </div>
+    </div>
+</script>
+

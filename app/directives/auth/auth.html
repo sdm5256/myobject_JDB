@@ -1,0 +1,66 @@
+<div id="scanAuth" ng-init="init()">
+	<!-- 发起鉴权 -->
+	<div class="status-wrapper" ng-show="status=='init'">
+		<img class="qrcode" ng-src="{{extInfo.auth_qrcode}}"/>
+		<div class="auth-detail">
+			<p class="desc">您正在给<em>{{totalInfo.number}}</em>名员工发放<em>{{totalInfo.amount | amountFormater}}</em>元{{modType2config[modeType]['typeText']}}</p>
+			<p>请{{stepName}}<em>{{authInfo.name}}（{{authInfo.phone}}）</em>打开借贷宝扫码确认</p>
+			<p>二维码72小时内有效</p>
+		</div>
+		<div class="auth-operate">
+			<button class="back-modify" ng-click="backModify();">返回修改</button>	
+			<button class="btn btn-default" ng-click="cancelPay();">取消发放</button>	
+		</div>
+	</div>
+
+	<!-- 操作人已确认成功，待管理员确认 -->
+	<div class="status-wrapper" ng-show="status=='waiting'">
+		<img class="qrcode" src="images/operator-confirm.png"/>
+		<div class="auth-detail">
+			<p class="desc">您已成功提交<em>{{totalInfo.number}}</em>名员工的{{modType2config[modeType]['typeText']}}发放信息! </p>
+			<p>{{stepName}}72小时内确认后即可发放。   返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+		</div>
+		<div class="auth-operate">
+			<button class="btn btn-default" ng-click="cancelPay();">取消发放</button>	
+		</div>
+	</div>
+
+	<!-- 已取消状态 -->
+	<div class="status-wrapper status-result" ng-show="status=='cancel'">
+		<img class="status-icon" src="images/auth-fail.png"/>
+		<p class="status-result-tips">{{modType2config[modeType]['typeText']}}发放已取消</p>
+		<p>{{stepName}}取消&nbsp;&nbsp;&nbsp;&nbsp;返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+	</div>
+
+	<!-- 已超时状态 -->
+	<div class="status-wrapper status-result" ng-show="status=='outtime'">
+		<img class="status-icon" src="images/auth-fail.png"/>
+		<p class="status-result-tips">{{modType2config[modeType]['typeText']}}发放已取消</p>
+		<p>{{stepName}}72小时内未确认&nbsp;&nbsp;&nbsp;&nbsp;返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+	</div>
+
+	<!-- 成功状态, 流程结束 -->
+	<!-- 如果是操作员发起鉴权，需要先操作员、后管理员鉴权；如果是管理员发起鉴权，只需要管理员鉴权即可。 -->
+	<div class="status-wrapper status-result" ng-show="status=='success'">
+		<img class="status-icon" src="images/auth-success.png"/>
+		<p class="status-result-tips">{{modType2config[modeType]['typeText']}}发放受理成功</p>
+		<p>{{stepName}}已确认&nbsp;&nbsp;&nbsp;&nbsp;返回&nbsp;<a ng-href="#/pay-management">工资管理</a></p>
+	</div>
+
+</div>
+
+
+<script type="text/ng-template" id="CancelPay.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+		<p style="text-align: center">您确认要取消本笔{{typeText}}的发放吗？</p>
+        <span class="input-group-btn">
+            <button class="btn btn-disabled left" type="submit" ng-click="cancel();">取消</button>
+        </span>
+        <span class="input-group-btn">
+			<button class="btn btn-primary right" type="submit" ng-click="go();">确认</button>
+        </span>
+    </div>
+</script>

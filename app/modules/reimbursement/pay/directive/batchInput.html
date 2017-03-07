@@ -1,0 +1,49 @@
+<form class="seach-wrap">
+    <div class="input-money-wrap">
+        <div
+            class="input-bg"
+            ng-show="inputMoneyBg"
+            ng-mouseenter="bgEnterHandler('money')"
+            ng-mouseleave="bgLeaveHandler('money')"
+            >
+            <a ng-show="btnMoney" href="javascript:;" class="btn-ok" ng-click="okHandler('money')"></a>
+            <a ng-show="btnMoney" href="javascript:;" class="btn-cancel" ng-click="cancelHandler('money')"></a>
+        </div>
+        <div class="money-content">
+            <span class="m-tips">
+                <div class="tips-container"  ng-show="isShowMoneyTip">单笔金额不能超过5万</div>
+            </span>
+            <label>批量输入金额：</label>
+            <input
+            class="input-money"
+            type="text"
+            ng-model="inputMoney"
+            ng-focus="inputFoucsHandler('money')"
+            ng-blur="inputBlurHandler('money')"
+            ng-change="inputChangeHandler('money')"
+            >
+        </div>
+    </div>
+    <div class="input-remark-wrap">
+        <div
+            class="input-bg remark-bg"
+            ng-show="inputRemarkBg"
+            ng-mouseenter="bgEnterHandler('remark')"
+            ng-mouseleave="bgLeaveHandler('remark')"
+            >
+            <a ng-show="btnRemark" href="javascript:;" class="btn-ok" ng-click="okHandler('remark')"></a>
+            <a ng-show="btnRemark" href="javascript:;" class="btn-cancel" ng-click="cancelHandler('remark')"></a>
+        </div>
+        <div class="input-content">
+            <label>批量备注：</label>
+            <input
+            class="input-remark"
+            type="text"
+            ng-model="inputRemark"
+            ng-focus="inputFoucsHandler('remark')"
+            ng-blur="inputBlurHandler('remark')"
+            ng-change="inputChangeHandler('remark')"
+            >
+        </div>
+    </div>
+</form>

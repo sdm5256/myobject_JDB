@@ -1,0 +1,236 @@
+<div id="how2-recharge">
+    <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/overview">概况</a>>&nbsp; 充值</li>
+    </ol>
+    <div class="titleTap">
+        <ul class="clearfix">
+            <li ng-show="!isShowTwoTabs"><a ng-class="{'curentWay': tabObj.online}" ng-click="tabSwitch( 'online' )">在线充值</a></li>
+            <li><a ng-class="{'curentWay': tabObj.netBank}" ng-click="tabSwitch( 'netBank' )">网银转账</a></li>
+            <li><a ng-class="{'curentWay': tabObj.bankHk}" ng-click="tabSwitch( 'bankHk' )">银行汇款</a></li>
+        </ul>
+    </div>
+    <!--在线充值-->
+    <div class="online-cash" ng-show="!isShowTwoTabs && tabObj.online">
+        <table>
+            <tr>
+                <td class="title">户名</td>
+                <td>{{initData.ext.company_name}}</td>
+            </tr>
+            <tr>
+                <td class="title">银行账号</td>
+                <td>{{initData.bankinfo.new_bank_card_no}}</td>
+            </tr>
+            <tr>
+                <td class="title">开户银行</td>
+                <td>{{initData.bankinfo.new_bank_name}}</td>
+            </tr>
+            <tr ng-show="getNewVal(initData.bankinfo.new_bank_abbr, initData.bankinfo.bank_abbr) == 'CMBC'" class="customCode">
+                <td class="title">民生银行客户号码<i-tips tip="登录网银或致电银行获取"></i-tips></td>
+                <td>
+                    <input class="form-control" maxlength="10" ng-class="{'error': errorCodeCustom}" type="text" ng-model="initData.bankinfo.payerCustNo" ng-blur="checkCustomCod()">
+                    <span class="error" ng-show="errorCodeCustom">请输入正确的银行客户号码</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="title">充值金额</td>
+                <td>
+                    <form name="chargeForm" id="rechargeForm" action="/charge/create" method="post" target="_blank">
+                        <input name="chargeAmount" type="text" id="account" class="form-control" autocomplete="off" ng-class="{'error': checkRechargeStatusOne || checkRechargeStatusTwo}" placeholder="¥" ipt-formatter ng-model="rechargeCash" ng-change="cashCheck();" ng-blur="checkRecharge()">
+                        <input type="hidden" name="token" value="{{token}}" />
+                        <input type="hidden" name="companyID" value="{{companyID}}" />
+                        <div class="red" ng-show="checkRechargeStatusOne">充值金额必须大于0元，小于1亿元；最多输入两位小数。</div>
+                        <div class="red" ng-show="checkRechargeStatusTwo">金额只能输入数字和小数点</div>
+                        <input name="bankNo" class="hidden" type="text" ng-value="getNewVal(initData.bankinfo.new_bank_abbr, initData.bankinfo.bank_abbr)">
+                        <input name="payerCustNo" class="hidden" type="text" ng-model="initData.bankinfo.payerCustNo" required>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <p class="tips">*点击确定后, 请在银行网银页面完成充值。</p>
+        <button id="queding" class="btn btn-disabled" ng-class="{'btn-primary':rechargeError}" ng-show="getNewVal(initData.bankinfo.new_bank_abbr, initData.bankinfo.bank_abbr) !== 'CMBC'" ng-click="submitRecharge(true && !chargeForm.chargeAmount.$invalid);">确定</button>
+        <button id="queding" class="btn btn-disabled" ng-class="{'btn-primary':rechargeError && initData.bankinfo.payerCustNo}" ng-show="getNewVal(initData.bankinfo.new_bank_abbr, initData.bankinfo.bank_abbr) == 'CMBC'" ng-click="submitRecharge(initData.bankinfo.payerCustNo && !chargeForm.chargeAmount.$invalid);">确定</button>
+        <br>
+        <br>
+        <br>
+        <p class="important-tips-wrap">
+            <img src="images/ia.png">
+            <span class="import-text">重要提示：</span>
+            <br>1. 建议您使用IE10以上浏览器。
+            <br>2. 银行客户号码可登录网银或致电银行获取。
+            <br>3. 请确保充值金额未超过网银转账上线且您已安装银行网银控件，并插入网银操作员网银盾。
+        </p>
+    </div>
+
+    <!--网银转账-->
+    <div class="net-bank" ng-show="tabObj.netBank">
+        <div class="tab-tip">登录企业网银，按如下信息填写，将充值款转到借贷宝企业版充值专用账户。</div>
+        <div class="net-bank-table">
+            <table class="net-table">
+                <tr>
+                    <td rowspan="3" class="text-center">付款人</td>
+                    <td class="text-right">户名</td>
+                    <td class="font-bold">{{initData.ext.company_name}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">银行账号</td>
+                    <td class="font-bold">
+                        <span ng-if="!isIdent">{{initData.bankinfo.new_bank_card_no}}</span>
+                        <span ng-if="isIdent">XXXX XXXX XXXX XXXX</span> <!--已认证,显示默认文案-->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">开户银行</td>
+                    <td class="font-bold">
+                        <span ng-if="!isIdent">{{initData.bankinfo.new_bank_name}}</span>
+                        <span ng-if="isIdent">XXXX银行XXX支行</span> <!--已认证,显示默认文案-->
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="3" class="text-center">收款人</td>
+                    <td class="text-right">户名</td>
+                    <td class="font-bold">鹰皇金佰仕网络技术有限公司客户备付金</td>
+                </tr>
+                <tr>
+                    <td class="text-right">银行账号</td>
+                    <td class="font-bold">{{separateNumPer4Letters('35030188000414273')}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">开户银行</td>
+                    <td class="font-bold">中国光大银行股份有限公司北京分行海淀支行</td>
+                </tr>
+                <tr>
+                    <td>用途/备注/附言/摘要栏（如有）</td>
+                    <td colspan="2" class="font-bold">全部填写：{{initData.bankinfo.security_code}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="table-bot-tip">*鹰皇金佰仕是人民银行批准的第三方支付机构，具有网络支付业务资质，为借贷宝及用户提供支付服务，请您放心转账。</div>
+        <br>
+        <br>
+        <p class="important-tips-wrap">
+            <img src="images/ia.png">
+            <span class="import-text">重要提示：</span>
+            <br>1. 建议您使用IE10以上浏览器。
+            <br>2. 银行客户号码可登录网银或致电银行获取。
+            <br>3. 请确保您已安装银行网银控件，并插入网银操作员网银盾。
+            <br>4. 非工作时间部分银行不处理对公业务，充值款最多需要1-3个工作日到账，建议您工作日9:00~17:00期间充值。
+        </p>
+    </div>
+
+    <!--银行汇款-->
+    <div class="bankRemit" ng-show="tabObj.bankHk">
+        <div class="step3-title">
+            请按照如下模版填写汇款单：
+        </div>
+        <div class="step3-content">
+            <h1>XX银行汇款单</h1>
+            <p>时间:&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日</p>
+            <table>
+                <tr>
+                    <td rowspan="3">付<br>款<br>人</td>
+                    <td>名&#12288;&#12288;&#12288;称</td>
+                    <td class="text-left">
+                        <div class="instruct1">{{initData.ext.company_name}}
+                            <div>
+                                <img src="images/instruct1.png" alt="">
+                            </div>
+                        </div>
+                    </td>
+                    <td rowspan="3">收<br>款<br>人</td>
+                    <td>名&#12288;&#12288;&#12288;称</td>
+                    <td class="text-left recive-name"><span>鹰皇金佰仕网络</span>
+                        <div class="instruction2">技术
+                            <div>
+                                <img src="images/instruct2.png" alt="">
+                            </div>
+                        </div><span>有限公司</span>
+                        <div class="instruction3">客户备付金
+                            <div>
+                                <img src="images/instruct3.png" alt="">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td >账&#12288;&#12288;&#12288;号</td>
+                    <td class="text-left">
+                        <span ng-if="!isIdent">{{initData.bankinfo.new_bank_card_no}}</span>
+                        <span ng-if="isIdent">XXXX&nbsp;&nbsp;XXXX&nbsp;&nbsp;XXXX&nbsp;&nbsp;XXXX</span> <!--已认证,显示默认文案-->
+                    </td>
+                    <td >账&#12288;&#12288;&#12288;号</td>
+                    <td class="text-left">3503&nbsp;&nbsp;01880&nbsp;&nbsp;0041&nbsp;&nbsp;4273</td>
+                </tr>
+                <tr>
+                    <td >开户行名称</td>
+                    <td class="text-left">
+                        <span ng-if="!isIdent">{{initData.bankinfo.new_bank_name}}</span>
+                        <span ng-if="isIdent">XXXX银行XXX支行</span> <!--已认证,显示默认文案-->
+                    </td>
+                    <td rowspan="">开户行名称</td>
+                    <td class="text-left">中国光大银行股份有限公司北京分行海淀支行</td>
+                </tr>
+                <tr>
+                    <td colspan="2" >汇款金额 </td>
+                    <td colspan="3" class="text-left rmb">人民币
+                        <br>&nbsp;(大写)</td>
+                    <td class="text-left mony">
+                        <table>
+                            <tr>
+                                <td><a>&#12288;</a></td>
+                                <td> <a>亿</a> </td>
+                                <td><a>千</a> </td>
+                                <td><a>百</a></td>
+                                <td><a>十</a></td>
+                                <td><a>万</a></td>
+                                <td><a>千</a></td>
+                                <td><a>百</a></td>
+                                <td><a>十</a></td>
+                                <td><a>元</a></td>
+                                <td> <a>角</a></td>
+                                <td><a>分</a> </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">汇款金额</td>
+                    <td colspan="4" class="text-left instruct4">
+                        <div class="">
+                            <p>用途：{{initData.bankinfo.security_code}}</p>
+                            <p>备注：{{initData.bankinfo.security_code}}</p>
+                            <p>附言：{{initData.bankinfo.security_code}}</p>
+                            <p>摘要：{{initData.bankinfo.security_code}}</p>
+                            <div class="img-instrct4">
+                                <img src="images/instruct4.png" alt="">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p class="important-tips-wrap">
+            <img src="images/ia.png">
+            <span class="import-text">重要提示：</span>
+            <br>非工作时间部分银行不处理对公业务，充值款最多需要1-3个工作日到账，建议您工作日9:00~17:00期间充值。
+        </p>
+    </div>
+    <div class="pande"><span>联系我们：<i class="phone"></i>400-100-6699</span><span> 客服邮箱：<i class="email"></i>chongzhi@jiedaibao.com</span></div>
+</div>
+<script type="text/ng-template" id="makeSureModal.html">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">充值提示</h3>
+    </div>
+    <div class="modal-body">
+        <span id="text">完成充值后，请点击确定按钮，刷新页面状态。</span>
+        <div>
+            <button class="btn btn-primary left" ng-click="cancel();">取消</button>
+            <button class="btn btn-primary right" ng-click="do();">确定</button>
+        </div>
+    </div>
+</script>

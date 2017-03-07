@@ -1,0 +1,905 @@
+<div id="audit" ng-init="init()" >
+    <div class="audit-wrap">
+        <ol class="breadcrumb">
+            <li class="active"><i class="fa fa-caret-left" aria-hidden="true"> &nbsp;<a  href="#/info">上一级</a></i> | 您所在的位置：<a href="#/info">企业资料</a>>&nbsp; 证件审核</li>
+        </ol>
+        <h1 class="audit-title " ng-class="{'mb50':certificate_status == 1}">证件审核</h1>
+        <div class="content" ng-class="{'paddingauto':certificate_status >= 4 || certificate_status == 1,'pr30':certificate_status == 0}">
+            <div class="audit-nav" ng-show="showstatus || certificate_status == 1">
+                <!--<h3>企业证件</h3>-->
+                <ul class="float-left">
+                    <li ng-class="{active: act == 1}" ng-click="goTo('operating',1);">营业执照</li>
+                    <li ng-class="{active: act == 2}" ng-click="goTo('legal',2);">法定代表人</li>
+                    <li ng-show="!aiostaus" ng-class="{active: act == 3}" ng-click="goTo('tax',3);">税务登记证</li>
+                    <li ng-show="!aiostaus" ng-class="{active: act == 4}" ng-click="goTo('organizational',4);">组织机构代码证</li>
+                    <li ng-class="{active: act == 5}" ng-click="goTo('bank',5);">开户许可证</li>
+                    <li ng-show="stfstaus && certificate_status == '0' || certificate_status == 2" ng-class="{active: act == 6}" ng-click="goTo('maninfo',6);">其他信息</li>
+                </ul>
+            </div>
+            <div class="card-list md" ng-class="{'fr':showstatus || certificate_status == 1,'md':!showstatus}">
+                <div class="admin-operating">
+                    <a class="btn btn-default bj ml30" ng-show="certificate_status >= 4 && !hidebtn" ng-click="operate(3)">取消</a>
+                    <a class="btn btn-primary bj" ng-show="certificate_status >= 4 && !hidebtn && !loadStatus" ng-click="operate(2)">保存</a>
+                    <a class="btn btn-primary bj" ng-show="certificate_status >= 4 && !hidebtn && loadStatus" ><i ng-show="loadStatus" class="fa fa-spinner fa-spin" ></i></a>
+                    <a class="btn btn-primary bj" ng-show="(certificate_status >= 4&&certificate_status != 6)&& hidebtn" ng-click="operate(1)">编辑</a>
+
+                </div>
+                <div id="operating" class="operating" ng-show="operating">
+                    <h3 class="title">营业执照</h3>
+                    <form class="from-operating" name="operatingForm" >
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12" ng-show="operating.operating_img&&operating||operating.operating_img_bak&&operating||operating.operating_img==''&&operating">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            营业执照照片:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <span class="nigaiwei col-xs-2" ng-show="operating.operating_img_bak && certificate_status == 5 && saveStatus">拟改为</span>
+                                                <div class="images-area col-xs-8" ng-class="{'pl15':operating.operating_img_bak}">
+                                                    <div class="image"  >
+                                                        <img ng-show="!operating.operating_img "  ngf-select="upload($file, 'operating','operating_img')" ng-model="file1" name="file" ngf-accept="'image/jpeg, image/png'" src="images/addimg.png"/>
+                                                        <img ng-show="!!operating.operating_img && certificate_status < 5" ng-click="openBigImg(operating.operating_img)" ng-src="{{operating.operating_img}}"/>
+                                                        <img ng-show="operating.operating_img && !operating.operating_img_bak&& certificate_status >= 5" ng-click="openBigImg(operating.operating_img_bak)" ng-src="{{operating.operating_img }}"/>
+                                                        <img ng-show="operating.operating_img_bak && certificate_status >= 5" ng-click="openBigImg(operating.operating_img_bak)" ng-src="{{operating.operating_img_bak }}"/>
+                                                    </div>
+                                                    <input type="text" class="hidden" ng-show="certificate_status < 5" name="operating_img" ng-model="operating.operating_img" ng-required="requiredStatus">
+                                                    <span class="nigaiwei col-xs-2 cur" ng-show="!saveStatus && (operating.operating_img_bak || operating.operating_img)" ngf-select="upload($file, 'operating','operating_img')" ng-model="file1" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <p class="res-tip col-xs-12" ng-show=" operatingForm.operating_img.$invalid && submited ">请上传营业执照照片</p>
+                                                <p class="res-tip col-xs-12" ng-show="operating.operating_img_status == 3 ||operating.operating_img_status== 8 || operating.operating_img_status == 6">审核不通过，原因:{{operating.operating_img_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('operating')">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            证件类型:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="check-type" ng-show="!saveStatus">
+                                                <span class="ico" ng-click="allInOne()" ng-class ="{'active':!aiostaus}" ng-show="!changeHideStatus"></span>
+                                                <span class="type" >普通营业执照</span>
+                                                <span class="ico" ng-click="allInOne()" ng-class ="{'active':aiostaus}" ng-show="!changeHideStatus"></span>
+                                                <span class="type" style="padding-left:20px;" >统一社会信用代码</span>
+                                            </div>
+                                            <div class="check-type" ng-show="saveStatus && operating.operating_info_status<5">
+                                                <span class="type "  ng-show="operating.company_id_type == 1">普通营业执照</span>
+                                                <span class="type pl20"  ng-show="operating.company_id_type == 2">统一社会信用代码</span>
+                                            </div>
+                                            <div class="check-type" ng-show="saveStatus && operating.operating_info_status >= 5">
+                                                <span class="nigaiwei2 col-xs-2" ng-show="operating.company_id_type_bak">拟改为</span>
+                                                <span class="type tal"  ng-show="operating.company_id_type_bak == 1">普通营业执照</span>
+                                                <span class="type pl20"  ng-show="operating.company_id_type_bak == 2">统一社会信用代码</span>
+                                                <span class="type tal"  ng-show="operating.company_id_type == 1 && !operating.company_id_type_bak">普通营业执照</span>
+                                                <span class="type pl20"  ng-show="operating.company_id_type == 2 && !operating.company_id_type_bak">统一社会信用代码</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="!aiostaus && com_no" >
+                                    <div class="form-group" ng-class="{'error':!saveStatus&&operatingForm.company_id_no1.$invalid && operatingForm.company_id_no1.$dirty || !saveStatus&&operatingForm.company_id_no1.$invalid && operatingForm.company_id_no1.$pristine || !saveStatus&&operatingForm.company_id_no1.$invalid && submited }">
+                                        <label class="trol-label col-xs-3" >
+                                            营业执照注册号:
+                                        </label>
+                                        <div class="col-xs-8" >
+                                            <span class="col-xs-2 nigaiwei2" ng-show="operating.company_id_no_bak && saveStatus">拟改为</span>
+                                            <div class="control-wrap " ng-show="!operating.company_id_no_bak">
+                                                <input class="form-contro"  ng-model="operating.company_id_no" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="company_id_no1" placeholder="请输入营业执照注册号" ng-model="operating.company_id_no" type="text" ng-show="!saveStatus" ng-pattern="/(^[a-zA-Z0-9]{13}$)|(^[a-zA-Z0-9]{15}$)/" maxlength="15" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="!saveStatus&&operatingForm.company_id_no1.$invalid && operatingForm.company_id_no1.$dirty||!saveStatus&&operatingForm.company_id_no1.$invalid && operatingForm.company_id_no1.$pristine || !saveStatus&&operatingForm.company_id_no1.$invalid && submited" >请输入正确的营业执照注册号</p>
+                                            </div>
+                                            <div class="control-wrap " ng-show="operating.company_id_no_bak">
+                                                <input class="form-contro"  ng-model="operating.company_id_no_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="company_id_no1_bak" placeholder="请输入营业执照注册号"  ng-model="operating.company_id_no_bak" type="text" ng-show="!saveStatus"  ng-pattern="/(^[a-zA-Z0-9]{13}$)|(^[a-zA-Z0-9]{15}$)/" maxlength="15"  ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="!saveStatus&&operatingForm.company_id_no1_bak.$invalid && operatingForm.company_id_no1_bak.$dirty|| !saveStatus&&operatingForm.company_id_no1_bak.$invalid && operatingForm.company_id_no1_bak.$pristine || !saveStatus&&operatingForm.company_id_no1_bak.$invalid && submited" >请输入正确的营业执照注册号</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="aiostaus && com_no" >
+                                    <div class="form-group" ng-class="{'error':!saveStatus&&operatingForm.company_id_no2.$invalid && operatingForm.company_id_no2.$dirty||!saveStatus&&operatingForm.company_id_no2.$invalid && operatingForm.company_id_no2.$pristine || !saveStatus&&operatingForm.company_id_no2.$invalid && submited }">
+
+                                        <label class="trol-label col-xs-3" >
+                                            统一社会信用代码:
+                                        </label>
+                                        <div class="col-xs-8" >
+                                            <span class="col-xs-2 nigaiwei2" ng-show="operating.company_id_no_bak && saveStatus">拟改为</span>
+                                            <div class="control-wrap" ng-show="!operating.company_id_no_bak">
+                                                <input class="form-contro"  ng-model="operating.company_id_no" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="company_id_no2"  placeholder="请输入统一社会信用代码"ng-model="operating.company_id_no" type="text" ng-show="!saveStatus" ng-pattern="/^(\w|-){18}$/" maxlength="18" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="operatingForm.company_id_no2.$invalid && operatingForm.company_id_no2.$dirty ||operatingForm.company_id_no2.$invalid && operatingForm.company_id_no2.$pristine|| operatingForm.company_id_no2.$invalid && submited" >请输入正确的统一社会信用代码</p>
+                                            </div>
+                                            <div class="control-wrap" ng-show="operating.company_id_no_bak">
+                                                <input class="form-contro"  ng-model="operating.company_id_no_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="company_id_no2_bak" placeholder="请输入统一社会信用代码" ng-model="operating.company_id_no_bak" type="text" ng-show="!saveStatus" ng-pattern="/^(\w|-){18}$/" maxlength="18"ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="operatingForm.company_id_no2_bak.$invalid && operatingForm.company_id_no2_bak.$dirty ||operatingForm.company_id_no2_bak.$invalid && operatingForm.company_id_no2_bak.$pristine || operatingForm.company_id_no2_bak.$invalid && submited" >请输入正确的统一社会信用代码</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('operating')">
+                                    <div class="form-group" ng-class="{'error':operatingForm.company_address.$invalid && operatingForm.company_address.$dirty || operatingForm.company_address.$invalid && submited || operatingForm.company_address_bak.$invalid && submited|| operatingForm.company_address_bak.$invalid && operatingForm.company_address_bak.$dirty,'ok':operatingForm.company_address.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            注册地址:
+                                        </label>
+                                        <div class="col-xs-8" ng-show="!operating.company_address_bak">
+                                            <div class="control-wrap ">
+                                                <span style="padding-left: 15px;" class="adress" ng-show="saveStatus" ng-class="{'resizeno': saveStatus}">{{operating.company_address}}</span>
+                                                <textarea class="special-ipt resizeno" name="company_address" placeholder="请输入注册地址"  ng-model="operating.company_address" minlength="5" maxlength="50"  ng-if="!saveStatus" ng-required="requiredStatus"></textarea>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="operatingForm.company_address.$invalid && operatingForm.company_address.$dirty || operatingForm.company_address.$invalid && submited ">请输入详细的注册地址</p>
+                                        </div>
+                                        <div class="col-xs-8" ng-show="operating.company_address_bak">
+                                            <span class="col-xs-2 nigaiwei2" ng-show="operating.company_address_bak&& saveStatus">拟改为</span>
+                                            <div class="control-wrap">
+                                                <span style="padding-left: 15px;" class="adress" ng-show="saveStatus" ng-class="{'resizeno': saveStatus}">{{operating.company_address_bak}}</span>
+
+                                                <textarea class="special-ipt" name="company_address_bak" placeholder="请输入注册地址"   ng-model="operating.company_address_bak" maxlength="50"  ng-show="!saveStatus" ng-required="requiredStatus"></textarea>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="operatingForm.company_address_bak.$invalid && operatingForm.company_address_bak.$dirty || operatingForm.company_address_bak.$invalid && submited ">请输入详细的注册地址</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('operating')">
+                                    <div class="form-group" ng-class="{'error':operatingForm.operating_effect_time.$invalid && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            有效期至:
+                                        </label>
+                                        <div class="col-xs-8" ng-show="!operating.operating_effect_time_bak">
+                                            <div class="control-wrap">
+                                                <input class="form-contro col-xs-6 w210 defalut-color"   type="text" ng-show="!saveStatus&& !operating1.timeStatus" readonly="saveStatus"/>
+                                                <input type="text" class="form-contro col-xs-6 w210" placeholder="请选择有效期"  name="operating_effect_time" ng-show="operating1.timeStatus" ng-disabled="saveStatus || !operating1.timeStatus" ng-click="operatingchecked();"
+                                                       ng-change="operatingdatechanged('operating')"  uib-datepicker-popup  ng-model="operating.operating_effect_time" is-open="operating.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus" />
+                                                <div class="check-type-single" ng-show="!saveStatus">
+                                                    <span class="ico" ng-class ="{'active':!operating1.timeStatus}" ng-click="operating1.click()"></span>
+                                                    <span class="type" >长期</span>
+                                                </div>
+                                                <div class="check-type-single" ng-show="saveStatus && operating.operating_effect_time ==1 || saveStatus && operating.operating_effect_time_bak ==1">
+                                                    <span class="ico" ng-class ="{'active':!operating1.timeStatus}" ng-show="operating1.timeStatus"ng-click="operating1.click()"></span>
+                                                    <span class="type pl20" >长期</span>
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="operatingForm.operating_effect_time.$invalid && submited">请选择有效期</p>
+                                            <p class="res-tip mt10 col-xs-12" ng-show="operating.operating_info_status == 3 ||operating.operating_info_status== 8 ">营审核不通过，原因:{{operating.operating_info_result}}</p>
+                                        </div>
+                                        <div class="col-xs-8" ng-show="operating.operating_effect_time_bak">
+
+                                            <div class="control-wrap">
+                                                <span class="col-xs-2 nigaiwei2" ng-show="operating.operating_effect_time_bak && saveStatus">拟改为</span>
+                                                <input class="form-contro col-xs-6 w210 defalut-color"  type="text" ng-show=" !saveStatus&& !operating1.timeStatus " readonly="saveStatus"/>
+                                                <input type="text" class="form-contro col-xs-6 w210"  placeholder="请选择有效期"  name="operating_effect_time_bak" ng-show="operating1.timeStatus" ng-disabled="saveStatus || !operating1.timeStatus" ng-click="operatingchecked();" ng-change="operatingdatechanged('operating')"  uib-datepicker-popup ng-model="operating.operating_effect_time_bak" is-open="operating.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus" />
+                                                <div class="check-type-single" ng-show="!saveStatus">
+                                                    <span class="ico" ng-class ="{'active':!operating1.timeStatus}" ng-click="operating1.click()"></span>
+                                                    <span class="type" >长期</span>
+
+                                                </div>
+                                                <div class="check-type-single" ng-show="saveStatus && !operating1.timeStatus">
+                                                    <span class="ico" ng-show="operating1.timeStatus"  ng-class ="{'active':!operating1.timeStatus}"  ng-click="operating1.click()"></span>
+                                                    <span class="type pl20" >长期</span>
+                                                </div>
+                                                <p class="res-tip col-xs-12" ng-show="operatingForm.operating_effect_time_bak.$invalid &&  submited">请选择有效期</p>
+                                                <p class="res-tip mt10 col-xs-12" ng-show="operating.operating_info_status == 3 ||operating.operating_info_status== 6 ">审核不通过，原因:{{operating.operating_info_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="legal" class="legal" ng-show="legal">
+                    <h3 class="title">法定代表人</h3>
+                    <form class="from-operating" name="legalForm">
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12" ng-show="legal.legal_img==''&&legal||legal.legal_img&&legal||legal.legal_img_bak&&legal||legal.legal_img_bak==''&&legal">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            法定代表人身份证照片:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <div class="images-area">
+                                                    <span class="nigaiwei col-xs-2" ng-show="legal.legal_img_bak && legal.legal_img_status >= 5  && saveStatus">拟改为</span>
+                                                    <div class="image" ng-show="!legal.legal_img_bak">
+                                                        <img ng-show="!legal.legal_img" ngf-select="upload($file, 'legal','legal_img')" ng-model="file2" name="file" ngf-accept="'image/jpeg, image/png'"src="images/addimg.png"/>
+                                                        <img ng-show="!!legal.legal_img" ng-click="openBigImg(legal.legal_img)" ng-src="{{legal.legal_img }}"/>
+                                                        <p class="image_tip">正面</p>
+                                                        <input type="text" class="hidden" ng-show="certificate_status < 5" name="legal_img" ng-model="legal.legal_img" ng-required="requiredStatus">
+                                                    </div>
+                                                    <div class="image" ng-show="legal.legal_img_bak &&(certificate_status >= 5 ) ">
+                                                        <img ng-show="!legal.legal_img_bak "src="images/addimg.png"/>
+                                                        <img ng-show="!!legal.legal_img_bak && certificate_status >= 5" ng-click="openBigImg(legal.legal_img_bak)" ng-src="{{legal.legal_img_bak }}"/>
+                                                        <p class="image_tip">正面</p>
+                                                        <input type="text" class="hidden" ng-show="certificate_status < 5" name="legal_img_bak" ng-model="legal.legal_img" ng-required="requiredStatus">
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="certificate_status == 5 && !saveStatus || certificate_status == 3 &&!!legal.legal_img ||  certificate_status == 4 && !saveStatus &&!!legal.legal_img ||certificate_status == 1 &&!!legal.legal_img || certificate_status == 0 && !!legal.legal_img|| certificate_status == 6 && !!legal.legal_img_bak" ngf-select="upload($file, 'legal','legal_img')" ng-model="file2" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+
+
+                                                </div>
+                                                <div class="images-area ml30">
+                                                    <span class="nigaiwei col-xs-2" ng-show="legal.legal_opposite_img_bak && legal.legal_img_status >= 5 && saveStatus">拟改为</span>
+                                                    <div class="image" ng-show="!legal.legal_opposite_img_bak">
+                                                        <img ng-show="!legal.legal_opposite_img" ngf-select="upload($file, 'legal','legal_opposite_img')" ng-model="file3" name="file" ngf-accept="'image/jpeg, image/png'"src="images/addimg.png"src="images/addimg.png"/>
+                                                        <img ng-show="!!legal.legal_opposite_img" ng-click="openBigImg(legal.legal_opposite_img)" ng-src="{{legal.legal_opposite_img}}"/>
+                                                        <p class="image_tip">反面</p>
+                                                        <input type="text" class="hidden" ng-show="certificate_status < 5" name="legal_opposite_img" ng-model="legal.legal_opposite_img" ng-required="requiredStatus">
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="certificate_status == 5 && !saveStatus || certificate_status == 3  && legal.legal_opposite_img||  certificate_status == 4 && !saveStatus  && legal.legal_opposite_img ||certificate_status == 1 && legal.legal_opposite_img || certificate_status == 0 && !!legal.legal_opposite_img || certificate_status == 6 && !!legal.legal_opposite_img_bak" ngf-select="upload($file, 'legal','legal_opposite_img')" ng-model="file3" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+
+                                                    <div class="image" ng-show="legal.legal_opposite_img_bak && certificate_status >= 5  ">
+                                                        <img ng-show="!legal.legal_opposite_img_bak"src="images/addimg.png"/>
+                                                        <img ng-show="legal.legal_opposite_img_bak && certificate_status >= 5" ng-click="openBigImg(legal.legal_opposite_img_bak)" ng-src="{{legal.legal_opposite_img_bak}}"/>
+                                                        <p class="image_tip">反面</p>
+                                                        <input type="text" class="hidden" ng-show="certificate_status < 5" name="legal_opposite_img_bak" ng-model="legal.legal_opposite_img_bak" ng-required="requiredStatus">
+
+                                                    </div>
+                                                    <!--<span class="nigaiwei" ng-if="certificate_status == 5 && !saveStatus && legal.legal_opposite_img_bak ||  certificate_status == 6 && !!legal.legal_opposite_img_bak" >修改</span>-->
+                                                </div>
+                                                <p class="res-tip col-xs-12" ng-show=" legalForm.legal_img_bak.$invalid && submited ||legalForm.legal_img.$invalid && submited  ">请上传法定代表人身份证照片</p>
+                                                <p class="res-tip col-xs-12" ng-show=" legalForm.legal_opposite_img_bak.$invalid && submited && legal.legal_opposite_img_bak ||legalForm.legal_opposite_img.$invalid && submited  ">请上传法定代表人身份证照片</p>
+                                                <p class="res-tip" ng-show="legal.legal_img_status ==3 || legal.legal_img_status == 6 ||legal.legal_img_status == 8">审核不通过，原因:{{legal.legal_img_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('legal')">
+                                    <div class="form-group" ng-class="{'error':legalForm.legal_name.$invalid && legalForm.legal_name.$dirty || legalForm.legal_name_bak.$invalid && legalForm.legal_name_bak.$dirty || legalForm.legal_name.$invalid && submited  || legalForm.legal_name_bak.$invalid && submited,'ok': legalForm.legal_name.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            姓名:
+                                        </label>
+
+                                        <div class="col-xs-8">
+                                            <span class="col-xs-2 nigaiwei2" ng-show="legal.legal_name_bak&&legal.legal_info_status >= 5  && saveStatus">拟改为</span>
+                                            <div class="control-wrap" ng-show="!legal.legal_name_bak">
+                                                <input class="form-contro" ng-model="legal.legal_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="legal_name" placeholder="请输入法定代表人姓名" ng-model="legal.legal_name" type="text" ng-show="!saveStatus" minlength="2" maxlength="20" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="legalForm.legal_name.$invalid && legalForm.legal_name.$dirty || legalForm.legal_name.$invalid && submited">请输入正确的姓名</p>
+                                            </div>
+                                            <div class="control-wrap" ng-show="legal.legal_name_bak">
+                                                <input class="form-contro"  ng-model="legal.legal_name_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="legal_name_bak" placeholder="请输入法定代表人姓名" ng-model="legal.legal_name_bak" type="text" ng-show="!saveStatus" maxlength="20" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="legalForm.legal_name_bak.$invalid && legalForm.legal_name_bak.$dirty || legalForm.legal_name_bak.$invalid && submited">请输入正确的姓名</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('legal')">
+                                    <div class="form-group" ng-class="{'error':legalForm.legal_id.$invalid && legalForm.legal_id.$dirty || legalForm.legal_id.$invalid && submited || legalForm.legal_id_bak.$invalid && submited
+                                    || legalForm.legal_id_bak.$invalid && legalForm.legal_id_bak.$dirty,'ok': legalForm.legal_id.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            身份证号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <span class="col-xs-2 nigaiwei2" ng-show="legal.legal_id_bak&&legal.legal_info_status >= 5   && saveStatus">拟改为</span>
+                                            <div class="control-wrap" ng-show="!legal.legal_id_bak">
+                                                <input class="form-contro" ng-model="legal.legal_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="legal_id" placeholder="请输入法定代表人身份证号" ng-model="legal.legal_id" type="text" ng-show="!saveStatus" minlength="15" maxlength="18" ng-required="requiredStatus"/>
+
+                                            </div>
+                                            <div class="control-wrap" ng-show="legal.legal_id_bak">
+                                                <input class="form-contro" ng-model="legal.legal_id_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="legal_id_bak" placeholder="请输入法定代表人身份证号"  ng-model="legal.legal_id_bak" type="text" ng-show="!saveStatus" minlength="15" maxlength="18" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="legalForm.legal_id.$invalid && legalForm.legal_id.$dirty || legalForm.legal_id.$invalid && submited ||
+                                             legalForm.legal_id_bak.$invalid && submited && legal.legal_id_bak || legal.legal_id_bak && legalForm.legal_id_bak.$invalid && legalForm.legal_id_bak.$dirty">请输入正确的身份证号码</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('legal')">
+                                    <div class="form-group" ng-class="{'error':legalForm.legal_effect_time.$error.required  && submited|| legalForm.legal_effect_time_bak.$error.required  && submited,'ok':legalForm.legal_effect_time.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            有效期至:
+                                        </label>
+                                        <div class="col-xs-8" ng-show="!legal.legal_effect_time_bak">
+                                            <div class="control-wrap">
+                                                <span class="col-xs-2 nigaiwei2" ng-show="legal.legal_effect_time_bak &&legal.legal_info_status >= 5  && saveStatus">拟改为</span>
+                                                <input class="form-contro col-xs-6 w210 defalut-color"  type="text" ng-show="saveStatus && certificate_status != 4 && !legal.legal_effect_time|| !legal1.timeStatus && !saveStatus" readonly="saveStatus"/>
+                                                <input type="text" class="form-contro col-xs-6 w210" placeholder="请选择有效期"  name="legal_effect_time" ng-show="legal1.timeStatus" ng-disabled="saveStatus || !legal1.timeStatus" ng-click="legalchecked();" ng-change="operatingdatechanged('legal')"  uib-datepicker-popup ng-model="legal.legal_effect_time" is-open="legal.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus" />
+                                                <div class="check-type-single" ng-show="!saveStatus ">
+                                                    <span class="ico" ng-class ="{'active':!legal1.timeStatus}" ng-click="legal1.click()"></span>
+                                                    <span class="type" >长期</span>
+
+                                                </div>
+                                                <div class="check-type-single" ng-show="saveStatus && legal.legal_effect_time == 1|| saveStatus && legal.legal_effect_time_bak == 1">
+                                                    <span class="ico" ng-class ="{'active':!legal1.timeStatus}" ng-show="legal1.timeStatus" ng-click="legal1.click()"></span>
+                                                    <span class="type pl15" >长期</span>
+
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="legalForm.legal_effect_time.$error.required  && submited">请选择有效期</p>
+                                            <p class="res-tip mt10 col-xs-12"  ng-show="legal.legal_info_status == 3 || legal.legal_info_status >= 6 ">审核不通过，原因:{{legal.legal_info_result}}</p>
+                                        </div>
+                                        <div class="col-xs-8" ng-show="legal.legal_effect_time_bak">
+                                            <div class="control-wrap">
+                                                <span class="col-xs-2 nigaiwei2" ng-show="legal.legal_effect_time_bak && saveStatus">拟改为</span>
+                                                <input class="form-contro col-xs-6 w210 defalut-color"  type="text" ng-show="saveStatus && legal.legal_info_status != 4 && !legal.legal_effect_time|| !legal1.timeStatus && !saveStatus" readonly="saveStatus"/>
+                                                <input type="text" class="form-contro col-xs-6 w210" placeholder="请选择有效期"  name="legal_effect_time_bak" ng-show="legal1.timeStatus" ng-disabled="saveStatus || !legal1.timeStatus" ng-click="legalchecked();" ng-change="operatingdatechanged('legal')"  uib-datepicker-popup ng-model="legal.legal_effect_time_bak" is-open="legal.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus"/>
+                                                <div class="check-type-single" ng-show="!saveStatus ">
+                                                    <span class="ico" ng-class ="{'active':!legal1.timeStatus}" ng-click="legal1.click()"></span>
+                                                    <span class="type" >长期</span>
+
+                                                </div>
+                                                <div class="check-type-single" ng-show="saveStatus  && !legal1.timeStatus">
+                                                    <span class="ico" ng-show="legal1.timeStatus" ng-class ="{'active':!legal1.timeStatus}" ng-click="legal1.click()"></span>
+                                                    <span class="type pl15" >长期</span>
+
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show=" legalForm.legal_effect_time_bak.$error.required  && submited ">请选择有效期</p>
+                                            <p class="res-tip mt10 col-xs-12"  ng-show="legal.legal_info_status ==3 || legal.legal_info_status >= 6 ">审核不通过，原因:{{legal.legal_info_result}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div id="tax" class="tax" ng-hide="aiostaus || !tax" >
+                    <h3 class="title">税务登记证</h3>
+                    <form class="from-operating" name="taxForm">
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12" ng-show="tax.tax_img&&tax || tax.tax_img_bak&&tax||tax.tax_img==''&&tax">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            税务登记证照片:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <span class="nigaiwei col-xs-2" ng-show="tax.tax_img_bak && tax.tax_img_status >= 5 && saveStatus">拟改为</span>
+                                                <div class="images-area" ng-show="!tax.tax_img_bak">
+                                                    <div class="image">
+                                                        <img ng-show="!tax.tax_img" ngf-select="upload($file, 'tax','tax_img')" ng-model="file4" name="file" ngf-accept="'image/jpeg, image/png'" src="images/addimg.png"/>
+                                                        <img ng-show="!!tax.tax_img " ng-click="openBigImg(tax.tax_img)"   ng-src="{{tax.tax_img}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show=" tax.tax_img_status==6 &&!!tax.tax_img||tax.tax_img_status==3 &&!!tax.tax_img ||  tax.tax_img_status == 4 && !saveStatus &&!!tax.tax_img||tax.tax_img_status == 1 &&!!tax.tax_img|| tax.tax_img_status == 0 &&!!tax.tax_img" ngf-select="upload($file, 'tax','tax_img')" ng-model="file4" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <div class="images-area" ng-show="tax.tax_img_bak">
+                                                    <div class="image">
+                                                        <img ng-show="!tax.tax_img_bak" src="images/addimg.png"/>
+                                                        <img ng-show="!!tax.tax_img_bak" ng-click="openBigImg(tax.tax_img_bak)"  ng-src="{{tax.tax_img_bak}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="tax.tax_img_status == 5 && !saveStatus || tax.tax_img_status == 6 && !!tax.tax_img_bak" ngf-select="upload($file, 'tax','tax_img')" ng-model="file4" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <input type="text" class="hidden" ng-show="certificate_status < 5" name="tax_img" ng-model="tax.tax_img" ng-required="requiredStatus">
+                                                <p class="res-tip col-xs-12" ng-show=" taxForm.tax_img.$invalid && submited ">请上传税务登记证照片</p>
+                                                <p class="res-tip" ng-show="tax.tax_img_status ==3 || tax.tax_img_status == 8 || tax.tax_img_status == 6">审核不通过，原因:{{tax.tax_img_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('tax')">
+                                    <div class="form-group" ng-class="{'error':taxForm.tax_id.$invalid  && taxForm.tax_id.$dirty || taxForm.tax_id_bak.$invalid  && submited|| taxForm.tax_id.$invalid  && submited|| taxForm.tax_id_bak.$invalid && taxForm.tax_id_bak.$dirty,'ok': taxForm.tax_id.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            税务登记证号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <span class="nigaiwei2 col-xs-2" ng-show="tax.tax_img_bak && tax.tax_info_status >= 5 && saveStatus">拟改为</span>
+                                            <div class="control-wrap " ng-show="!tax.tax_id_bak">
+                                                <input class="form-contro" ng-model="tax.tax_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="tax_id" placeholder="请输入税务登记证号" ng-model="tax.tax_id" type="text" ng-show="!saveStatus" ng-pattern="/[a-zA-z0-9\-]{15,18}/" maxlength="18" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show=" taxForm.tax_id.$invalid  && taxForm.tax_id.$dirty || taxForm.tax_id.$invalid  && submited">请输入正确的税务登记证号</p>
+                                                <p class="res-tip mt10" ng-show="tax.tax_info_status ==3 || tax.tax_info_status == 6 ">审核不通过，原因:{{tax.tax_info_result}}</p>
+                                            </div>
+                                            <div class="control-wrap " ng-show="tax.tax_id_bak">
+                                                <input class="form-contro" ng-model="tax.tax_id_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="tax_id_bak" placeholder="请输入税务登记证号"  ng-model="tax.tax_id_bak" type="text" ng-show="!saveStatus" ng-pattern="/[a-zA-z0-9\-]{15,18}/" maxlength="18" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="taxForm.tax_id_bak.$invalid && taxForm.tax_id_bak.$dirty || taxForm.tax_id_bak.$invalid  && submited">请输入正确的税务登记证号</p>
+                                                <p class="res-tip mt10" ng-show="tax.tax_info_status ==3 || tax.tax_info_status == 8 || tax.tax_info_status == 6">审核不通过，原因:{{tax.tax_info_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="organizational" class="organizational" ng-hide="aiostaus || !organizational">
+                    <h3 class="title">组织机构代码证</h3>
+                    <form class="from-operating" name="organizationalForm">
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12" ng-show="organizational.organizational_img&&organizational||organizational.organizational_img_bak&&organizational||organizational.organizational_img==''&&organizational">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            组织机构代码证照片:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <span class="nigaiwei col-xs-2" ng-show="organizational.organizational_img_bak && organizational.organizational_img_status >= 5 && saveStatus">拟改为</span>
+                                                <div class="images-area" ng-show="!organizational.organizational_img_bak ">
+                                                    <div class="image" >
+                                                        <img ng-show="!organizational.organizational_img " ngf-select="upload($file, 'organizational','organizational_img')" ng-model="file5" name="file" ngf-accept="'image/jpeg, image/png'" src="images/addimg.png"/>
+                                                        <img ng-show="!!organizational.organizational_img" ng-click="openBigImg(organizational.organizational_img)"  ng-src="{{organizational.organizational_img}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="organizational.organizational_img_status == 3 && organizational.organizational_img ||  organizational.organizational_img_status == 4 && !saveStatus && organizational.organizational_img||organizational.organizational_img_status == 1 && organizational.organizational_img || organizational.organizational_img_status == 0 && organizational.organizational_img"  ngf-select="upload($file, 'organizational','organizational_img')" ng-model="file5" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <div class="images-area" ng-show="organizational.organizational_img_bak && certificate_status >= 5">
+                                                    <div class="image" >
+                                                        <img ng-show="!organizational.organizational_img_bak " src="images/addimg.png"/>
+                                                        <img ng-show="!!organizational.organizational_img_bak " ng-click="openBigImg(organizational.organizational_img_bak)" ng-src="{{organizational.organizational_img_bak}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="organizational.organizational_img_status == 5 && !saveStatus && organizational.organizational_img_bak ||organizational.organizational_img_status == 6 && organizational.organizational_img_bak"  ngf-select="upload($file, 'organizational','organizational_img')" ng-model="file5" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <input type="text" class="hidden" ng-show="certificate_status < 5" name="organizational_img" ng-model="organizational.organizational_img" ng-required="requiredStatus">
+                                                <p class="res-tip col-xs-12" ng-show=" organizationalForm.organizational_img.$invalid && submited ">请上传组织机构代码证照片</p>
+                                                <p class="res-tip" ng-show="organizational.organizational_img_status == 3 || organizational.organizational_img_status == 8  || organizational.organizational_img_status == 6">审核不通过，原因:{{organizational.organizational_img_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('organizational')">
+                                    <div class="form-group" ng-class="{'error':organizationalForm.organizational_id.$invalid && organizationalForm.organizational_id.$dirty || submited&&organizationalForm.organizational_id.$invalid,'ok': organizationalForm.organizational_id.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            组织机构代码:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <span class="nigaiwei2 col-xs-2" ng-show="organizational.organizational_img_bak && organizational.organizational_info_status >= 5 && saveStatus">拟改为</span>
+                                            <div class="control-wrap" ng-show="!organizational.organizational_id_bak">
+                                                <input class="form-contro" ng-model="organizational.organizational_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="organizational_id" placeholder="请输入组织机构代码"  ng-model="organizational.organizational_id" type="text" ng-show="!saveStatus" ng-pattern="/^[A-Z0-9]{8}-[A-Z0-9]$/" maxlength="10" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show=" organizationalForm.organizational_id.$invalid && organizationalForm.organizational_id.$dirty || submited&&organizationalForm.organizational_id.$invalid">请输入正确的组织机构代码证号</p>
+                                                <p class="res-tip mt10" ng-show="organizational.organizational_info_status == 3 || organizational.organizational_info_status == 8">审核不通过，原因:{{organizational.organizational_info_result}}</p>
+                                            </div>
+                                            <div class="control-wrap" ng-show="organizational.organizational_id_bak">
+                                                <input class="form-contro" ng-model="organizational.organizational_id_bak" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="organizational_id_bak" placeholder="请输入组织机构代码" ng-model="organizational.organizational_id_bak" type="text" ng-show="!saveStatus" ng-pattern="/^[A-Z0-9]{8}-[A-Z0-9]$/" maxlength="10"  ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show=" organizationalForm.organizational_id_bak.$invalid && organizationalForm.organizational_id_bak.$dirty || submited&&organizationalForm.organizational_id_bak.$invalid">请输入正确的组织机构代码证号</p>
+                                                <p class="res-tip mt10" ng-show="organizational.organizational_info_status == 3 || organizational.organizational_info_status == 6 || organizational.organizational_info_status == 8">审核不通过，原因:{{organizational.organizational_info_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="bank" class="bank" ng-show="bank">
+                    <h3 class="title">开户许可证</h3>
+                    <form class="from-operating" name="bankForm">
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12" ng-show="bank.bank_img&&bank || bank.bank_img_bak&&bank || bank.bank_img==''&&bank ">
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            开户许可证照片:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <span class="nigaiwei col-xs-2" ng-show="bank.bank_img_bak && bank.bank_img_status >= 5 && saveStatus">拟改为</span>
+                                                <div class="images-area" ng-show="!bank.bank_img_bak">
+                                                    <div class="image">
+                                                        <img ng-show="!bank.bank_img && certificate_status < 5"  ngf-select="upload($file, 'bank','bank_img')" ng-model="file6" name="file" ngf-accept="'image/jpeg, image/png'"src="images/addimg.png"/>
+                                                        <img ng-show="!!bank.bank_img "  ng-click="openBigImg(bank.bank_img)"  ng-src="{{bank.bank_img}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="certificate_status == 5 && !saveStatus || certificate_status == 3 && bank.bank_img||  certificate_status == 4 && !saveStatus && bank.bank_img||certificate_status == 1 && bank.bank_img|| certificate_status == 0 && bank.bank_img" ngf-select="upload($file, 'bank','bank_img')" ng-model="file6" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <div class="images-area" ng-show="bank.bank_img_bak && certificate_status >= 5">
+                                                    <div class="image">
+                                                        <img ng-show="!bank.bank_img_bak && certificate_status >= 5" src="images/addimg.png"/>
+                                                        <img ng-show="!!bank.bank_img_bak && certificate_status >= 5"  ng-click="openBigImg(bank.bank_img_bak)"  ng-src="{{bank.bank_img_bak}}"/>
+                                                    </div>
+                                                    <span class="nigaiwei cur" ng-show="certificate_status == 5 && !saveStatus && !!bank.bank_img_bak ||certificate_status == 6 &&!!bank.bank_img_bak"  ngf-select="upload($file, 'bank','bank_img')" ng-model="file6" name="file" ngf-accept="'image/jpeg, image/png'">修改</span>
+                                                </div>
+                                                <input type="text" class="hidden" ng-show="certificate_status < 5" name="bank_img" ng-model="bank.bank_img" ng-required="requiredStatus">
+                                                <p class="res-tip col-xs-12" ng-show=" bankForm.bank_img.$invalid && submited ">请上传开户许可证照片</p>
+                                                <p class="res-tip" ng-show="bank.bank_img_status == 3 || bank.bank_img_status == 8 || bank.bank_img_status == 6">审核不通过，原因:{{bank.bank_img_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-hide="IsHide('bank')">
+                                    <div class="form-group" ng-class="{'error':bankForm.bank_id.$invalid && bankForm.bank_id.$pristine|| bankForm.bank_id.$invalid && bankForm.bank_id.$dirty|| bankForm.bank_id_bak.$invalid && bankForm.bank_id_bak.$dirty || submited && bankForm.bank_id_bak.$invalid || submited && bankForm.bank_id.$invalid|| bankForm.bank_id_bak.$invalid && bankForm.bank_id_bak.$pristine,'ok': bankForm.bank_id.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            开户许可证核准号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <span class="nigaiwei2 col-xs-2" ng-show="bank.bank_id_bak && bank.bank_info_status >= 5 && saveStatus">拟改为</span>
+                                            <div class="control-wrap" ng-show="!bank.bank_id_bak">
+                                                <input class="form-contro"   ng-model="bank.bank_id"  type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="bank_id" placeholder="请输入开户许可证核准号" ng-model="bank.bank_id" type="text" ng-show="!saveStatus" ng-pattern="/(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{14}/" maxlength="14" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="bankForm.bank_id.$invalid && bankForm.bank_id.$pristine|| bankForm.bank_id.$invalid && bankForm.bank_id.$dirty || submited && bankForm.bank_id.$invalid">请输入正确的开户许可证号</p>
+                                                <p class="res-tip mt10" ng-show="bank.bank_info_status == 3 || bank.bank_info_status == 8 || bank.bank_info_status == 6">审核不通过，原因:{{bank.bank_info_result}}</p>
+                                            </div>
+                                            <div class="control-wrap" ng-show="bank.bank_id_bak">
+                                                <input class="form-contro"  ng-model="bank.bank_id_bak"  type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="bank_id_bak" placeholder="请输入开户许可证核准号"  ng-model="bank.bank_id_bak" type="text" ng-show="!saveStatus" ng-pattern="/(?![0-9]+$)(?![A-Z]+$)[0-9A-Z]{14}/" maxlength="14" ng-required="requiredStatus"/>
+                                                <p class="res-tip col-xs-12" ng-show="bankForm.bank_id_bak.$invalid && bankForm.bank_id_bak.$pristine||bankForm.bank_id_bak.$invalid && bankForm.bank_id_bak.$dirty || submited && bankForm.bank_id_bak.$invalid">请输入正确的开户许可证号</p>
+                                                <p class="res-tip mt10" ng-show="bank.bank_info_status == 3 || bank.bank_info_status == 8|| bank.bank_info_status == 6">审核不通过，原因:{{bank.bank_info_result}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="maninfo" class="maninfo" ng-show="stfstaus && certificate_status == '0' || certificate_status == 1">
+                    <h3 class="title">其他信息</h3>
+                    <form class="from-operating" name="maninfoForm">
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12">
+                                    <p class="tac"><span>控股股东</span></p>
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            属性:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="check-type">
+                                                <span class="ico" ng-class ="{'active':!changestockholder.status}" ng-click="changestockholder.click()"></span>
+                                                <span class="type" >自然人</span>
+                                                <span class="ico" ng-class ="{'active':changestockholder.status}" ng-click="changestockholder.click()"></span>
+                                                <span class="type" >法人</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="!changestockholder.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.stockholder_name.$invalid && maninfoForm.stockholder_name.$dirty || maninfoForm.stockholder_name.$invalid && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            姓名:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro" ng-model="memberInfo.stockholder_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入姓名" name="stockholder_name"  ng-model="memberInfo.stockholder_name" type="text" ng-show="!saveStatus" maxlength="20" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.stockholder_name.$invalid && maninfoForm.stockholder_name.$dirty || maninfoForm.stockholder_name.$invalid && submited">请输入正确的姓名</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="changestockholder.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.stockholder_name.$invalid && maninfoForm.stockholder_name.$dirty || maninfoForm.stockholder_name.$invalid && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            名称:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.stockholder_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入企业名称" name="stockholder_name"  ng-model="memberInfo.stockholder_name" type="text" ng-show="!saveStatus"maxlength="50" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.stockholder_name.$invalid  && maninfoForm.stockholder_name.$dirty || maninfoForm.stockholder_name.$invalid && submited">请输入正确的企业名称</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="!changestockholder.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.stockholder_id.$invalid && maninfoForm.stockholder_id.$dirty || maninfoForm.stockholder_id.$invalid && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            身份证号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.stockholder_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入身份证号" name="stockholder_id"  ng-model="memberInfo.stockholder_id" type="text" ng-show="!saveStatus" minlength="15" maxlength="18" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.stockholder_id.$invalid && maninfoForm.stockholder_id.$dirty || maninfoForm.stockholder_id.$invalid && submited">请输入正确的身份证号码</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12" ng-show="changestockholder.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.stockholder_id.$invalid && maninfoForm.stockholder_id.$dirty || maninfoForm.stockholder_id.$invalid && submited }">
+                                        <label class="trol-label col-xs-3">
+                                            证件号码:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.stockholder_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="stockholder_id" placeholder="营业执照注册号或统一社会信用代码"  ng-model="memberInfo.stockholder_id" type="text" placeholder="营业执照注册号或统一社会信用代码" minlength="13" maxlength="18" ng-show="!saveStatus" ng-required="requiredStatus"/>
+
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.stockholder_id.$invalid && maninfoForm.stockholder_id.$dirty || maninfoForm.stockholder_id.$invalid && submited">请输入正确的证件号码</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.stockholder_effect_time.$error.required && submited,'ok':maninfoForm.stockholder_effect_time.$valid}">
+                                        <label class="trol-label col-xs-3">
+                                            有效期至:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro col-xs-6 w210 defalut-color"   type="text" ng-show="saveStatus && certificate_status < 2 || !stockholder1.timeStatus" readonly="saveStatus"/>
+                                                <input type="text" class="form-contro col-xs-6 w210"  placeholder="请选择有效期"  name="stockholder_effect_time" ng-show="stockholder1.timeStatus" ng-disabled="saveStatus || !stockholder1.timeStatus" ng-click="stockholderchecked();" ng-change="operatingdatechanged('stockholder')"  uib-datepicker-popup ng-model="memberInfo.stockholder_effect_time" is-open="stockholder.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus" />
+                                                <div class="check-type-single">
+                                                    <span class="ico" ng-class ="{'active':!stockholder1.timeStatus}" ng-click="stockholder1.click()"></span>
+                                                    <span class="type" >长期</span>
+
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.stockholder_effect_time.$error.required && submited">请选择有效期</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12">
+                                    <p class="tac"><span>实际控制人</span></p>
+                                    <div class="form-group">
+                                        <label class="trol-label col-xs-3">
+                                            属性:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="check-type">
+                                                <span class="ico" ng-class ="{'active':!changecontroll.status}" ng-click="changecontroll.click()"></span>
+                                                <span class="type" >自然人</span>
+                                                <span class="ico" ng-class ="{'active':changecontroll.status}" ng-click="changecontroll.click()"></span>
+                                                <span class="type" >法人</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="!changecontroll.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.controll_name.$invalid && submited || maninfoForm.controll_name.$invalid && maninfoForm.controll_name.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            姓名:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro" ng-model="memberInfo.controll_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入姓名" name="controll_name" ng-model="memberInfo.controll_name" type="text" ng-show="!saveStatus" maxlength="20" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.controll_name.$invalid && submited || maninfoForm.controll_name.$invalid && maninfoForm.controll_name.$dirty">请输入正确的姓名</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="changecontroll.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.controll_legal_name.$invalid && submited || maninfoForm.controll_legal_name.$invalid && maninfoForm.controll_legal_name.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            名称:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro" ng-model="memberInfo.controll_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="controll_legal_name" placeholder="请输入企业名称" ng-model="memberInfo.controll_name" type="text" ng-show="!saveStatus"maxlength="50" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.controll_legal_name.$invalid && submited || maninfoForm.controll_legal_name.$invalid && maninfoForm.controll_legal_name.$dirty">请输入正确的企业名称</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="!changecontroll.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.controll_id.$invalid && submited || maninfoForm.controll_id.$invalid && maninfoForm.controll_id.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            身份证号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.controll_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入身份证号" name="controll_id" ng-model="memberInfo.controll_id"  type="text" ng-show="!saveStatus" minlength="15" maxlength="18" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.controll_id.$invalid && submited || maninfoForm.controll_id.$invalid && maninfoForm.controll_id.$dirty">请输入正确的身份证号</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="changecontroll.status">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.controll_id.$invalid && submited || maninfoForm.controll_id.$invalid && maninfoForm.controll_id.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            证件号码:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.controll_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" name="controll_legal_id" placeholder="营业执照注册号或统一社会信用代码" ng-model="memberInfo.controll_id"  type="text" ng-show="!saveStatus" minlength="13" maxlength="18" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.controll_id.$invalid && submited || maninfoForm.controll_id.$invalid && maninfoForm.controll_id.$dirty">请输入正确的证件号码</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.controll_effect_time.$error.required && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            有效期至:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro col-xs-6 w210 defalut-color"  type="text" ng-show="saveStatus && certificate_status < 2 || !controll1.timeStatus " readonly="saveStatus"/>
+                                                <!--<input class="form-contro col-xs-6 w210" name="controll_effect_time" ng-model="memberInfo.controll_effect_time" type="text" ng-if="saveStatus"readonly="saveStatus"/>-->
+                                                <!--<input class="form-contro col-xs-6 w210" name="controll_effect_time" ng-disabled="!controll1.timeStatus" ng-model="memberInfo.controll_effect_time" type="text" ng-if="!saveStatus"/>-->
+                                                <input type="text" placeholder="请选择有效期" class="form-contro col-xs-6 w210" ng-show="controll1.timeStatus" name="controll_effect_time" ng-disabled="saveStatus || !controll1.timeStatus" ng-click="controllchecked();" ng-change="operatingdatechanged('controll')"  uib-datepicker-popup ng-model="memberInfo.controll_effect_time" is-open="controll.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus" />
+                                                <div class="check-type-single">
+                                                    <span class="ico" ng-class ="{'active':!controll1.timeStatus }" ng-click="controll1.click()"></span>
+                                                    <span class="type" >长期</span>
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.controll_effect_time.$error.required && submited">请选择有效期</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12">
+                                    <p class="tac"><span>经办人</span></p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.transactor_name.$invalid && submited || maninfoForm.transactor_name.$invalid && maninfoForm.transactor_name.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            姓名:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.transactor_name" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入姓名" name="transactor_name"  ng-model="memberInfo.transactor_name" type="text" ng-show="!saveStatus"maxlength="20" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.transactor_name.$invalid && submited || maninfoForm.transactor_name.$invalid && maninfoForm.transactor_name.$dirty">请输入正确的姓名</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.transactor_id.$invalid && submited || maninfoForm.transactor_id.$invalid && maninfoForm.transactor_id.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            身份证号:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro"  ng-model="memberInfo.transactor_id" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro" placeholder="请输入身份证号" name="transactor_id" ng-model="memberInfo.transactor_id" type="text" ng-show="!saveStatus" minlength="15" maxlength="18" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.transactor_id.$invalid && submited || maninfoForm.transactor_id.$invalid && maninfoForm.transactor_id.$dirty">请输入正确的身份证号</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.transactor_effect_time.$error.required && submited}">
+                                        <label class="trol-label col-xs-3">
+                                            有效期至:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro col-xs-6 w210 defalut-color"  type="text" ng-show="saveStatus && certificate_status < 2 || !transactor1.timeStatus " readonly="saveStatus"/>
+                                                <input type="text" placeholder="请选择有效期" class="form-contro col-xs-6 w210" ng-show="transactor1.timeStatus" name="transactor_effect_time" ng-disabled="saveStatus || !transactor1.timeStatus" ng-click="transactorchecked();" ng-change="operatingdatechanged('transactor')"  uib-datepicker-popup ng-model="memberInfo.transactor_effect_time" is-open="transactor.opened" min-date="minDate"  show-button-bar=false date-disabled="disabled(date, mode)" ng-required="requiredStatus"/>
+                                                <div class="check-type-single">
+                                                    <span class="ico" ng-class ="{'active':!transactor1.timeStatus }" ng-click="transactor1.click()"></span>
+                                                    <span class="type" >长期</span>
+
+                                                </div>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.transactor_effect_time.$error.required && submited">请选择有效期</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-content">
+                            <div class="row" ng-class="{'b0':saveStatus}">
+                                <div class="col-xs-12">
+                                    <p class="tac"><span>补充信息</span></p>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.industry.$error.required && submited || maninfoForm.industry.$error.required && maninfoForm.industry.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            行业:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro" type="text" ng-show="saveStatus" readonly="saveStatus"/>
+                                                <input class="form-contro " name="industry" placeholder="须与营业范围相符" ng-model="memberInfo.industry"  ng-required="requiredStatus" ng-show="!saveStatus" ng-click="getTradeMsg($event)" />
+                                                <i class="selecteType"></i>
+                                                <ul id="catelogList" class="catelogList" ng-show="hangye" >
+                                                    <li ng-repeat="(key,value) in tradList track by key">
+                                                        <div>{{key}}
+                                                            <ul>
+                                                                <li ng-repeat="cateType in value" ng-click="selectCatelog(cateType)">{{cateType}}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.industry.$error.required && submited || maninfoForm.industry.$error.required && maninfoForm.industry.$dirty">请输入须与营业范围相符的行业</p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.business.$error.required && submited || maninfoForm.business.$error.required && maninfoForm.business.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            经营范围:
+                                        </label>
+                                        <div class="col-xs-8" >
+                                            <div class="control-wrap pr">
+                                                <input style="padding-left: 15px;" class="special-ipt form-contro" ng-model="memberInfo.business " readonly="saveStatus" ng-show="saveStatus" ng-class="{'resizeno': saveStatus}"/>
+                                                <textarea class="special-ipt resizeno" name="business"  placeholder="须与营业执照保持一致" ng-model="memberInfo.business"  ng-trim="true" ng-show="!saveStatus" ng-required="requiredStatus"></textarea>
+                                                <span class="tips500">{{ 500 - memberInfo.business.length }} / 500 </span>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.business.$invalid && submited || maninfoForm.business.$error.required && maninfoForm.business.$dirty">请输入与营业执照一致的经营范围</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12" ng-show="staff_numstatus">
+                                    <div class="form-group" ng-class="{'error':maninfoForm.staff_num.$error.required && submited || maninfoForm.staff_num.$error.required && maninfoForm.staff_num.$dirty}">
+                                        <label class="trol-label col-xs-3">
+                                            员工人数:
+                                        </label>
+                                        <div class="col-xs-8">
+                                            <div class="control-wrap">
+                                                <input class="form-contro" placeholder="请输入企业员工人数" name="staff_num" ng-model="memberInfo.staff_num" type="text"maxlength="7" ng-required="requiredStatus"/>
+                                            </div>
+                                            <p class="res-tip col-xs-12" ng-show="maninfoForm.staff_num.$error.required && submited || maninfoForm.staff_num.$error.required && maninfoForm.staff_num.$dirty">请输入与营业执照一致的经营范围</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="btncenter" ng-class="{'mt0':certificate_status == 1}" ng-show="certificate_status == 1" >
+                    <a class="btn btn-primary" ng-show="!loadStatus" ng-click="submit(1,1)">确认修改</a>
+                    <a class="btn btn-primary" ng-show="loadStatus" ><i ng-show="loadStatus" class="fa fa-spinner fa-spin" ></i></a>
+                </div>
+            </div>
+            <div class="btnfloat" ng-show="certificate_status == 0 || certificate_status == 2" ng-class="{'btn-bac':true}">
+                <button class="btn btn-default"  ng-show="!loadStatus"  ng-click="submit(1,1)" >暂存</button>
+                <button class="btn btn-default"  ng-show="loadStatus"><i ng-show="loadStatus" class="fa fa-spinner fa-spin" ></i></button>
+                <button class="btn btn-primary" ng-show="!subloadStatus" ng-click="submit(2,1)" >提交审核</button>
+                <button class="btn btn-primary" ng-show="subloadStatus" ><i ng-show="subloadStatus" class="fa fa-spinner fa-spin" ></i></button>
+            </div>
+            <div class="btnright"  ng-show=" certificate_status == 5 && saveStatus" ng-class="{'btn-bac':true}">
+                <a class="btn btn-primary" style="float: right;margin-top:20px;"href="#/change-request" >申请变更表</a>
+                <span style="float: right">填写申请表并上传，通过审核后修改生效。</span>
+            </div>
+            <div class="btncenter"  ng-show="certificate_status == 3 || certificate_status == 6" >
+                <a class="btn btn-primary" ng-show="!loadStatus" ng-click="submit(1,2,1)">确认修改</a>
+                <a class="btn btn-primary" ng-show="loadStatus"><i ng-show="loadStatus" class="fa fa-spinner fa-spin" ></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-class="{'big-img':bigImgstaus}" ng-show="bigImgstaus" >
+		<span class="close-big-img" ng-click="cancelBigImg()"><img src="../images/close.png" alt=""></span>
+		<img  ng-src="{{ bigImgSrc }}">
+    </div>
+
+</div>
+
+

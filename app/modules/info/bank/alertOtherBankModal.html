@@ -1,0 +1,62 @@
+<div class="dialog1">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        支行信息支持模糊搜索，如果您未找到所属支行，可以输入关键词查找。如：中原银行股份有限公司郑州曼哈顿支行，输入“曼哈顿”,即可被搜索到。<br>
+    </div>
+    <div class="modal-footer">
+        <div class="clearfix">
+            <span class="pull-left manual">还是没找到，我要<a ng-click="openAdd()">手工输入</a></span>
+            <button class="btn btn-primary pull-right" type="button" ng-click="ok();">知道了</button>
+        </div>
+    </div>
+</div>
+<div class="dialog2">
+    <div class="modal-header">
+        <i class="modal-close-icon" ng-click="modalClose();"></i>
+        <h3 class="modal-title">手工添加</h3>
+    </div>
+    <div class="modal-body">
+        <form data-role="form" name="addBankForm"  class="form-horizontal" ng-submit="submitStep(addBankForm.$valid);" novalidate>
+            <div class="form-group error-tip" ng-class="{'error': submitted && addBankForm.bankName.$invalid, 'ok': submitted && addBankForm.bankName.$valid}">
+                <label class="control-label col-xs-3">
+                    支行名称：<!--<span class="star">*</span>-->
+                </label>
+                <div class="col-xs-9">
+                    <div class="control-wrap">
+                        <input class="form-control" name="bankName" type="text" ng-model="bank_name" ng-pattern=/^[\u4e00-\u9fa5]*$/ autocomplete="off"
+                               placeholder="请输入支行全称" required/>
+                        <div ng-messages="addBankForm.bankName.$error">
+                            <div class="error-messages" ng-message="pattern">只能输入中文</div>
+                        </div>
+                    </div>
+                    <p class="sample">示例：中国建设银行北京望京支行</p>
+                </div>
+            </div>
+            <div class="form-group error-tip" ng-class="{'error': submitted && addBankForm.bankCard.$invalid || addBankForm.bankCard._invalid, 'ok': submitted && addBankForm.bankCard._valid && addBankForm.bankCard.$valid}">
+                <label class="control-label col-xs-3">
+                    联行号：<!--<span class="star">*</span>-->
+                </label>
+                <div class="col-xs-9">
+                    <div class="control-wrap">
+                        <input bank-num bank-pattern="/.{12}/"  class="form-control" name="bankCard" type="text" ng-model="lbnk_no" ng-pattern=/^\d*$/ autocomplete="off"
+                               placeholder="请输入银行联行号" maxlength="12" ng-click="focuse()" ng-blur="blur(addBankForm.$valid)" required/>
+                        <div ng-messages="addBankForm.bankCard.$error">
+                            <div class="error-messages" ng-message="pattern">请输入正确的开户行联行号</div>
+                            <div class="error-messages" ng-show="addBankForm.bankCard._invalid">联行号必须12位</div>
+                        </div>
+                    </div>
+                    <p class="sample">示例：308521015372</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="clearfix">
+            <span class="pull-left manual">提示：输入错误的联行号会导致提现失败</span>
+            <button class="btn btn-primary pull-right" type="button" ng-click="ok(addBankForm.$valid);">确认</button>
+        </div>
+    </div>
+</div>

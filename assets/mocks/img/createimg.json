@@ -1,0 +1,12 @@
+{
+  "error":
+    {
+     "returnCode":"0",
+     "returnMessage":"获取成功",
+     "returnUserMessage":"获取成功"},
+     "data":
+    {
+      "post":"57b9841b0e23172a8e6e79e49c996cf7",
+      "img":"http://qiye.dev.jiedaibao.com/img/code?code=57b9841b0e23172a8e6e79e49c996cf7"
+    }
+}

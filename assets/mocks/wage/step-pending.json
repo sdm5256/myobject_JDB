@@ -1,0 +1,25 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "OK",
+    "returnUserMessage": "OK"
+  },
+  "traceId": "e614571571d54538296736a858a6732d",
+  "data": {
+    "order": "4fd5e8e1f734f9ac4959a2c4b2c014f2",
+	"step": "50",
+    "mode_type": "0",
+    "ext": {
+      "struct_type": 0,
+      "fix_type": 1,
+      "auth_id": 0,
+      "auth_qrcode": "http://jdbserver.b0.upaiyun.com/qrcode/667471617018605893/43882.png",
+      "balance": "9913000"
+    },
+    "total": {
+      "number": 0,
+      "account": 0
+    },
+    "step": "90"
+  }
+}

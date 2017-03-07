@@ -1,0 +1,11 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "is_check": 1,
+        "total": 990000
+    }
+}

@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-08-18 10:42:02
+ * @version $Id$
+ */
+@media screen{#printSection{display:none}}@media print{body *{display:none}#printSection,#printSection *{display:inline}#printSection{position:absolute;left:0;top:0}}

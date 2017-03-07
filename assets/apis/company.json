@@ -1,0 +1,11 @@
+{
+    "/company/get-ident-status": "mocks/company/get-ident-status.json",
+    "/company/querydetail": "mocks/company/querydetail.json",
+    "/company/search": "mocks/company/search.json",
+    "/company/getdetail": "mocks/company/getdetail.json",
+    "/company/getdetailimg": "mocks/company/getdetailimg.json",
+    "/company/export": "mocks/company/export.json",
+    "/company/remit": "mocks/company/remit.json",
+    "/company/verify": "mocks/company/verify.json",
+    "/company/search": "mocks/company/search.json"
+}

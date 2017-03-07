@@ -1,0 +1,96 @@
+<div id="header" class="clearfix" ng-controller="HeaderCtrl">
+	<!-- 登录页Header -->
+	<div ng-show="$root.isLoginHeader">
+		<div class="logo">
+			<a href="/"><img src="images/logo.png"/></a>
+		</div>
+		<span>
+			<span class="logo home">
+				<a href="index.html">首页</a>
+				<a href="news.html">新闻</a>
+				<a href="financial-service.html">金融服务</a>
+				<a href="help-page.html">帮助</a>
+			</span>
+			<div class="home login-link pull-right">
+				<a ng-href="#/login" class="links-img"><img src="images/login-icon-active.png"/></a>
+				<a ng-href="#/login" class="active">登录</a>
+			</div>
+		</span>
+	</div>
+
+	<!-- 非登录页Header -->
+	<div ng-show="!$root.isLoginHeader">
+		<div class="logo">
+			<a ng-click="goToOverView();"><img src="images/logo.png"/></a>
+		</div>
+		<div id="check-company-wrap">
+			<!--<input value="添加我的企业" />-->
+			<select class="form-control"  ng-options="item.name for item  in companyList track by item.company_id" ng-model="curCompany" ng-change="initCompany(curCompany, true)"
+			>
+			</select>
+		</div>
+		<div class="company-tips" ng-click="cancelTips()" ng-hide="hideCompanyTips">在这儿可以添加或切换您的企业</div>
+		<div class="clearfix pull-right">
+			<div uib-dropdown class="user-dropdown pull-left nav-margin" >
+				<!--<div id="leave" class="user-info float-right"><a href="" ng-href="#/help-page">帮助</a></div>-->
+				<div id="leave" class="user-info float-right"><a href="help-page.html" target="_blank">帮助</a></div>
+				<div id="leave" class="user-info float-right"><a ng-click="logout();">退出</a></div>
+				<span href class="user-info float-right" >
+					<span class="head">
+						<img ng-src="{{userAvatar}}"/>
+					</span>
+					<span class="username">
+						{{userName}}
+					</span>
+				</span>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script type="text/ng-template" id="ZeroFriendModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">提示</h3>
+    </div>
+    <div class="modal-body">
+        当前好友数为0，不能发起融资。<br>
+        <p style="text-align: left">通过借贷宝，给员工发一次工资，即可添加他们为好友，这样就可以向他们融资啦。</p>
+        <span class="input-group-btn">
+            <button class="btn btn-disabled left" type="submit" ng-click="cancel();">取消</button>
+        </span>
+        <span class="input-group-btn">
+            <button class="btn btn-primary right" type="submit" ng-click="go();">发工资</button>
+        </span>
+    </div>
+</script>
+
+<!--额度借满提醒-->
+<script type="text/ng-template" id="CheckQuota.html">
+    <div class="modal-header">
+        <h3 class="modal-title">温馨提示</h3>
+    </div>
+    <div class="modal-body">
+        <p class="text-left">您企业目前的融资额度已用尽，请耐心等待我们的综合评定，根据评定结果会有相应额度调整</p>
+        <span>
+            <button class="btn btn-primary center" ng-click="cancel();">我知道了</button>
+        </span>
+    </div>
+</script>
+
+<!--额度提示 -->
+<script type="text/ng-template" id="quotaTip.html">
+    <div class="modal-header">
+        <h3 class="modal-title">温馨提示</h3>
+    </div>
+    <div class="modal-body">
+        <p style="text-align: justify !important; margin-bottom: 20px;">您的企业经过综合评定，目前融资额度为30万，如需增加额度，请将您企业近3个月内的报税证明（增值或者营业税）和近2个月的代发工资流水原件（银行盖章）寄送到我公司供审核。</p>
+        <p class="text-left">收件人：借贷宝<br>
+            地址：北京市朝阳区北苑路86号北美国际商务中心C座借贷宝<br>
+            联系电话：010-56179041 </p>
+        <span>
+            <button class="btn btn-primary center" ng-click="linkToBorrow();">我知道了</button>
+        </span>
+    </div>
+</script>
+

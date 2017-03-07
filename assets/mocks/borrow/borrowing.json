@@ -1,0 +1,60 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "ok",
+    "returnUserMessage": "ok"
+  },
+  "traceId": "8409b34e284e6321bbf3d8a52284bf4d",
+  "data": {
+    "products": [
+      {
+        "productId": "6605488160972595450001",
+        "avaliableAmount": "0.00",
+        "totalAmount": "1013.07",
+        "principal": "1000.00",
+        "interest": 0,
+        "repay_amount": "950.04",
+        "overdue_fee": 0,
+        "overdue_day": 9,
+        "productReason": "测试",
+        "yearRate": "24.00",
+        "ownerName": null,
+        "ownerID": null,
+        "guaranteeName": "张一",
+        "guaranteeID": "647165871152918917",
+        "guaranteeRepayAmount": "0",
+        "effectiveDate": "2016年10月14日",
+        "startDate": "2016年10月14日",
+        "endDate": "2016年10月24日",
+        "cleanDate": 0,
+        "status": 14,
+		"systemPublishedFlag":1,
+        "tips": "已经逾期9天"
+      },
+      {
+        "productId": "6598943491624668100001",
+        "avaliableAmount": "100",
+        "totalAmount": "0.00",
+        "principal": "0.00",
+        "interest": 0,
+        "repay_amount": 0,
+        "overdue_fee": 0,
+        "overdue_day": 0,
+        "productReason": "生产经营",
+        "yearRate": "24.00",
+        "ownerName": null,
+        "ownerID": null,
+        "guaranteeName": "张二",
+        "guaranteeID": "647165871152918920",
+        "guaranteeRepayAmount": "0",
+        "effectiveDate": "2016年11月06日",
+        "startDate": "2016年11月02日",
+        "endDate": "2016年11月07日",
+        "cleanDate": 0,
+		"systemPublishedFlag":0,
+        "status": 10,
+        "tips": "有效期还剩4天"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "total": {
+            "number": 1,
+            "actual_amount": "500.00"
+        },
+        "list": [{
+            "name": "测试",
+            "phone": "15210925952",
+            "idcard": "123456789012345678",
+            "should_amount": "5000.00",
+            "fund_amount": "1000.00",
+            "tax_amount": "200.00",
+            "actual_amount": "3800.00",
+            "bonus_shuould_amount": "100.00",
+            "bonus_tax_amount": "20.00",
+            "bonus_actual_amount": "80.00"
+        }]
+    }
+}

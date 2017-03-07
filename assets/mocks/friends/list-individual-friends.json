@@ -1,0 +1,50 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "curMemberID": "571054799013817583",
+        "hasMore": 1,
+        "lastIndex": "11,22",
+        "count": 1,
+        "list": [{
+            "memberID": "566631140618674423",
+            "userName": "张三",
+            "sex": 1,
+            "avatarUrl": "",
+            "realName": true,
+            "face": false,
+            "bankCard": true,
+            "followStatus": 0
+        },{
+            "memberID": "566631140618674423",
+            "userName": "张三",
+            "sex": 2,
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "realName": true,
+            "face": false,
+            "bankCard": true,
+            "followStatus": 1
+        },{
+            "memberID": "566631140618674423",
+            "userName": "张三",
+            "sex": 1,
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "realName": true,
+            "face": false,
+            "bankCard": true,
+            "followStatus": 2
+        },{
+            "memberID": "566631140618674423",
+            "userName": "张三",
+            "sex": 0,
+            "avatarUrl": "http://jdbserver.b0.upaiyun.com/images/t_2205b3b02854aa028eb6d3be770af358.jpeg",
+            "realName": true,
+            "face": false,
+            "bankCard": true,
+            "followStatus": 3
+        }]
+    }
+}

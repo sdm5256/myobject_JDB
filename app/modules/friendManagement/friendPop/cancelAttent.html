@@ -1,0 +1,15 @@
+<div id="cancelAttent">
+	<div class="modal-header">
+        <h3 class="modal-title">提示</h3><i class="closeIcon" ng-click="cancel();"></i>
+    </div>
+    <div class="modal-body onledit-text-center">
+		<p ng-if="currentType">你确认取消对{{componyName}}的关注吗？</p>
+        <p ng-if="!currentType">你确认移除{{componyName}}吗？</p>
+        <span class="input-group-btn center-online-edit">
+            <button class="btn btn-disabled " type="submit" ng-click="cancel();">取消</button>
+        </span>
+        <span class="input-group-btn center-online-edit">
+			<button class="btn btn-primary " type="submit" ng-click="confirm();">确认</button>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "OK",
+    "returnUserMessage": "OK"
+  },
+  "traceId": "024916d302e1ed071f2192924846613f",
+  "data": {
+    "total": {
+      "number": "2",
+      "actual_amount": "12005.00",
+      "work_actual_amount": "16800.00"
+    },
+    "list": [
+      {
+        "name": "晏旭瑞",
+        "phone": "18811409643",
+        "idcard": "530302199308092436",
+        "actual_amount": "12005.00",
+        "should_amount": "20000.00",
+        "fund_amount": "6500.00",
+        "tax_amount": "1495.00",
+        "remark": "1000000",
+        "oper_type":1
+      },{
+        "name": "晏旭瑞",
+        "phone": "18811409643",
+        "idcard": "530302199308092436",
+        "actual_amount": "12005.00",
+        "should_amount": "20000.00",
+        "fund_amount": "6500.00",
+        "tax_amount": "1495.00",
+        "remark": "1000000"
+      }
+    ]
+  }
+}

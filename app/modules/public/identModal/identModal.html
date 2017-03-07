@@ -1,0 +1,16 @@
+<div class="modal-header">
+	<i class="modal-close-icon" ng-click="modalClose();"></i>
+	<h3 class="modal-title">提示</h3>
+</div>
+<div class="modal-body">
+	<form data-role="form" class="form-horizontal">
+		<div class="step-content clearfix">
+			<p>为保障企业账号及资金安全，完成认证后才可以{{modalParams.identText}}，请进行企业认证</p>
+		</div>
+		<div class="step-actions">
+			<div class="col-xs-12 text-center">
+				<button class="btn btn-primary" type="button" ng-click="goToIdent()">立即认证</button>
+			</div>
+		</div>
+	</form>
+</div>

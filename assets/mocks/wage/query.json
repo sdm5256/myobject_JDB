@@ -1,0 +1,38 @@
+{
+  "error": {
+    "returnCode": 0,
+    "returnMessage": "OK",
+    "returnUserMessage": "OK"
+  },
+  "traceId": "31e69cf370974e7525548c64184f7639",
+  "data": {
+    "list": [
+      {
+        "id": "370",
+        "amount": "12005.00",
+        "id_card": "530302199308092436",
+        "name": "晏旭瑞",
+        "phone": "18811409643",
+        "status": 2,
+        "pay_status": "0",
+        "status_text": "待领取",
+        "reason": "未注册（请提醒员工注册认证借贷宝后领取）",
+        "oper_type": 4,
+        "oper_text": "修改并重发",
+        "type_text": "工资",
+        "should_amount": "2000000",
+        "fund_amount": "650000",
+        "tax_amount": "149500"
+      }
+    ],
+    "total": {
+      "number": "1",
+      "amount": "28805.00",
+      "operation_type": 3,
+      "optimized_number": "1",
+	  "status": 3,
+	  "cancel_status": 4,
+      "optimized_amount": "1800.00"
+    }
+  }
+}

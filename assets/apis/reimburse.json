@@ -1,0 +1,15 @@
+{
+    "/reimburse/batch-list": "mocks/reimburse/batch-list.json",
+    "/reimburse/batch-status": "mocks/reimburse/batch-status.json",
+    "/reimburse/del-batch": "mocks/reimburse/del-batch.json",
+    "/reimburse/pending": "mocks/reimburse/pending.json",
+    "/reimburse/modify": "mocks/reimburse/modify.json",
+    "/reimburse/summary": "mocks/reimburse/summary.json",
+    "/reimburse/list": "mocks/reimburse/list.json",
+    "/reimburse/query": "mocks/reimburse/query.json",
+    "/reimburse/confirm": "mocks/reimburse/confirm.json",
+    "/reimburse/update-single": "mocks/reimburse/update-single.json",
+    "/reimburse/update-batch": "mocks/reimburse/update-batch.json",
+    "/reimburse/upload": "mocks/reimburse/upload.json",
+    "/reimburse/select-all": "mocks/reimburse/select-all.json"
+}

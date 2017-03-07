@@ -1,0 +1,48 @@
+<div id="addFriend">
+	 <ol class="breadcrumb">
+        <li>
+            <a href="" ng-click="historyBack();">
+                <span class="glyphicon glyphicon-triangle-left"></span> 返回
+            </a>
+        </li>
+        <li class="active">您所在的位置：<a href="#/friendList">好友管理</a>>&nbsp; 添加好友</li>
+    </ol>
+    <div class="addFriendCont">
+    	<div class="addTitle">
+    		<span>添加好友</span>
+    		<div>
+                <form ng-submit="search()" >
+                    <input type="text" class="form-control" ng-model="searchCont" placeholder="输入所要关注的企业" >
+                <!-- ng-keypress="($event.which === 13)?search():0" -->
+    			    <i ng-click="search()"></i>
+                </form>
+    		</div>
+    	</div>
+        <div class="searchResult">
+            <div class="searchPro" ng-if="!friendList"></div>
+            <div ng-if="friendList">
+                <div class="resultNum">共搜索到{{friendList.length}}条结果</div>
+                <div class="noResult" ng-if="friendList.length==0">该公司还没有注册借贷宝企业版</div>
+                <friend-list data-list='friendList' data-activecurrent='activeCurent'></friend-list>
+            </div>
+        </div>
+        <div class="addFriendWay" ng-if="false">
+            <div class="wayCont">
+               <div class="wayTitle">
+                   <span>你可以通过以下方式添加好友</span>
+               </div>
+               <ul>
+                    <li class="way-one"><p>方式一</p><span>通过企业全称搜索认识的企业<i></i></span></li>
+                    <li class="way-two"><p>方式二</p><span>通过手机借贷宝分享企业名片<br>给朋友获得人宝粉<i></i></span></li>
+                </ul>
+                <div class="way-three">
+                    <p>方式三</p>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <span>将以上企业二维码分享给朋友<br>使用借贷宝扫描关注<i></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

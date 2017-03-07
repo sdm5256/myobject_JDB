@@ -1,0 +1,14 @@
+{
+    "error": {
+        "returnCode": "0",
+        "returnMessage": "",
+        "returnUserMessage": ""
+    },
+    "data": {
+        "LBNK_NM": "丽江古城富滇村镇银行康仲支行",
+        "PROV_CD": 530,
+        "CITY_CD": 7550,
+        "LBNK_CD": 320,
+        "LBNK_NO": 320755000025
+    }
+}

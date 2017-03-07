@@ -1,0 +1,16 @@
+{
+    "error": {
+        "returnCode": 0,
+        "returnMessage": "success",
+        "returnUserMessage": "success"
+    },
+    "data": {
+        "step":"admin",
+        "status":"init",
+        "type":"reimburse",
+        "name":"lijun",
+        "phone":"13133333333",
+        "memberID":"lijun",
+        "logo":"http://baidu.com/log.png"
+    }
+}

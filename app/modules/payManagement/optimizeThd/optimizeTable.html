@@ -1,0 +1,264 @@
+<div id="optimizeTable" ng-show="optimizeTable">
+    <h3 ng-show="optimizeBe">优化前明细</h3>
+    <h3 ng-show="!optimizeBe">优化后明细</h3>
+    <div class="tabledtl">
+        <p>方案明细</p>
+        <!-- 工资劳务报酬头部 -->
+        <div ng-show="opmzHead">
+            <div class="table-area" ng-show="labor">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>项目明细</th>
+                            <th>应发金额</th>
+                            <th>社保公积金个人部分</th>
+                            <th>个人所得税</th>
+                            <th>实发金额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>工资</td>
+                            <td>{{totall.should_amount}}</td>
+                            <td>{{totall.fund_amount}}</td>
+                            <td>{{totall.tax_amount}}</td>
+                            <td>{{totall.actual_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-area" ng-show="!labor">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>项目明细</th>
+                            <th>应发金额</th>
+                            <th>社保公积金个人部分</th>
+                            <th>个人所得税</th>
+                            <th>实发金额</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>工资</td>
+                            <td>{{totall.should_amount}}</td>
+                            <td>{{totall.fund_amount}}</td>
+                            <td>{{totall.tax_amount}}</td>
+                            <td>{{totall.actual_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td>劳务报酬</td>
+                            <td>{{totall.work_should_amount}}</td>
+                            <td></td>
+                            <td>{{totall.work_tax_amount}}</td>
+                            <td>{{totall.work_actual_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td>合计</td>
+                            <td>{{totall.total_should_amount}}</td>
+                            <td>{{totall.total_fund_amount}}</td>
+                            <td>{{totall.total_tax_amount}}</td>
+                            <td>{{totall.total_actual_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 工资+一次性年终奖头部-->
+        <div class="table-area" ng-show="!opmzHead">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>项目明细</th>
+                        <th>应发金额</th>
+                        <th>社保公积金个人部分</th>
+                        <th>个人所得税</th>
+                        <th>实发金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>工资</td>
+                        <td>{{totall.should_amount}}</td>
+                        <td>{{totall.fund_amount}}</td>
+                        <td>{{totall.tax_amount}}</td>
+                        <td>{{totall.actual_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td>全年一次性奖金</td>
+                        <td>{{totall.should_bonus_amount}}</td>
+                        <td>{{totall.fund_bonus_amount}}</td>
+                        <td>{{totall.tax_bonus_amount}}</td>
+                        <td>{{totall.actual_bonus_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td>合计</td>
+                        <td>{{totall.total_should_amount}}</td>
+                        <td>{{totall.total_fund_amount}}</td>
+                        <td>{{totall.total_tax_amount}}</td>
+                        <td>{{totall.total_actual_amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>员工明细</p>
+        <!-- 工资+劳务报酬 -->
+        <div ng-show="opmzHead">
+            <div class="table-area" ng-show="labor">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>身份证号</th>
+                            <th>应发工资</th>
+                            <th>社保公积金个人部分</th>
+                            <th>个人所得税</th>
+                            <th>实发工资</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="iterm in list track by $index">
+                            <td>{{iterm.name}}</td>
+                            <td>{{iterm.phone}}</td>
+                            <td>{{iterm.idcard}}</td>
+                            <td>{{iterm.should_amount}}</td>
+                            <td>{{iterm.fund_amount}}</td>
+                            <td>{{iterm.tax_amount}}</td>
+                            <td>{{iterm.actual_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="list.length" class="clearfix table-bottom">
+                    <uib-pagination class="table-pagination" ng-change="tableInit(wagePageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotal" items-per-page="pageSize" rotate="false" ng-model="wagePageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                    <div class="table-tip">
+                        共{{totall.number}}条记录&nbsp;&nbsp;&nbsp;&nbsp; <!-- 金额：{{totall.actual_amount}}元 -->
+                    </div>
+                </div>
+            </div>
+            <div class="table-area" ng-show="!labor">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>身份证号</th>
+                            <th>应发工资</th>
+                            <th>社保公积金个人部分</th>
+                            <th>工资个人所得税</th>
+                            <th>实发工资</th>
+                            <th>应发劳务报酬</th>
+                            <th>劳务报酬个人所得税</th>
+                            <th>实发劳务报酬</th>
+                            <th>实发金额总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="iterm in list track by $index">
+                            <td>{{iterm.name}}</td>
+                            <td>{{iterm.phone}}</td>
+                            <td>{{iterm.idcard}}</td>
+                            <td>{{iterm.should_amount}}</td>
+                            <td>{{iterm.fund_amount}}</td>
+                            <td>{{iterm.tax_amount}}</td>
+                            <td>{{iterm.actual_amount}}</td>
+                            <td>{{iterm.work_should_amount}}</td>
+                            <td>{{iterm.work_tax_amount}}</td>
+                            <td>{{iterm.work_actual_amount}}</td>
+                            <td>{{iterm.total_actual_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="list.length" class="clearfix table-bottom">
+                    <uib-pagination class="table-pagination" ng-change="tableInit(wagePageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotal" items-per-page="pageSize" rotate="false" ng-model="wagePageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                    <div class="table-tip">
+                        共{{totall.number}}条记录&nbsp;&nbsp;&nbsp;&nbsp; <!-- 金额：{{totall.actual_amount}}元 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 工资+一次性年终奖 -->
+        <div ng-show="!opmzHead">
+            <div class="table-area" ng-show="onceBonus">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>身份证号</th>
+                            <th>应发工资</th>
+                            <th>社保公积金个人部分</th>
+                            <th>工资个人所得税</th>
+                            <th>实发工资</th>
+                            <th>应发一次性奖金</th>
+                            <th>一次性奖金个人所得税</th>
+                            <th>实发一次性奖金</th>
+                            <th>实发金额总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="iterm in list track by $index">
+                            <td>{{iterm.name}}</td>
+                            <td>{{iterm.phone}}</td>
+                            <td>{{iterm.idcard}}</td>
+                            <td>{{iterm.should_amount}}</td>
+                            <td>{{iterm.fund_amount}}</td>
+                            <td>{{iterm.tax_amount}}</td>
+                            <td>{{iterm.actual_amount}}</td>
+                            <td>{{iterm.should_bonus_amount}}</td>
+                            <td>{{iterm.tax_bonus_amount}}</td>
+                            <td>{{iterm.actual_bonus_amount}}</td>
+                            <td>{{iterm.actual_total_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="list.length" class="clearfix table-bottom">
+                    <uib-pagination class="table-pagination" ng-change="tableInit(wagePageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotal" items-per-page="pageSize" rotate="false" ng-model="wagePageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                    <div class="table-tip">
+                        共{{totall.number}}条记录&nbsp;&nbsp;&nbsp;&nbsp;<!--  金额：{{totall.actual_amount}}元 -->
+                    </div>
+                </div>
+            </div>
+            <div class="table-area" ng-show="!onceBonus">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>身份证号</th>
+                            <th>应发工资</th>
+                            <th>社保公积金个人部分</th>
+                            <th>工资个人所得税</th>
+                            <th>实发工资</th>
+                            <th>应发一次性奖金</th>
+                            <th>一次性奖金个人所得税</th>
+                            <th>实发一次性奖金</th>
+                            <th>实发金额总计</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="iterm in list track by $index">
+                            <td>{{iterm.name}}</td>
+                            <td>{{iterm.phone}}</td>
+                            <td>{{iterm.idcard}}</td>
+                            <td>{{iterm.should_amount}}</td>
+                            <td>{{iterm.fund_amount}}</td>
+                            <td>{{iterm.tax_amount}}</td>
+                            <td>{{iterm.actual_amount}}</td>
+                            <td>{{iterm.should_bonus_amount}}</td>
+                            <td>{{iterm.tax_bonus_amount}}</td>
+                            <td>{{iterm.actual_bonus_amount}}</td>
+                            <td>{{iterm.actual_total_amount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-show="list.length" class="clearfix table-bottom">
+                    <uib-pagination class="table-pagination" ng-change="tableInit(wagePageNo);" ng-disabled="wagePageDisabled" total-items="wageListTotal" items-per-page="pageSize" rotate="false" ng-model="wagePageNo" max-size="5" class="pagination-sm" boundary-links="true" previous-text="上一页" next-text="下一页" first-text="首页" last-text="尾页"></uib-pagination>
+                    <div class="table-tip">
+                        共{{totall.number}}条记录&nbsp;&nbsp;&nbsp;&nbsp;<!--  金额：{{totall.actual_amount}}元 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

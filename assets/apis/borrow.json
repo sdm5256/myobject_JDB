@@ -1,0 +1,11 @@
+{
+    "/borrow/set": "mocks/borrow/set.json",
+    "/borrow/clean": "mocks/borrow/clean.json",
+    "/borrow/borrowing": "mocks/borrow/borrowing.json",
+    "/borrow/cancel": "mocks/borrow/cancel.json",
+    "/borrow/get-borrow-total-amount": "mocks/borrow/get-borrow-total-amount.json",
+    "/borrow/not-show-fee-tip": "mocks/borrow/not-show-fee-tip.json",
+    "/borrow/pending": "mocks/borrow/pending.json",
+    "/borrow/get-borrow-data": "mocks/borrow/get-borrow-data.json",
+	"/borrow/is-auto-renewal": "mocks/borrow/is-auto-renewal.json"
+}
